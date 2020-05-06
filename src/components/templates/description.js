@@ -1,6 +1,6 @@
 import { html } from "lit-element";
 
-import "../kr-inline-input";
+import "../bt-inline-input";
 
 export default ({ description = "", editable = false, omit = false }) => {
   if (omit) return html``;
@@ -14,7 +14,7 @@ export default ({ description = "", editable = false, omit = false }) => {
   }
 
   return html`
-    <kr-inline-input
+    <bt-inline-input
       id="description"
       .model="${description}"
       .name="${"description"}"
@@ -26,6 +26,6 @@ export default ({ description = "", editable = false, omit = false }) => {
         this._emit("description-change", { value: e.detail.value }, true);
       }}"
     >
-    </kr-inline-input>
+    </bt-inline-input>
   `;
 };

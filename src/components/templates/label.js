@@ -4,7 +4,7 @@ import { ifDefined } from "lit-html/directives/if-defined";
 
 import { styleMap } from "lit-html/directives/style-map";
 
-import "../kr-inline-input";
+import "../bt-inline-input";
 
 export default ({
   label = "",
@@ -54,7 +54,7 @@ export default ({
 
   // Editable mode (form builder)
   return html`
-    <kr-inline-input
+    <bt-inline-input
       id="label"
       editable
       highlightOnFocus
@@ -68,6 +68,6 @@ export default ({
       }}"
     >
       ${annotationTemplate}
-    </kr-inline-input>
+    </bt-inline-input>
   `;
 };

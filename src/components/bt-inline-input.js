@@ -1,7 +1,7 @@
 import { html } from "lit-element";
 import BTBase from "bt-base";
 
-class KRInlineInput extends BTBase {
+class BTInlineInput extends BTBase {
   static get properties() {
     return {
       editable: { type: Boolean, reflect: true },
@@ -183,7 +183,7 @@ class KRInlineInput extends BTBase {
     this.removeEventListener("blur", this._blurListener);
   }
 }
-customElements.define("kr-inline-input", KRInlineInput);
+customElements.define("bt-inline-input", BTInlineInput);
 
 const editableStyle = html`
   <style>
