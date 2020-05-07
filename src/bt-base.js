@@ -20,13 +20,13 @@ export default class BTBase extends LitElement {
         detail,
         bubbles: true,
         cancelable: true,
-        composed,
+        composed
       })
     );
   }
 
   static get styles() {
-    // console.debug("Tailwind injection", utilCSS);
+    console.debug("Tailwind injection", utilCSS);
     return [
       css`
         ${unsafeCSS(utilCSS)}
@@ -44,7 +44,7 @@ export default class BTBase extends LitElement {
             }
           `
         )}
-      `,
+      `
     ];
   }
 }

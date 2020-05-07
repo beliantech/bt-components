@@ -3,10 +3,10 @@ const webpack = require("webpack");
 const fs = require("fs");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 // const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const fileEntryMap = {}
+const fileEntryMap = {};
 fs.readdirSync("./src/components").forEach(filename => {
   const pathToFile = `./src/components/${filename}`;
   const stat = fs.statSync(pathToFile);
@@ -24,17 +24,17 @@ module.exports = {
   output: {
     publicPath: "/",
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "dist")
   },
   mode: "development", // TODO: Override in PRODUCTION
   devtool: "inline-source-map",
   devServer: {
     contentBase: "./dist",
-    allowedHosts: ["local.beliantech.com"],
+    allowedHosts: ["local.beliantech.com"]
   },
   resolve: {
     extensions: [".js", ".json", ".ts", ".tsx"],
-    modules: [path.resolve(__dirname, "src"), "node_modules"],
+    modules: [path.resolve(__dirname, "src"), "node_modules"]
   },
   module: {
     rules: [
@@ -42,8 +42,8 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
-        },
+          loader: "babel-loader"
+        }
       },
       {
         test: /\.(png|jpg|gif)$/i,
@@ -51,20 +51,20 @@ module.exports = {
           {
             loader: "url-loader",
             options: {
-              limit: 8192,
-            },
-          },
-        ],
+              limit: 8192
+            }
+          }
+        ]
       },
       {
         test: /\.css$/,
         use: [
           {
-            loader: "postcss-loader",
-          },
-        ],
-      },
-    ],
+            loader: "postcss-loader"
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -74,8 +74,8 @@ module.exports = {
       inject: false,
       template: "./index.html",
       chunksSortMode: "none", // https://github.com/vuejs/vue-cli/issues/1669
-      environment: process.env.NODE_ENV,
-    }),
+      environment: process.env.NODE_ENV
+    })
     // new CopyWebpackPlugin([{ from: "src/static/public" }]),
-  ],
+  ]
 };

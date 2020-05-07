@@ -92,7 +92,7 @@ export default class BTInput extends BTBase {
 
       errorMessage: { type: String },
 
-      _errors: { type: Array },
+      _errors: { type: Array }
     };
   }
 
@@ -238,8 +238,12 @@ export default class BTInput extends BTBase {
     if (this.displaymode) {
       contentTemplate = html`
         ${this.model != null && this.model !== ""
-          ? html` <div class="display text-sm">${this.model}</div> `
-          : html` <div class="text-gray-600 text-sm">(empty)</div> `}
+          ? html`
+              <div class="display text-sm">${this.model}</div>
+            `
+          : html`
+              <div class="text-gray-600 text-sm">(empty)</div>
+            `}
       `;
     } else {
       errorTemplate = this._renderErrorTemplate();
@@ -247,7 +251,7 @@ export default class BTInput extends BTBase {
     }
 
     const containerClasses = {
-      flex: this.horizontal,
+      flex: this.horizontal
     };
 
     return html`
@@ -272,12 +276,12 @@ export default class BTInput extends BTBase {
               hideIndicator: this.hideIndicator,
               editable: this.editable,
               annotation: this.annotation,
-              hasDescription: !!this.description,
+              hasDescription: !!this.description
             })}
             ${descriptionTemplate({
               description: this.description,
               editable: this.editable,
-              omit: this.clickToEdit && this.displaymode,
+              omit: this.clickToEdit && this.displaymode
             })}
           </div>
           <div>
@@ -337,17 +341,17 @@ export default class BTInput extends BTBase {
           ?disabled="${this.disabled}"
           @input="${this._onInput}"
           @blur="${this._onBlur}"
-          @keydown=${(e) => {
+          @keydown=${e => {
             if (this.expandable) {
               this._resizeTextarea();
             }
           }}
-          @cut=${(e) => {
+          @cut=${e => {
             if (this.expandable) {
               this._resizeTextarea();
             }
           }}
-          @paste=${(e) => {
+          @paste=${e => {
             if (this.expandable) {
               this._resizeTextarea();
             }
@@ -359,7 +363,7 @@ ${this.model}</textarea
     } else {
       const inputClasses = {
         "text-sm": true,
-        "flex-1": true,
+        "flex-1": true
       };
       if (this.inline) {
         inputClasses["inline"] = true;
@@ -394,7 +398,7 @@ ${this.model}</textarea
         >
           ${this.chips.length > 0
             ? this.chips.map(
-                (chip) =>
+                chip =>
                   html`
                     <span class="px-2 py-1 text-sm bg-gray-300 mr-2"
                       >${chip}</span
@@ -457,7 +461,7 @@ ${this.model}</textarea
           : Promise.resolve(),
         this._id("description")
           ? this._id("description").updateComplete
-          : Promise.resolve(),
+          : Promise.resolve()
       ])
     );
   }
@@ -466,7 +470,7 @@ ${this.model}</textarea
     const value = e.target.value;
 
     if (this.__onInput == null) {
-      const onInput = (value) => {
+      const onInput = value => {
         this.model = this.transformer ? this.transformer(value) : value;
 
         // Validate silently if user is typing and no current errors.
@@ -555,7 +559,7 @@ ${this.model}</textarea
   _submit() {
     if (this.validate()) {
       this._emit("model-change", {
-        value: this.model,
+        value: this.model
       });
     }
   }
@@ -595,11 +599,13 @@ ${this.model}</textarea
         }
         input:focus,
         textarea:focus {
-          border: 1px solid var(--bt-input-border-color, ${unsafeCSS(colors.blue)});
+          border: 1px solid
+            var(--bt-input-border-color, ${unsafeCSS(colors.blue)});
         }
         input.inline:focus {
           border: 1px solid transparent;
-          border-bottom: 1px solid var(--bt-input-border-color, ${unsafeCSS(colors.blue)});
+          border-bottom: 1px solid
+            var(--bt-input-border-color, ${unsafeCSS(colors.blue)});
         }
         input.inline.noline {
           border-bottom: 1px solid transparent;
@@ -612,9 +618,9 @@ ${this.model}</textarea
           word-wrap: break-word;
         }
       `
-    ]
+    ];
   }
 }
-customElements.define("bt-input", KRInput);
+customElements.define("bt-input", BTInput);
 
 import colors from "../colors";
