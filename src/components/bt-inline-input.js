@@ -1,6 +1,8 @@
 import { html } from "lit-element";
 import BTBase from "bt-base";
 
+import "components/bt-input";
+
 class BTInlineInput extends BTBase {
   static get properties() {
     return {
@@ -63,7 +65,7 @@ class BTInlineInput extends BTBase {
 
     if (this._editMode && this.editable) {
       contentTemplate = html`
-        <kr-input
+        <bt-input
           id="input"
           inline
           expandable
@@ -108,7 +110,7 @@ class BTInlineInput extends BTBase {
             this._emitInputSubmitDebounced(e);
           }}"
         >
-        </kr-input>
+        </bt-input>
       `;
     } else {
       contentTemplate = html`

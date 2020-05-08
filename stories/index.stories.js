@@ -1,5 +1,5 @@
 export default {
-  title: "BT Components"
+  title: "BT Components",
 };
 
 // export const Button = () => {
@@ -11,3 +11,6 @@ export default {
 // };
 
 export const BTInput = () => "<bt-input></bt-input>";
+
+export const BTInlineInput = () =>
+  '<bt-inline-input model="Text"></bt-inline-input>';
