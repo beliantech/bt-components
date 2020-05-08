@@ -114,4 +114,7 @@ module.exports = {
   plugins: [
     // Some useful comment
   ],
+  purge: {
+    content: ["./src/components/**/*.js", "./src/*.js"],
+  },
 };

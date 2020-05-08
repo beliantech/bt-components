@@ -4,6 +4,8 @@ const fs = require("fs");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+
 // const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const fileEntryMap = {};
@@ -19,22 +21,25 @@ console.log("entryMap", fileEntryMap);
 
 module.exports = {
   entry: {
-    ...fileEntryMap
+    ...fileEntryMap,
   },
   output: {
     publicPath: "/",
-    filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist")
+    filename: "[name].js",
+    path: path.resolve(__dirname, "dist"),
   },
-  mode: "development", // TODO: Override in PRODUCTION
-  devtool: "inline-source-map",
-  devServer: {
-    contentBase: "./dist",
-    allowedHosts: ["local.beliantech.com"]
-  },
+  mode: "production",
+  // devServer: {
+  //   contentBase: "./dist",
+  //   allowedHosts: ["local.beliantech.com"]
+  // },
   resolve: {
     extensions: [".js", ".json", ".ts", ".tsx"],
-    modules: [path.resolve(__dirname, "src"), "node_modules"]
+    modules: [path.resolve(__dirname, "src"), "node_modules"],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
   module: {
     rules: [
@@ -42,8 +47,8 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.(png|jpg|gif)$/i,
@@ -51,31 +56,23 @@ module.exports = {
           {
             loader: "url-loader",
             options: {
-              limit: 8192
-            }
-          }
-        ]
+              limit: 8192,
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,
         use: [
           {
-            loader: "postcss-loader"
-          }
-        ]
-      }
-    ]
+            loader: "postcss-loader",
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      title: "KanRails",
-      hash: true,
-      inject: false,
-      template: "./index.html",
-      chunksSortMode: "none", // https://github.com/vuejs/vue-cli/issues/1669
-      environment: process.env.NODE_ENV
-    })
     // new CopyWebpackPlugin([{ from: "src/static/public" }]),
-  ]
+  ],
 };
