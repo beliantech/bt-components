@@ -4,8 +4,6 @@ import { ifDefined } from "lit-html/directives/if-defined";
 
 import { styleMap } from "lit-html/directives/style-map";
 
-import "../bt-inline-input";
-
 export default ({
   label = "",
   labelAlign = "",

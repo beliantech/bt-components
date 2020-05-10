@@ -10,7 +10,11 @@ export default {
 //   return btn;
 // };
 
-export const BTInput = () => "<bt-input></bt-input>";
+export const BTInput = () => `
+  <bt-input></bt-input>
+
+  <bt-input inline></bt-input>
+`;
 
 export const BTInlineInput = () =>
   '<bt-inline-input model="Text"></bt-inline-input>';

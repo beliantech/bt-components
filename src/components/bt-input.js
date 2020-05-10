@@ -10,6 +10,8 @@ import labelTemplate from "./templates/label";
 import descriptionTemplate from "./templates/description";
 import errorTemplate from "./templates/error";
 
+import "./bt-inline-input";
+
 import { isEmail } from "validate";
 
 import debounce from "lodash/debounce";
@@ -92,7 +94,7 @@ export default class BTInput extends BTBase {
 
       errorMessage: { type: String },
 
-      _errors: { type: Array }
+      _errors: { type: Array },
     };
   }
 
@@ -251,7 +253,7 @@ export default class BTInput extends BTBase {
     }
 
     const containerClasses = {
-      flex: this.horizontal
+      flex: this.horizontal,
     };
 
     return html`
@@ -276,12 +278,12 @@ export default class BTInput extends BTBase {
               hideIndicator: this.hideIndicator,
               editable: this.editable,
               annotation: this.annotation,
-              hasDescription: !!this.description
+              hasDescription: !!this.description,
             })}
             ${descriptionTemplate({
               description: this.description,
               editable: this.editable,
-              omit: this.clickToEdit && this.displaymode
+              omit: this.clickToEdit && this.displaymode,
             })}
           </div>
           <div>
@@ -363,7 +365,7 @@ ${this.model}</textarea
     } else {
       const inputClasses = {
         "text-sm": true,
-        "flex-1": true
+        "flex-1": true,
       };
       if (this.inline) {
         inputClasses["inline"] = true;
@@ -461,7 +463,7 @@ ${this.model}</textarea
           : Promise.resolve(),
         this._id("description")
           ? this._id("description").updateComplete
-          : Promise.resolve()
+          : Promise.resolve(),
       ])
     );
   }
@@ -559,7 +561,7 @@ ${this.model}</textarea
   _submit() {
     if (this.validate()) {
       this._emit("model-change", {
-        value: this.model
+        value: this.model,
       });
     }
   }
@@ -617,7 +619,7 @@ ${this.model}</textarea
           white-space: pre-wrap;
           word-wrap: break-word;
         }
-      `
+      `,
     ];
   }
 }

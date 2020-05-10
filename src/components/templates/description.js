@@ -1,7 +1,5 @@
 import { html } from "lit-element";
 
-import "../bt-inline-input";
-
 export default ({ description = "", editable = false, omit = false }) => {
   if (omit) return html``;
   if (!editable) {
