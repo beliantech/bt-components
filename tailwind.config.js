@@ -69,9 +69,8 @@ module.exports = {
     // Some useful comment
     extend: {
       colors: {
-        "kr-blue": "var(--kr-blue)",
-        "kr-red": "var(--kr-red)",
-        "kr-body": "var(--kr-body)",
+        error: "var(--bt-error-color, red)",
+        lightgray: "lightgray",
       },
     },
   },

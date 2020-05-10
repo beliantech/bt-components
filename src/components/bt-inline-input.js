@@ -81,13 +81,13 @@ class BTInlineInput extends BTBase {
           .name="${this.name}"
           .placeholder="${this.placeholder}"
           .inputClass="${this.inputClass}"
-          @keydown="${e => {
+          @keydown="${(e) => {
             // keypress does not cross Shadom DOM boundary
             if (e.key === "Escape") {
               this._editMode = false;
             }
           }}"
-          @input-blur="${e => {
+          @input-blur="${(e) => {
             this._editMode = false;
 
             // note(jon): submit inline input on input blur
@@ -95,7 +95,7 @@ class BTInlineInput extends BTBase {
               this._emitInputSubmitDebounced(e);
             }
           }}"
-          @model-change="${e => {
+          @model-change="${(e) => {
             this.model = e.detail.value;
 
             // proxy the event up
@@ -103,7 +103,7 @@ class BTInlineInput extends BTBase {
               value: e.detail.value,
             });
           }}"
-          @input-submit="${e => {
+          @input-submit="${(e) => {
             this._editMode = false;
 
             // proxy the event up
@@ -211,6 +211,4 @@ const editableStyle = html`
   </style>
 `;
 
-const style = ({ editable }) => html`
-  ${editable ? editableStyle : null}
-`;
+const style = ({ editable }) => html` ${editable ? editableStyle : null} `;

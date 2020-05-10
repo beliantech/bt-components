@@ -240,12 +240,8 @@ export default class BTInput extends BTBase {
     if (this.displaymode) {
       contentTemplate = html`
         ${this.model != null && this.model !== ""
-          ? html`
-              <div class="display text-sm">${this.model}</div>
-            `
-          : html`
-              <div class="text-gray-600 text-sm">(empty)</div>
-            `}
+          ? html` <div class="display text-sm">${this.model}</div> `
+          : html` <div class="text-gray-600 text-sm">(empty)</div> `}
       `;
     } else {
       errorTemplate = this._renderErrorTemplate();
@@ -336,24 +332,24 @@ export default class BTInput extends BTBase {
           id="input"
           value=${this.model}
           class="p-2 w-full text-sm ${this._errors.length > 0
-            ? "border-kr-red"
+            ? "border-error"
             : ""}"
           style="${styleMap(textAreaStyle)}"
           placeholder="${ifDefined(this.placeholder)}"
           ?disabled="${this.disabled}"
           @input="${this._onInput}"
           @blur="${this._onBlur}"
-          @keydown=${e => {
+          @keydown=${(e) => {
             if (this.expandable) {
               this._resizeTextarea();
             }
           }}
-          @cut=${e => {
+          @cut=${(e) => {
             if (this.expandable) {
               this._resizeTextarea();
             }
           }}
-          @paste=${e => {
+          @paste=${(e) => {
             if (this.expandable) {
               this._resizeTextarea();
             }
@@ -385,7 +381,7 @@ ${this.model}</textarea
         inputClasses["w-full"] = true;
       }
       if (this._errors.length > 0) {
-        inputClasses["border-kr-red"] = true;
+        inputClasses["border-error"] = true;
       }
       if (this.inputType === InputTypeNumber) {
         inputClasses["pr-1"] = true;
@@ -395,12 +391,12 @@ ${this.model}</textarea
         <div
           class="w-full
             ${this.chips.length
-            ? "border border-gray-400 inline-block p-2 flex items-center"
+            ? "border border-lightgray inline-block p-2 flex items-center"
             : ""}"
         >
           ${this.chips.length > 0
             ? this.chips.map(
-                chip =>
+                (chip) =>
                   html`
                     <span class="px-2 py-1 text-sm bg-gray-300 mr-2"
                       >${chip}</span
@@ -472,7 +468,7 @@ ${this.model}</textarea
     const value = e.target.value;
 
     if (this.__onInput == null) {
-      const onInput = value => {
+      const onInput = (value) => {
         this.model = this.transformer ? this.transformer(value) : value;
 
         // Validate silently if user is typing and no current errors.

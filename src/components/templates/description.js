@@ -6,9 +6,7 @@ export default ({ description = "", editable = false, omit = false }) => {
     if (!description) {
       return html``;
     }
-    return html`
-      <div class="text-xs mb-1">${description}</div>
-    `;
+    return html` <div class="text-xs mb-1">${description}</div> `;
   }
 
   return html`
@@ -20,7 +18,7 @@ export default ({ description = "", editable = false, omit = false }) => {
       .inputClass="${"mb-1"}"
       .placeholder="${"Add a description..."}"
       highlightOnFocus
-      @input-submit="${function(e) {
+      @input-submit="${function (e) {
         this._emit("description-change", { value: e.detail.value }, true);
       }}"
     >

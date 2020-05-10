@@ -61,7 +61,7 @@ export default ({
       .inlineClass="${"text-sm font-bold mb-1"}"
       .inputClass="${"mb-1"}"
       .placeholder="${"Add a field name..."}"
-      @input-submit="${function(e) {
+      @input-submit="${function (e) {
         this._emit("label-change", { value: e.detail.value }, true);
       }}"
     >
