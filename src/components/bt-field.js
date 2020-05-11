@@ -198,7 +198,7 @@ class BTField extends BTBase {
     }
   }
 }
-customElements.define("bt-field", BTField);
+customElements.get("bt-field") || customElements.define("bt-field", BTField);
 
 const style = html`
   <style>

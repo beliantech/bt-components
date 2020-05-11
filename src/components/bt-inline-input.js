@@ -185,7 +185,8 @@ class BTInlineInput extends BTBase {
     this.removeEventListener("blur", this._blurListener);
   }
 }
-customElements.define("bt-inline-input", BTInlineInput);
+customElements.get("bt-inline-input") ||
+  customElements.define("bt-inline-input", BTInlineInput);
 
 const editableStyle = html`
   <style>

@@ -32,7 +32,7 @@ const InputTypePassword = "password";
 
 import "components/bt-field";
 
-export default class BTInput extends BTBase {
+class BTInput extends BTBase {
   static get properties() {
     return {
       label: { type: String },
@@ -619,6 +619,6 @@ ${this.model}</textarea
     ];
   }
 }
-customElements.define("bt-input", BTInput);
+customElements.get("bt-input") || customElements.define("bt-input", BTInput);
 
 import colors from "../colors";
