@@ -1,6 +1,6 @@
 {
-  "name": "bt-components",
-  "version": "0.1.0",
+  "name": "@beliantech/bt-components",
+  "version": "0.1.1",
   "description": "UI components for Belian Tech products",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,13 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
+  "homepage": "https://github.com/beliantech/bt-components",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beliantech/bt-components.git"
+  },
   "author": "Jonathan Lin",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "lit-element": "^2.3.1",
     "lit-html": "^1.2.1",

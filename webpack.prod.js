@@ -75,5 +75,6 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([{ from: "package.json" }]),
+    new CopyWebpackPlugin([{ from: "README.md" }]),
   ],
 };
