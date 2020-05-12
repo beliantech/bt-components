@@ -175,9 +175,13 @@ class BTField extends BTBase {
       document.execCommand("copy");
       document.body.removeChild(textarea);
 
-      this._emit("bt-copied", {
-        text: this.field.model,
-      });
+      this._emit(
+        "bt-copied",
+        {
+          text: this.field.model,
+        },
+        true
+      );
     }
   }
 
