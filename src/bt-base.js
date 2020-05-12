@@ -20,7 +20,7 @@ export default class BTBase extends LitElement {
         detail,
         bubbles: true,
         cancelable: true,
-        composed
+        composed,
       })
     );
   }
@@ -44,7 +44,7 @@ export default class BTBase extends LitElement {
             }
           `
         )}
-      `
+      `,
     ];
   }
 }

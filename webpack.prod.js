@@ -1,15 +1,16 @@
 const path = require("path");
-const webpack = require("webpack");
 const fs = require("fs");
 
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const webpack = require("webpack");
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
-// const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const fileEntryMap = {};
-fs.readdirSync("./src/components").forEach(filename => {
+fs.readdirSync("./src/components").forEach((filename) => {
   const pathToFile = `./src/components/${filename}`;
   const stat = fs.statSync(pathToFile);
   if (stat.isFile()) {
@@ -73,6 +74,6 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    // new CopyWebpackPlugin([{ from: "src/static/public" }]),
+    new CopyWebpackPlugin([{ from: "package.json" }]),
   ],
 };
