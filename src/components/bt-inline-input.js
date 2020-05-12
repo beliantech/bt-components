@@ -1,7 +1,7 @@
 import { html } from "lit-element";
 import BTBase from "bt-base";
 
-import "components/bt-input";
+import "./bt-input";
 
 class BTInlineInput extends BTBase {
   static get properties() {

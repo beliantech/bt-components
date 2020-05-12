@@ -11,6 +11,7 @@ import descriptionTemplate from "./templates/description";
 import errorTemplate from "./templates/error";
 
 import "./bt-inline-input";
+import "./bt-field";
 
 import { isEmail } from "validate";
 
@@ -29,8 +30,6 @@ const ErrorMinLength = "minlength";
 const InputTypeNumber = "number";
 const InputTypeText = "text";
 const InputTypePassword = "password";
-
-import "components/bt-field";
 
 class BTInput extends BTBase {
   static get properties() {

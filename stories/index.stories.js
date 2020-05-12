@@ -13,6 +13,8 @@ export default {
 export const BTInput = () => `
   <bt-input></bt-input>
 
+  <bt-input model="Model" displaymode clicktoedit></bt-input>
+
   <bt-input inline></bt-input>
 `;
 
