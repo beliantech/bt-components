@@ -1,11 +1,13 @@
 import { html, css } from "lit-element";
 import BTBase from "bt-base";
 
+import labelTemplate from "./templates/label";
 import "@material/mwc-slider";
 
 class BTSlider extends BTBase {
   static get properties() {
     return {
+      label: { type: String },
       step: { type: Number },
       max: { type: Number },
       value: { type: Number },
@@ -37,7 +39,17 @@ class BTSlider extends BTBase {
 
   render() {
     return html`
-      <div>
+      ${labelTemplate({
+        label: this.label,
+        labelAlign: this.labelAlign,
+        labelColor: this.labelColor,
+        required: false,
+        hideIndicator: true,
+        editable: this.editable,
+        annotation: this.annotation,
+        hasDescription: !!this.description,
+      })}
+      <div class="-mt-2">
         ${this.showNumbers
           ? html`
               <div class="flex justify-between" style="margin-bottom: -1rem;">
@@ -53,7 +65,7 @@ class BTSlider extends BTBase {
           : html``}
 
         <mwc-slider
-          class="w-full px-2"
+          class="w-full px-1"
           @change=${(e) => (this.value = e.currentTarget.value)}
           .step=${this.step}
           .max=${this.max}

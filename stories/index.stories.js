@@ -21,4 +21,4 @@ export const BTInput = () => `
 export const BTInlineInput = () =>
   '<bt-inline-input model="Text"></bt-inline-input>';
 
-export const BTSlider = () => '<bt-slider model="Text"></bt-slider>';
+export const BTSlider = () => '<bt-slider label="Label"></bt-slider>';
