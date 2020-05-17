@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "beliantech-web"
+  },
+  "targets": {
+    "beliantech-web": {
+      "hosting": {
+        "bt-components": [
+          "bt-web-components"
+        ]
+      }
+    }
+  }
+}
