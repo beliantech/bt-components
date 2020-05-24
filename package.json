@@ -21,7 +21,9 @@
     "@material/mwc-slider": "^0.15.0",
     "lit-element": "^2.3.1",
     "lit-html": "^1.2.1",
-    "pikaday": "^1.8.0"
+    "lodash": "^4.17.15",
+    "pikaday": "^1.8.0",
+    "uuid": "^8.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",

@@ -22,3 +22,26 @@ export const BTInlineInput = () =>
   '<bt-inline-input model="Text"></bt-inline-input>';
 
 export const BTSlider = () => '<bt-slider label="Label"></bt-slider>';
+
+export const BTRadio = () => {
+  const radio = document.createElement("bt-radio");
+  radio.options = [
+    { id: "123", name: "Option 1" },
+    { id: "234", name: "Option 2" },
+    { id: "345", name: "Option 3" },
+    { id: "456", name: "Option 4" },
+  ];
+  return radio;
+};
+
+export const BTRadioHorizontal = () => {
+  const radio = document.createElement("bt-radio");
+  radio.options = [
+    { id: "123", name: "Option 1" },
+    { id: "234", name: "Option 2" },
+    { id: "345", name: "Option 3" },
+    { id: "456", name: "Option 4" },
+  ];
+  radio.horizontal = true;
+  return radio;
+};
