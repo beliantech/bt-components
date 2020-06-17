@@ -9,7 +9,8 @@
     "deploy-storybook": "npm run build-storybook && firebase deploy",
     "publish-npm": "npm run build && npm publish dist --access public",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "start-storybook -p 6006"
+    "storybook": "start-storybook -p 6006",
+    "start": "npm run storybook"
   },
   "homepage": "https://github.com/beliantech/bt-components",
   "repository": {
