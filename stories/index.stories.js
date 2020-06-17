@@ -45,3 +45,22 @@ export const BTRadioHorizontal = () => {
   radio.horizontal = true;
   return radio;
 };
+
+export const BTIcon = () => `
+  <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
+
+  <bt-icon>navigate_before</bt-icon>
+  <bt-icon xsmall>navigate_before</bt-icon>
+  <bt-icon small>navigate_before</bt-icon>
+  <bt-icon medium>navigate_before</bt-icon>
+  <bt-icon large>navigate_before</bt-icon>
+  <bt-icon large>navigate_before</bt-icon>
+
+  <bt-icon>
+    settings
+    <div class="absolute right-0" slot="dropdown">Dropdown</div>
+  </bt-icon>
+  <bt-icon button tooltip="Foo Bar">
+    navigate_before
+  </bt-icon>
+`;
