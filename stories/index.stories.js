@@ -63,4 +63,7 @@ export const BTIcon = () => `
   <bt-icon button tooltip="Foo Bar">
     navigate_before
   </bt-icon>
+  <bt-icon linkTo="https://beliantech.com">
+    open_in_new
+  </bt-icon>
 `;

@@ -115,9 +115,7 @@ const style = (linkTo = false, muted = false) => {
         color: var(--bt-icon-button-active-color, #9e9e9e);
       }
 
-      ${linkTo
-        ? html` a, a:visited { height: ${size}; color: inherit; } `
-        : html``}
+      ${linkTo ? html` a, a:visited { color: inherit; } ` : html``}
 
       .icon-container .tooltip {
         display: block;
