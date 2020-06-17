@@ -43,7 +43,10 @@ export default class BTIcon extends BTBase {
     let contentTemplate = html` <mwc-icon><slot></slot></mwc-icon> `;
     if (this.linkTo) {
       contentTemplate = html`
-        <a href="${this.linkTo}" target="${ifDefined(this.linkTarget)}"
+        <a
+          href="${this.linkTo}"
+          target="${ifDefined(this.linkTarget)}"
+          style="line-height:0"
           >${contentTemplate}</a
         >
       `;
