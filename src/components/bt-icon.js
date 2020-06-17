@@ -63,7 +63,7 @@ export default class BTIcon extends BTBase {
     return html`
       ${style(this.linkTo, this.muted)}
       <div
-        class="icon-container relative inline-block"
+        class="icon-container relative inline-flex"
         @click=${(e) => {
           // Prevent click from going to parent element.
           if (this.button && !this.linkTo) {
@@ -86,6 +86,7 @@ const style = (linkTo = false, muted = false) => {
         user-select: none;
         position: relative;
         color: inherit;
+        display: inline-flex;
         ${muted ? "opacity: 0.5" : ""};
 
         --mdc-icon-size: 20px;
