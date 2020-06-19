@@ -30,8 +30,8 @@ export default class BTIcon extends BTBase {
 
   render() {
     const tooltipStyle = {};
-    if (this.width) {
-      tooltipStyle["width"] = `${this.width}px`;
+    if (this.tooltipWidth) {
+      tooltipStyle["width"] = `${this.tooltipWidth}px`;
     }
     if (this.tooltipPosition === "right") {
       tooltipStyle["right"] = 0;
