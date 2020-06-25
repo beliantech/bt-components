@@ -67,3 +67,10 @@ export const BTIcon = () => `
     open_in_new
   </bt-icon>
 `;
+
+export const BTButton = () => `
+  <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
+
+  <bt-button>Button</bt-button>
+  <bt-button icon="add">Button</bt-button>
+`;
