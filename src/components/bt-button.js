@@ -340,4 +340,4 @@ export default class BTButton extends BTBase {
     ];
   }
 }
-customElements.define("bt-button", BTButton);
+customElements.get("bt-button") || customElements.define("bt-button", BTButton);

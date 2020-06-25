@@ -79,7 +79,7 @@ export default class BTIcon extends BTBase {
     `;
   }
 }
-customElements.define("bt-icon", BTIcon);
+customElements.get("bt-icon") || customElements.define("bt-icon", BTIcon);
 
 const style = (linkTo = false, muted = false) => {
   return html`
