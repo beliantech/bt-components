@@ -1,10 +1,10 @@
 import { html } from "lit-element";
 import { classMap } from "lit-html/directives/class-map";
 
-import BTBase from "bt-base";
+import BTBase from "../bt-base";
 
-import "support/bt-editable-options";
-import "components/bt-field";
+import "../support/bt-editable-options";
+import "./bt-field";
 
 import labelTemplate from "./templates/label";
 import descriptionTemplate from "./templates/description";

@@ -1,7 +1,7 @@
 import { html, css, unsafeCSS } from "lit-element";
 import { classMap } from "lit-html/directives/class-map";
 import { styleMap } from "lit-html/directives/style-map";
-import BTBase from "bt-base";
+import BTBase from "../bt-base";
 
 import "./bt-icon";
 import colors from "../colors";

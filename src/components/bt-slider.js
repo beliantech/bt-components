@@ -1,5 +1,5 @@
 import { html, css } from "lit-element";
-import BTBase from "bt-base";
+import BTBase from "../bt-base";
 
 import labelTemplate from "./templates/label";
 import "@material/mwc-slider";

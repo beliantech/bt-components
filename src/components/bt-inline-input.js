@@ -1,5 +1,5 @@
 import { html } from "lit-element";
-import BTBase from "bt-base";
+import BTBase from "../bt-base";
 
 import "./bt-input";
 

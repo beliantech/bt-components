@@ -1,5 +1,5 @@
 import { html } from "lit-element";
-import BTBase from "bt-base";
+import BTBase from "../bt-base";
 import { styleMap } from "lit-html/directives/style-map";
 import { ifDefined } from "lit-html/directives/if-defined";
 import "@material/mwc-icon";

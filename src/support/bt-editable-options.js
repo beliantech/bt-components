@@ -1,13 +1,13 @@
 import { html } from "lit-element";
-import BTBase from "bt-base";
+import BTBase from "../bt-base";
 
 import { v4 as uuidv4 } from "uuid";
 
 import isEqual from "lodash/isEqual";
 
-import "components/bt-inline-input";
+import "../components/bt-inline-input";
 
-import { moveIndex } from "util/positioning";
+import { moveIndex } from "../util/positioning";
 
 /**
  * An editable item consists of a row (L to R): icon, editable text field, dragger icon, delete icon

@@ -3,8 +3,8 @@ import { ifDefined } from "lit-html/directives/if-defined";
 import { classMap } from "lit-html/directives/class-map";
 import { styleMap } from "lit-html/directives/style-map";
 
-import BTBase from "bt-base";
-import t from "locale";
+import BTBase from "../bt-base";
+import t from "../locale";
 
 import labelTemplate from "./templates/label";
 import descriptionTemplate from "./templates/description";
@@ -13,7 +13,7 @@ import errorTemplate from "./templates/error";
 import "./bt-inline-input";
 import "./bt-field";
 
-import { isEmail } from "validate";
+import { isEmail } from "../validate";
 
 import debounce from "lodash/debounce";
 import keyBy from "lodash/keyBy";
