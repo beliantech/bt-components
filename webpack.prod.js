@@ -22,12 +22,15 @@ console.log("entryMap", fileEntryMap);
 
 module.exports = {
   entry: {
-    ...fileEntryMap,
+    // ...fileEntryMap,
+    index: "index.js",
   },
   output: {
     publicPath: "/",
     filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
+    // libraryTarget: "umd",
+    // library: "bt-components",
   },
   mode: "production",
   // devServer: {
@@ -41,18 +44,17 @@ module.exports = {
   optimization: {
     minimize: true,
     minimizer: [new TerserPlugin()],
-    runtimeChunk: true,
   },
-  externals: [/^lodash\/.+$/],
+  // externals: [/^lodash\/.+$/],
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
-      },
+      // {
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: "babel-loader",
+      //   },
+      // },
       {
         test: /\.(png|jpg|gif)$/i,
         use: [
@@ -78,5 +80,16 @@ module.exports = {
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([{ from: "package.json" }]),
     new CopyWebpackPlugin([{ from: "README.md" }]),
+    new CopyWebpackPlugin([
+      {
+        from: "src",
+        transformPath(targetPath, absolutePath) {
+          return targetPath.replace(/src\//, "");
+        },
+        globOptions: {
+          ignore: ["**/*.css"],
+        },
+      },
+    ]),
   ],
 };
