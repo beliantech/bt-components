@@ -13,6 +13,7 @@ export default class BTIcon extends BTBase {
       medium: { type: Boolean, reflect: true },
       large: { type: Boolean, reflect: true },
       button: { type: Boolean, reflect: true },
+      circle: { type: Boolean, reflect: true },
 
       muted: { type: Boolean, reflect: true },
 
@@ -104,6 +105,18 @@ const style = (linkTo = false, muted = false) => {
       }
       :host([large]) {
         --mdc-icon-size: 36px;
+      }
+
+      :host([circle]) {
+        height: 36px;
+        width: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      :host([circle]:hover) {
+        background-color: var(--bt-icon-circle-bg-color, #eeeeee);
+        border-radius: 50%;
       }
 
       :host([button]) {
