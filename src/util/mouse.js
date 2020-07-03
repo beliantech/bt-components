@@ -1,3 +1,7 @@
+function getEventPath(e) {
+  return e.path || (e.composedPath && e.composedPath());
+}
+
 export function clickOutsideToDismiss(el, cb) {
   const ondismiss = (e) => {
     if (e.type === "keydown" && e.key !== "Escape") {
