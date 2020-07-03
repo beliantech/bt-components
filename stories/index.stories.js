@@ -60,7 +60,7 @@ export const BTIcon = () => `
     settings
     <div class="absolute right-0" slot="dropdown">Dropdown</div>
   </bt-icon>
-  <bt-icon button tooltip="Foo Bar">
+  <bt-icon button tooltip="Foo Bar Long Tooltip">
     navigate_before
   </bt-icon>
   <bt-icon linkTo="https://beliantech.com">

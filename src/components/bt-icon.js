@@ -19,7 +19,6 @@ export default class BTIcon extends BTBase {
       linkTo: { type: String },
       linkTarget: { type: String },
       tooltip: { type: String },
-      tooltipWidth: { type: Number },
       tooltipPosition: { type: String },
     };
   }
@@ -30,14 +29,13 @@ export default class BTIcon extends BTBase {
 
   render() {
     const tooltipStyle = {};
-    if (this.tooltipWidth) {
-      tooltipStyle["width"] = `${this.tooltipWidth}px`;
-    }
     if (this.tooltipPosition === "right") {
       tooltipStyle["right"] = 0;
-    }
-    if (this.tooltipPosition === "left") {
+    } else if (this.tooltipPosition === "left") {
       tooltipStyle["left"] = 0;
+    } else {
+      tooltipStyle["transform"] = "translateX(-50%)";
+      tooltipStyle["left"] = "50%";
     }
 
     let contentTemplate = html` <mwc-icon><slot></slot></mwc-icon> `;
@@ -55,7 +53,7 @@ export default class BTIcon extends BTBase {
       contentTemplate = html`
         ${contentTemplate}
         <div
-          class="absolute tooltip font-bold text-xs py-2 px-3 mt-1 bg-gray-800 leading-normal text-white text-center z-20"
+          class="absolute tooltip font-bold text-xs py-2 px-3 mt-1 bg-gray-800 leading-normal text-white text-center z-20 whitespace-no-wrap"
           style=${styleMap(tooltipStyle)}
         >
           ${this.tooltip}
