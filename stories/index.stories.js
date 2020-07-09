@@ -16,6 +16,8 @@ export const BTInput = () => `
   <bt-input model="Model" displaymode clicktoedit></bt-input>
 
   <bt-input inline></bt-input>
+
+  <bt-input type="richtext"></bt-input>
 `;
 
 export const BTInlineInput = () =>

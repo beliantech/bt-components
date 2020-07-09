@@ -87,7 +87,7 @@ module.exports = {
           return targetPath.replace(/src\//, "");
         },
         globOptions: {
-          ignore: ["**/*.css"],
+          ignore: ["src/bt-utils.css"],
         },
       },
     ]),

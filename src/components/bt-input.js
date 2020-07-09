@@ -21,6 +21,7 @@ import isEmpty from "lodash/isEmpty";
 
 const TypeInput = "input";
 const TypeTextarea = "textarea";
+const TypeRichText = "richtext";
 
 const ErrorValidation = "validation";
 const ErrorInvalidEmail = "invalid-email";
@@ -357,6 +358,8 @@ class BTInput extends BTBase {
 ${this.model}</textarea
         >
       `;
+    } else if (this.type === TypeRichText) {
+      return html` <slot></slot> `;
     } else {
       const inputClasses = {
         "text-sm": true,
@@ -441,6 +444,32 @@ ${this.model}</textarea
       const input = this._id("input");
       if (input && input.value !== this.model) {
         input.value = this.model;
+      }
+    }
+    if (changed.has("type") && this.type === TypeRichText) {
+      if (!window.__btComponentsTrixLoad) {
+        window.__btComponentsTrixLoad = true;
+
+        // Load Trix dependencies ONCE
+        const script = document.createElement("script");
+        script.src =
+          "https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.3/trix-core.min.js";
+        document.body.appendChild(script);
+
+        import("./trix.css").then((module) => {
+          const style = document.createElement("style");
+          style.innerText = module.default;
+          document.body.appendChild(style);
+        });
+      }
+
+      if (!this.__initTrixEditor) {
+        this.__initTrixEditor = true;
+
+        const trixEditor = document.createElement("trix-editor");
+        trixEditor.classList.add("trix-content");
+        trixEditor.addEventListener("trix-change", this._onInput.bind(this));
+        this.appendChild(trixEditor);
       }
     }
 

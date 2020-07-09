@@ -28,6 +28,7 @@
     "lit-html": "^1.2.1",
     "lodash": "^4.17.15",
     "pikaday": "^1.8.0",
+    "trix": "^1.2.3",
     "uuid": "^8.1.0"
   },
   "devDependencies": {
