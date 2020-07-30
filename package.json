@@ -9,7 +9,7 @@
     "deploy-storybook": "npm run build-storybook && firebase deploy",
     "publish-npm": "npm run build && npm publish dist --access public",
     "build-css": "npx tailwindcss build src/bt-utils.css -o dist/bt-utils-full.css && npm run purge-css",
-    "purge-css": "npx purgecss --css dist/bt-utils-full.css --content src/**/*.js -o dist/bt-utils.css && rm dist/bt-utils-full.css",
+    "purge-css": "npx purgecss --css dist/bt-utils-full.css --content src/**/*.js,src/components/**/*.js -o dist/bt-utils.css && rm dist/bt-utils-full.css",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
     "start": "npm run storybook"
