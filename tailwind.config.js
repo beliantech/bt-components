@@ -115,6 +115,6 @@ module.exports = {
     // Some useful comment
   ],
   purge: {
-    content: ["./src/components/**/*.js", "./src/util/*.js", "./src/*.js"],
+    content: ["./src/**/*.js"],
   },
 };
