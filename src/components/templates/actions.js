@@ -10,15 +10,15 @@ export default (
   opts.editmode
     ? html`
         <div class="mt-1">
-          <kr-button class="inline-block" small primary @click=${opts.onSave}
-            >Save</kr-button
+          <bt-button class="inline-block" small primary @click=${opts.onSave}
+            >Save</bt-button
           >
-          <kr-button
+          <bt-button
             class="inline-block"
             small
             transparent
             @click=${opts.onCancel}
-            >Cancel</kr-button
+            >Cancel</bt-button
           >
         </div>
       `

@@ -11,9 +11,13 @@ export default {
 // };
 
 export const BTInput = () => `
+  <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
+
   <bt-input></bt-input>
 
   <bt-input model="Model" displaymode clicktoedit></bt-input>
+
+  <bt-input model="https://beliantech.com" displaymode clicktoedit></bt-input>
 
   <bt-input inline></bt-input>
 

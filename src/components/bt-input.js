@@ -1,4 +1,5 @@
 import { html, css, unsafeCSS } from "lit-element";
+import { unsafeHTML } from "lit-html/directives/unsafe-html";
 import { ifDefined } from "lit-html/directives/if-defined";
 import { classMap } from "lit-html/directives/class-map";
 import { styleMap } from "lit-html/directives/style-map";
@@ -9,6 +10,8 @@ import t from "../locale";
 import labelTemplate from "./templates/label";
 import descriptionTemplate from "./templates/description";
 import errorTemplate from "./templates/error";
+
+import { urlify } from "../util/url";
 
 import "./bt-inline-input";
 import "./bt-field";
@@ -240,7 +243,9 @@ class BTInput extends BTBase {
     if (this.displaymode) {
       contentTemplate = html`
         ${this.model != null && this.model !== ""
-          ? html` <div class="display text-sm">${this.model}</div> `
+          ? /*prettier-ignore */ html`
+              <div class="display text-sm" @click=${this._onDisplayClick}>${unsafeHTML(urlify(this.model))}</div>
+            `
           : html` <div class="text-gray-600 text-sm">(empty)</div> `}
       `;
     } else {
@@ -579,6 +584,12 @@ ${this.model}</textarea
           input.setSelectionRange(0, input.value.length);
         }
       }, 25);
+    }
+  }
+
+  _onDisplayClick(e) {
+    if (e.target.nodeName === "A") {
+      e.stopPropagation();
     }
   }
 

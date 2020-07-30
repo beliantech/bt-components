@@ -4,6 +4,8 @@ import { classMap } from "lit-html/directives/class-map";
 
 import actionsTemplate from "./templates/actions";
 
+import "./bt-icon";
+
 const NodeNamesAllowCopyPaste = {
   "BT-INPUT": true,
   "BT-DATE-INPUT": true,
@@ -48,12 +50,9 @@ class BTField extends BTBase {
           >
             ${NodeNamesAllowCopyPaste[this.field.nodeName]
               ? html`
-                  <kr-icon
-                    button
-                    small
-                    .icon=${"filter_none"}
-                    @click=${this._onCopyClick}
-                  ></kr-icon>
+                  <bt-icon button small @click=${this._onCopyClick}
+                    >filter_none</bt-icon
+                  >
                 `
               : html``}
           </div>
@@ -156,6 +155,19 @@ class BTField extends BTBase {
   _onOverlayClick(e) {
     // Prevent click from going through.
     e.preventDefault();
+
+    // HACKY, reach underlying link and click it.
+    e.currentTarget.style.display = "none";
+    const element = document.elementFromPoint(e.clientX, e.clientY);
+    if (element.nodeName == "BT-INPUT") {
+      const el = element.shadowRoot.elementFromPoint(e.clientX, e.clientY);
+      if (el.nodeName === "A") {
+        el.click();
+        e.currentTarget.style.display = "";
+        return;
+      }
+    }
+    e.currentTarget.style.display = "";
 
     if (!this.field) return;
 

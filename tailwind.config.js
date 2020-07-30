@@ -70,6 +70,7 @@ module.exports = {
     extend: {
       colors: {
         error: "var(--bt-error-color, red)",
+        link: "var(--bt-link-color, #00A1DE)",
         lightgray: "lightgray",
       },
     },
