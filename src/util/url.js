@@ -1,4 +1,6 @@
 export function urlify(text) {
+  if (!text) return text;
+
   var urlRegex = /(https?:\/\/[^\s]+)/g;
   return text.replace(
     urlRegex,

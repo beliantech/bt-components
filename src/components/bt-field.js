@@ -156,19 +156,6 @@ class BTField extends BTBase {
     // Prevent click from going through.
     e.preventDefault();
 
-    // HACKY, reach underlying link and click it.
-    e.currentTarget.style.display = "none";
-    const element = document.elementFromPoint(e.clientX, e.clientY);
-    if (element.nodeName == "BT-INPUT") {
-      const el = element.shadowRoot.elementFromPoint(e.clientX, e.clientY);
-      if (el.nodeName === "A") {
-        el.click();
-        e.currentTarget.style.display = "";
-        return;
-      }
-    }
-    e.currentTarget.style.display = "";
-
     if (!this.field) return;
 
     if (this.field.clickToEdit && this.field.displaymode) {
