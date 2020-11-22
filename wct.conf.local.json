@@ -1,0 +1,18 @@
+{
+  "npm": true,
+  "verbose": true,
+  "moduleResolution": "node",
+  "plugins": {
+    "local": {
+      "browsers": [
+        "chrome"
+      ],
+      "browserOptions": {
+        "chrome": [
+          "disable-gpu",
+          "no-sandbox"
+        ]
+      }
+    }
+  }
+}

@@ -24,6 +24,7 @@ module.exports = {
   entry: {
     // ...fileEntryMap,
     index: "index.js",
+    "test-support": "test-support.js",
   },
   output: {
     publicPath: "/",
