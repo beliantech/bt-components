@@ -11,7 +11,7 @@
     "build-css": "npx tailwindcss build src/bt-utils.css -o dist/bt-utils-full.css && npm run purge-css",
     "purge-css": "npx purgecss --css dist/bt-utils-full.css --content src/**/*.js,src/components/**/*.js -o dist/bt-utils.css && rm dist/bt-utils-full.css",
     "test": "npm run build && wct --npm",
-    "test:debug": "wct --npm -p --config-file wct.conf.local.json",
+    "test:debug": "npm run build && wct --npm -p --config-file wct.conf.local.json",
     "storybook": "start-storybook -p 6006",
     "start": "npm run storybook"
   },
