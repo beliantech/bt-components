@@ -26,3 +26,23 @@ export function clickOutsideToDismiss(el, cb) {
     window.removeEventListener("click", ondismiss);
   };
 }
+
+export function escapeToDismiss(cb) {
+  const onescape = (e) => {
+    const path = getEventPath(e);
+    if (e.key === "Escape") {
+      if (path && path[0].nodeName === "INPUT") {
+        // Escaping from a form input. Ignore.
+        return;
+      }
+
+      if (cb) cb();
+    }
+  };
+
+  window.addEventListener("keydown", onescape);
+
+  return () => {
+    window.removeEventListener("keydown", onescape);
+  };
+}
