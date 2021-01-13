@@ -42,7 +42,10 @@ module.exports = {
           },
         },
       ],
-      include: [path.resolve(__dirname, "../src")],
+      include: [
+        path.resolve(__dirname, "../src"),
+        path.resolve(__dirname, "../node_modules/jsoneditor/dist"),
+      ],
     });
 
     // console.dir(config.module.rules);
