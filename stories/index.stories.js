@@ -80,3 +80,7 @@ export const BTButton = () => `
   <bt-button>Button</bt-button>
   <bt-button icon="add">Button</bt-button>
 `;
+
+export const BTJsonEditor = () => `
+  <bt-json-editor model="const foo = 'Hello World!;'"></bt-json-editor>
+`;
