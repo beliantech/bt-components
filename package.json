@@ -26,7 +26,6 @@
     "@material/mwc-icon": "^0.15.0",
     "@material/mwc-slider": "^0.15.0",
     "codeflask": "^1.4.1",
-    "jsoneditor": "^9.1.7",
     "lit-element": "^2.3.1",
     "lit-html": "^1.2.1",
     "lodash": "^4.17.15",
