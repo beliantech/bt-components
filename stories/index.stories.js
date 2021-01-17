@@ -82,5 +82,5 @@ export const BTButton = () => `
 `;
 
 export const BTJsonEditor = () => `
-  <bt-json-editor></bt-json-editor>
+  <bt-json-editor model="const foo = 'Hello World!;'"></bt-json-editor>
 `;

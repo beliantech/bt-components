@@ -1,12 +1,14 @@
 import { html, css, unsafeCSS } from "lit-element";
-import JSONEditor from "jsoneditor";
-import jsonEditorStyle from "jsoneditor/dist/jsoneditor.css";
+
+import CodeFlask from "codeflask";
 
 import BTBase from "../bt-base";
 
 class BTJSONEditor extends BTBase {
   static get properties() {
-    return {};
+    return {
+      model: { type: String },
+    };
   }
 
   constructor() {
@@ -15,25 +17,33 @@ class BTJSONEditor extends BTBase {
 
   render() {
     return html`
-      <div id="jsoneditor"></div>
+      <div id="editor"></div>
       <div>Foo</div>
     `;
   }
 
   firstUpdated() {
-    const container = this._id("jsoneditor");
-    const editor = new JSONEditor(container, { mode: "code" });
+    const container = this._id("editor");
 
-    console.debug("json editor style", jsonEditorStyle);
+    this._flask = new CodeFlask(container, {
+      language: "js",
+      lineNumbers: true,
+      styleParent: this.shadowRoot,
+    });
+
+    this._flask.onUpdate((code) => {
+      this._emit("model-change", { value: code });
+    });
+  }
+
+  updated(changed) {
+    if (changed.has("model")) {
+      this._flask.updateCode(this.model);
+    }
   }
 
   static get styles() {
-    return [
-      super.styles,
-      css`
-        ${unsafeCSS(jsonEditorStyle)}
-      `,
-    ];
+    return [super.styles, css``];
   }
 }
 customElements.get("bt-json-editor") ||
