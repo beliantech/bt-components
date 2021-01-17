@@ -1,4 +1,4 @@
-import { html, css, unsafeCSS } from "lit-element";
+import { html, css } from "lit-element";
 
 import CodeFlask from "codeflask";
 
