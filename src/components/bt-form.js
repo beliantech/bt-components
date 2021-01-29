@@ -7,6 +7,7 @@ import { guard } from "lit-html/directives/guard";
 
 import BTBase from "../bt-base";
 import "./bt-input";
+import "./bt-button";
 
 class BTForm extends BTBase {
   static get properties() {
