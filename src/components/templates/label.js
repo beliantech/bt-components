@@ -1,5 +1,5 @@
 import { html } from "lit-element";
-import t from "locale";
+import t from "../../locale";
 import { ifDefined } from "lit-html/directives/if-defined";
 
 import { styleMap } from "lit-html/directives/style-map";
