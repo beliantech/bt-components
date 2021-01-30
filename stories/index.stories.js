@@ -13,7 +13,7 @@ export default {
 export const BTInput = () => `
   <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
 
-  <bt-input></bt-input>
+  <bt-input label="Label" description="Description"></bt-input>
 
   <bt-input model="Model" displaymode clicktoedit></bt-input>
 
@@ -37,6 +37,8 @@ export const BTRadio = () => {
     { id: "345", name: "Option 3" },
     { id: "456", name: "Option 4" },
   ];
+  radio.label = "Label";
+  radio.description = "Description";
   return radio;
 };
 
@@ -49,6 +51,8 @@ export const BTRadioHorizontal = () => {
     { id: "456", name: "Option 4" },
   ];
   radio.horizontal = true;
+  radio.label = "Label";
+  radio.description = "Description";
   return radio;
 };
 

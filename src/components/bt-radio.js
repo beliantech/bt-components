@@ -6,8 +6,6 @@ import BTBase from "../bt-base";
 import "../support/bt-editable-options";
 import "./bt-field";
 
-import labelTemplate from "./templates/label";
-import descriptionTemplate from "./templates/description";
 import errorTemplate from "./templates/error";
 
 const ErrorRequired = "required";
@@ -52,19 +50,6 @@ class BTRadio extends BTBase {
       ${style}
       <bt-field .field=${this}>
         <div class=${classMap(containerClasses)}>
-          ${labelTemplate({
-            label: this.label,
-            forId: "input",
-            required: this.required,
-            hideIndicator: this.hideIndicator,
-            editable: this.editable,
-            hasDescription: !!this.description,
-          })}
-          ${descriptionTemplate({
-            description: this.description,
-            editable: this.editable,
-            omit: this.clickToEdit && this.displaymode,
-          })}
           <!--Need to use <form> because Safari at one point does not scope radios using Shadow DOM boundary.-->
           <form
             class="m-0 py-0 px-0

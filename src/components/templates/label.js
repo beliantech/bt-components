@@ -9,7 +9,6 @@ export default ({
   labelAlign = "",
   labelColor = "",
   required = false,
-  forId = "",
   hideIndicator = false,
   hasDescription = false,
   editable = false,
@@ -43,7 +42,6 @@ export default ({
       <label
         class="block text-sm font-bold ${hasDescription ? "" : "mb-1"}"
         style=${styleMap(labelStyles)}
-        for=${ifDefined(forId)}
       >
         ${t(label)} ${annotationTemplate}
       </label>

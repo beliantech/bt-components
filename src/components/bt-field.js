@@ -2,6 +2,8 @@ import { html } from "lit-element";
 import BTBase from "../bt-base";
 import { classMap } from "lit-html/directives/class-map";
 
+import labelTemplate from "./templates/label";
+import descriptionTemplate from "./templates/description";
 import actionsTemplate from "./templates/actions";
 
 import "./bt-icon";
@@ -29,6 +31,7 @@ class BTField extends BTBase {
     super();
 
     this.enableOverlay = true;
+    this.hideDescription = false;
   }
 
   render() {
@@ -82,6 +85,21 @@ class BTField extends BTBase {
         @input-cancel=${this._exitEditMode /* Close from deep nested fields. */}
       >
         ${overlayTemplate}
+        ${labelTemplate({
+          label: this.field.label,
+          labelAlign: this.field.labelAlign,
+          labelColor: this.field.labelColor,
+          editable: this.field.editable,
+          hideIndicator: this.field.hideIndicator,
+          hasDescription: !!this.field.description,
+          required: this.field.required,
+          annotation: this.field.annotation,
+        })}
+        ${descriptionTemplate({
+          description: this.field.description,
+          editable: this.field.editable,
+          omit: this.field.clickToEdit && this.field.displaymode,
+        })}
         <div>
           <slot></slot>
         </div>

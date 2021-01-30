@@ -7,8 +7,6 @@ import { styleMap } from "lit-html/directives/style-map";
 import BTBase from "../bt-base";
 import t from "../locale";
 
-import labelTemplate from "./templates/label";
-import descriptionTemplate from "./templates/description";
 import errorTemplate from "./templates/error";
 
 import { urlify } from "../util/url";
@@ -269,24 +267,6 @@ class BTInput extends BTBase {
             ? `width: ${this.width};`
             : ""} position: relative;"
         >
-          <div class="${this.horizontal ? "field-label-horizontal" : ""}">
-            ${labelTemplate({
-              label: this.label,
-              forId: "input",
-              labelAlign: this.labelAlign,
-              labelColor: this.labelColor,
-              required: this.required,
-              hideIndicator: this.hideIndicator,
-              editable: this.editable,
-              annotation: this.annotation,
-              hasDescription: !!this.description,
-            })}
-            ${descriptionTemplate({
-              description: this.description,
-              editable: this.editable,
-              omit: this.clickToEdit && this.displaymode,
-            })}
-          </div>
           <div>
             ${contentTemplate} ${inputTemplate} ${errorTemplate}
           </div>
