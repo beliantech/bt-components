@@ -143,7 +143,10 @@ describe("bt-input", () => {
 
       await el.updateComplete;
 
-      assert.isTrue(el._select("label").textContent.indexOf("foobar") > 0);
+      assert.isTrue(
+        el._select("bt-field")._select("label").textContent.indexOf("foobar") >
+          0
+      );
     });
   });
 
@@ -272,12 +275,15 @@ describe("bt-input", () => {
 
         await delay();
 
-        MockInteractions.click(el._id("label")._select(".display"));
+        MockInteractions.click(
+          el._select("bt-field")._id("label")._select(".display")
+        );
 
         await delay();
 
         MockInteractions.pressEnter(
           el
+            ._select("bt-field")
             ._id("label") // kr-inline-input
             ._id("input") // kr-input
             ._id("input") // input
@@ -309,12 +315,15 @@ describe("bt-input", () => {
 
         await delay();
 
-        MockInteractions.click(el._id("description")._select(".display"));
+        MockInteractions.click(
+          el._select("bt-field")._id("description")._select(".display")
+        );
 
         await delay();
 
         MockInteractions.pressEnter(
           el
+            ._select("bt-field")
             ._id("description") // kr-inline-input
             ._id("input") // kr-input
             ._id("input") // input
