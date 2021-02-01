@@ -1,3 +1,5 @@
+import { html } from "lit-element";
+
 export default {
   title: "BT Components",
 };
@@ -88,3 +90,41 @@ export const BTButton = () => `
 export const BTJsonEditor = () => `
   <bt-json-editor model="const foo = 'Hello World!;'"></bt-json-editor>
 `;
+
+export const BTForm = () => {
+  const form = document.createElement("bt-form");
+
+  form.customFieldsFunc = function () {
+    return {
+      radio: (model, field, form) => {
+        return html`<bt-radio
+          id=${field.id}
+          .model=${model}
+          .options=${field.options}
+          .label=${field.label}
+          @model-change=${form.onModelChange}
+        ></bt-radio>`;
+      },
+    };
+  };
+  form.formSchema = {
+    fields: [
+      {
+        id: "my_short_text",
+        type: "short_text",
+        label: "Short text",
+      },
+      {
+        id: "my_radio",
+        type: "radio",
+        label: "Radio",
+        options: [
+          { id: "foo", name: "Foo" },
+          { id: "bar", name: "Bar" },
+        ],
+      },
+    ],
+  };
+
+  return form;
+};

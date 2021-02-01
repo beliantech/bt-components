@@ -52,6 +52,8 @@ class BTForm extends BTBase {
       // Used by file-input
       meta: { type: Object },
 
+      _fieldMapping: { type: Object },
+
       _errors: { type: Object },
       _disableSubmit: { type: Boolean },
       _modelMap: { type: Object },
@@ -116,6 +118,17 @@ class BTForm extends BTBase {
     this.displaymode = false;
 
     this.formBottomTemplate = nothing;
+  }
+
+  // A function that preloads field components (import), and returns a map of field type to function that takes in (model,field,formEl) and returns html``,
+  // e.g. { "fieldtype": (model, field, form) => html`<my-field .model={model} .required=${field.required} @model-change(form.onModelChange)></my-field>` }
+  set customFieldsFunc(func) {
+    // Execute once only
+    if (this._fieldMapping != null) return;
+
+    if (typeof func === "function") {
+      this._fieldMapping = func();
+    }
   }
 
   // model is a {id: value} object
@@ -285,7 +298,7 @@ class BTForm extends BTBase {
             .minlength="${field.minlength}"
             .maxlength="${field.maxlength}"
             .placeholder="${field.placeholder}"
-            .label="${field.name}"
+            .label="${field.label}"
             .validator="${field.validator}"
             .corrector=${field.corrector}
             .transformer=${field.transformer}
@@ -296,14 +309,18 @@ class BTForm extends BTBase {
             .disableValidation=${!this.validate}
             .model=${model}
             .annotation=${field.computed ? "computed" : ""}
-            @model-change="${this._onModelChange}"
+            @model-change="${this.onModelChange}"
             @input-submit="${this._onSubmit}"
             @input-cancel="${this._onInputCancel}"
             style=${styleMap(fieldStyles)}
           ></bt-input>
         `;
-      default:
+      default: {
+        if (this._fieldMapping && this._fieldMapping[field.type]) {
+          return this._fieldMapping[field.type](model, field, this);
+        }
         return html``;
+      }
     }
   }
 
@@ -329,7 +346,7 @@ class BTForm extends BTBase {
     }
   }
 
-  _onModelChange(e) {
+  onModelChange(e) {
     const fieldId = e.currentTarget.id;
 
     if (this._prevModelMap[fieldId] == null) {
