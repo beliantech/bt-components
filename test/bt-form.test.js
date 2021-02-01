@@ -30,7 +30,7 @@ describe("bt-form", () => {
         fields: [
           {
             id: "foo",
-            name: "Foo",
+            label: "Foo",
             type: "short_text",
             required: false,
           },
@@ -54,13 +54,13 @@ describe("bt-form", () => {
         fields: [
           {
             id: "foo",
-            name: "Foo",
+            label: "Foo",
             type: "short_text",
             required: false,
           },
           {
             id: "bar",
-            name: "Bar",
+            label: "Bar",
             type: "short_text",
             required: false,
           },
@@ -89,13 +89,13 @@ describe("bt-form", () => {
         fields: [
           {
             id: "foo",
-            name: "Foo",
+            label: "Foo",
             type: "number",
             required: false,
           },
           {
             id: "check",
-            name: "Checklist",
+            label: "Checklist",
             type: "checklist",
             options: [
               { id: "bar", value: 2 },
@@ -121,7 +121,7 @@ describe("bt-form", () => {
         fields: [
           {
             id: "foo",
-            name: "Foo",
+            label: "Foo",
             type: "short_text",
             required: false,
           },
@@ -148,7 +148,7 @@ describe("bt-form", () => {
         fields: [
           {
             id: "foo",
-            name: "Foo",
+            label: "Foo",
             type: "short_text",
             required: false,
           },
@@ -171,7 +171,7 @@ describe("bt-form", () => {
         fields: [
           {
             id: "foo",
-            name: "Foo",
+            label: "Foo",
             type: "short_text",
             required: false,
           },
@@ -192,7 +192,7 @@ describe("bt-form", () => {
         fields: [
           {
             id: "foo",
-            name: "Foo",
+            label: "Foo",
             type: "number",
             required: false,
           },
@@ -210,7 +210,7 @@ describe("bt-form", () => {
       fields: [
         {
           id: "foo",
-          name: "Foo",
+          label: "Foo",
           type: "short_text",
           required: false,
         },
@@ -234,7 +234,7 @@ describe("bt-form", () => {
       fields: [
         {
           id: "foo",
-          name: "Foo",
+          label: "Foo",
           type: "short_text",
           required: false,
         },
@@ -261,12 +261,12 @@ describe("bt-form", () => {
       fields: [
         {
           id: "step",
-          name: "Step One",
+          label: "Step One",
           type: "step",
         },
         {
           id: "foo",
-          name: "Foo",
+          label: "Foo",
           type: "short_text",
           required: false,
         },
