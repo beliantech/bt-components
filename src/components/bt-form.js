@@ -7,6 +7,7 @@ import { guard } from "lit-html/directives/guard";
 
 import BTBase from "../bt-base";
 import "./bt-input";
+import "./bt-hidden";
 import "./bt-button";
 
 class BTForm extends BTBase {
@@ -315,6 +316,9 @@ class BTForm extends BTBase {
             style=${styleMap(fieldStyles)}
           ></bt-input>
         `;
+      case "hidden": {
+        return html`<bt-hidden id=${field.id} .model=${model}></bt-hidden>`;
+      }
       default: {
         if (this._fieldMapping && this._fieldMapping[field.type]) {
           return this._fieldMapping[field.type](model, field, this);
