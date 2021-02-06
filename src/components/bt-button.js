@@ -184,6 +184,11 @@ export default class BTButton extends BTBase {
     }
   }
 
+  // Close the popup from outside.
+  close() {
+    this._showPopup = false;
+  }
+
   updated(changed) {
     if (changed.has("_showPopup")) {
       if (this._showPopup) {
