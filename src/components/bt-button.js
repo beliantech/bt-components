@@ -26,6 +26,7 @@ export default class BTButton extends BTBase {
       narrow: { type: Boolean, reflect: true },
       unpadded: { type: Boolean, reflect: true },
       square: { type: Boolean, reflect: true },
+      icononly: { type: Boolean, reflect: true },
 
       small: { type: Boolean, reflect: true },
       large: { type: Boolean, reflect: true },
@@ -131,7 +132,11 @@ export default class BTButton extends BTBase {
         ?disabled=${this.disabled}
       >
         ${this.icon
-          ? html` <bt-icon small class="ml-0 mr-1 my-0">${this.icon}</bt-icon> `
+          ? html`
+              <bt-icon small class=${this.icononly ? "m-0" : "ml-0 mr-1 my-0"}
+                >${this.icon}</bt-icon
+              >
+            `
           : html``}
         <slot></slot>
         ${this.aftericon
