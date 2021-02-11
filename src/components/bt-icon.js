@@ -18,8 +18,7 @@ export default class BTIcon extends BTBase {
 
       linkTo: { type: String },
       linkTarget: { type: String },
-      tooltip: { type: String },
-      tooltipPosition: { type: String },
+      tooltip: { type: String, reflect: true },
 
       _openMenu: { type: Boolean },
     };
@@ -32,16 +31,6 @@ export default class BTIcon extends BTBase {
   }
 
   render() {
-    const tooltipStyle = {};
-    if (this.tooltipPosition === "right") {
-      tooltipStyle["right"] = 0;
-    } else if (this.tooltipPosition === "left") {
-      tooltipStyle["left"] = 0;
-    } else {
-      tooltipStyle["transform"] = "translateX(-50%)";
-      tooltipStyle["left"] = "50%";
-    }
-
     let contentTemplate = html` <mwc-icon><slot></slot></mwc-icon> `;
     if (this.linkTo) {
       contentTemplate = html`
@@ -58,7 +47,6 @@ export default class BTIcon extends BTBase {
         ${contentTemplate}
         <div
           class="absolute tooltip font-bold text-xs py-2 px-3 mt-1 bg-gray-800 leading-normal text-white text-center z-20 whitespace-no-wrap"
-          style=${styleMap(tooltipStyle)}
         >
           ${this.tooltip}
         </div>
@@ -93,14 +81,14 @@ export default class BTIcon extends BTBase {
   updated(changed) {
     if (changed.has("_openMenu")) {
       if (this._openMenu) {
-        this.__removeClickOutsideHandler =
-          this.__removeClickOutsideHandler ||
+        this._removeClickOutsideHandler =
+          this._removeClickOutsideHandler ||
           clickOutsideToDismiss(this, () => {
             this._openMenu = false;
           });
       } else {
-        this.__removeClickOutsideHandler && this._removeClickOutsideHandler();
-        this.__removeClickOutsideHandler = null;
+        this._removeClickOutsideHandler && this._removeClickOutsideHandler();
+        this._removeClickOutsideHandler = null;
       }
     }
   }
@@ -190,10 +178,10 @@ const style = (linkTo = false, muted = false) => {
         cursor: pointer;
       }
       :host([button]) mwc-icon:hover {
-        color: var(--bt-icon-button-hover-color, #616161);
+        color: var(--bt-icon-button-hover-color, #808183);
       }
       :host([button]) mwc-icon:active {
-        color: var(--bt-icon-button-active-color, #9e9e9e);
+        color: var(--bt-icon-button-active-color, #A7A9AC);
       }
 
       ${linkTo ? html` a, a:visited { color: inherit; } ` : html``}
@@ -204,12 +192,25 @@ const style = (linkTo = false, muted = false) => {
       }
       :host(:hover) .icon-container .tooltip {
         visibility: visible;
-        transition: 0.3s;
-        transition-delay: 0.5s;
+        transition: 0.25s;
+        transition-delay: 0.25s;
       }
       .tooltip {
         top: 100%;
-        min-width: 90px;
+      }
+
+      :host([tooltip]) .tooltip {
+        transform: translateX(-50%);
+        left: 50%;
+      }
+      :host([tooltip-right]) .tooltip {
+        transform: none;
+        right: 0;
+        left: unset;
+      }
+      :host([tooltip-left]) .tooltip {
+        transform: none;
+        left: 0;
       }
     </style>
   `;

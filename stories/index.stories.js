@@ -80,6 +80,12 @@ export const BTIcon = () => `
   <bt-icon button tooltip="Foo Bar Long Tooltip">
     navigate_before
   </bt-icon>
+  <bt-icon button tooltip="Foo Bar Long Tooltip" tooltip-right>
+    navigate_before
+  </bt-icon>
+  <bt-icon button tooltip="Foo Bar Long Tooltip" tooltip-left>
+    navigate_before
+  </bt-icon>
   <bt-icon circle linkTo="https://beliantech.com">
     open_in_new
   </bt-icon>
