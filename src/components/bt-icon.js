@@ -164,13 +164,12 @@ const style = (linkTo = false, muted = false) => {
         height: 18px;
       }
       :host([medium]) .icon-container,
-      :host([small]) .icon-container mwc-icon {
+      :host([medium]) .icon-container mwc-icon {
         width: 24px;
         height: 24px;
       }
       :host([large]) .icon-container,
-      :host([small]) .icon-container mwc-icon {
-        width: 24px;
+      :host([large]) .icon-container mwc-icon {
         width: 36px;
         height: 36px;
       }
