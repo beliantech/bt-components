@@ -1,10 +1,10 @@
 import { html } from "lit-element";
 import BTBase from "../bt-base";
-import { styleMap } from "lit-html/directives/style-map";
 import { ifDefined } from "lit-html/directives/if-defined";
 import "@material/mwc-icon";
 
 import { clickOutsideToDismiss } from "../util/mouse";
+import colors from "../colors";
 
 export default class BTIcon extends BTBase {
   static get properties() {
@@ -46,7 +46,7 @@ export default class BTIcon extends BTBase {
       contentTemplate = html`
         ${contentTemplate}
         <div
-          class="absolute tooltip font-bold text-xs py-2 px-3 mt-1 bg-gray-800 leading-normal text-white text-center z-20 whitespace-no-wrap"
+          class="absolute tooltip font-bold text-xs py-2 px-3 mt-1 leading-normal text-white text-center z-20 whitespace-no-wrap"
         >
           ${this.tooltip}
         </div>
@@ -178,25 +178,26 @@ const style = (linkTo = false, muted = false) => {
         cursor: pointer;
       }
       :host([button]) mwc-icon:hover {
-        color: var(--bt-icon-button-hover-color, #808183);
+        color: var(--bt-icon-button-hover-color, ${colors.gray});
+      }
+      :host([button-light]) mwc-icon:hover {
+        color: var(--bt-icon-button-hover-color, lightgray) !important;
       }
       :host([button]) mwc-icon:active {
-        color: var(--bt-icon-button-active-color, #A7A9AC);
+        color: var(--bt-icon-button-active-color, ${colors.lightgray});
       }
 
       ${linkTo ? html` a, a:visited { color: inherit; } ` : html``}
 
       .icon-container .tooltip {
-        display: block;
-        visibility: hidden;
+        display: none;
       }
       :host(:hover) .icon-container .tooltip {
-        visibility: visible;
-        transition: 0.25s;
-        transition-delay: 0.25s;
+        display: block;
       }
       .tooltip {
         top: 100%;
+        background-color: ${colors.gray}
       }
 
       :host([tooltip]) .tooltip {
