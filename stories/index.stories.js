@@ -67,6 +67,7 @@ export const BTIcon = () => `
   <bt-icon medium>navigate_before</bt-icon>
   <bt-icon large>navigate_before</bt-icon>
   <bt-icon large>navigate_before</bt-icon>
+  <bt-icon button muted>settings</bt-icon>
   <bt-icon popup>
     add
     <div class="p-1" slot="popup">Booyah</div>

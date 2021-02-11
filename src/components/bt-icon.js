@@ -189,10 +189,10 @@ const style = (linkTo = false, muted = false) => {
       :host([button]) {
         cursor: pointer;
       }
-      :host([button]:hover) {
+      :host([button]) mwc-icon:hover {
         color: var(--bt-icon-button-hover-color, #616161);
       }
-      :host([button]:active) {
+      :host([button]) mwc-icon:active {
         color: var(--bt-icon-button-active-color, #9e9e9e);
       }
 
