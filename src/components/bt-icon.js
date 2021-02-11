@@ -80,9 +80,9 @@ export default class BTIcon extends BTBase {
           }
         }}
       >
-        <div>${contentTemplate}</div>
+        ${contentTemplate}
         ${this.popup && this._openMenu
-          ? html`<div class="absolute right-0" style="top:100%;">
+          ? html`<div class="absolute popup" style="top:100%;">
               <slot name="popup"></slot>
             </div>`
           : html``}
@@ -136,6 +136,43 @@ const style = (linkTo = false, muted = false) => {
       }
       :host([large]) {
         --mdc-icon-size: 36px;
+      }
+
+      :host .popup,
+      :host[popup-right] .popup {
+        top: 100%;
+        right: 0;
+      }
+      :host([popup-left]) .popup {
+        top: 100%;
+        left: 0;
+      }
+
+      :host .icon-container,
+      :host .icon-container mwc-icon {
+        width: 20px;
+        height: 20px;
+      }
+      :host([xsmall]) .icon-container,
+      :host([xsmall]) .icon-container mwc-icon {
+        width: 14px;
+        height: 14px;
+      }
+      :host([small]) .icon-container,
+      :host([small]) .icon-container mwc-icon {
+        width: 18px;
+        height: 18px;
+      }
+      :host([medium]) .icon-container,
+      :host([small]) .icon-container mwc-icon {
+        width: 24px;
+        height: 24px;
+      }
+      :host([large]) .icon-container,
+      :host([small]) .icon-container mwc-icon {
+        width: 24px;
+        width: 36px;
+        height: 36px;
       }
 
       :host([circle]) {

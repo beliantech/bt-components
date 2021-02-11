@@ -71,6 +71,10 @@ export const BTIcon = () => `
     add
     <div class="p-1" slot="popup">Booyah</div>
   </bt-icon>
+  <bt-icon popup popup-left>
+    add
+    <div class="p-1" slot="popup">Booyah</div>
+  </bt-icon>
 
   <bt-icon button tooltip="Foo Bar Long Tooltip">
     navigate_before
@@ -78,6 +82,7 @@ export const BTIcon = () => `
   <bt-icon circle linkTo="https://beliantech.com">
     open_in_new
   </bt-icon>
+  <bt-icon>visibility_on</bt-icon>
 `;
 
 export const BTButton = () => `
