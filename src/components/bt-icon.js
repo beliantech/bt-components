@@ -16,7 +16,7 @@ export default class BTIcon extends BTBase {
       muted: { type: Boolean, reflect: true },
       popup: { type: Boolean, reflect: true },
 
-      linkTo: { type: String },
+      linkTo: { type: String, reflect: true },
       linkTarget: { type: String },
       tooltip: { type: String, reflect: true },
 
@@ -165,13 +165,20 @@ const style = (linkTo = false, muted = false) => {
       :host([circle]) {
         height: 36px;
         width: 36px;
+      }
+      :host([circle]) a {
         display: flex;
         align-items: center;
         justify-content: center;
-      }
-      :host([circle]:hover) {
-        background-color: var(--bt-icon-circle-bg-color, #eeeeee);
+        cursor: pointer;
         border-radius: 50%;
+        padding: 0.5rem;
+      }
+      :host([circle]:hover) a {
+        background-color: var(--bt-icon-circle-hover-color, #eeeeee);
+      }
+      :host([circle]:active) a {
+        background-color: var(--bt-icon-circle-hover-color, lightgray);
       }
 
       :host([button]) {
@@ -180,10 +187,13 @@ const style = (linkTo = false, muted = false) => {
       :host([button]) mwc-icon:hover {
         color: var(--bt-icon-button-hover-color, ${colors.gray});
       }
-      :host([button-light]) mwc-icon:hover {
-        color: var(--bt-icon-button-hover-color, lightgray) !important;
+      :host([button][button-light]) mwc-icon:hover {
+        color: var(--bt-icon-button-hover-color, lightgray);
       }
       :host([button]) mwc-icon:active {
+        color: var(--bt-icon-button-active-color, ${colors.lightgray});
+      }
+      :host([button][button-light]) mwc-icon:active {
         color: var(--bt-icon-button-active-color, ${colors.lightgray});
       }
 

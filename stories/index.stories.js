@@ -68,6 +68,9 @@ export const BTIcon = () => `
   <bt-icon large>navigate_before</bt-icon>
   <bt-icon large>navigate_before</bt-icon>
   <bt-icon button muted>settings</bt-icon>
+  <div style="background-color: black; color: white; padding: 1rem;">
+  <bt-icon button button-light>settings</bt-icon>
+  </div>
   <bt-icon popup>
     add
     <div class="p-1" slot="popup">Booyah</div>
