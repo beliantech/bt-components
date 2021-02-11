@@ -4,28 +4,31 @@ import { styleMap } from "lit-html/directives/style-map";
 import { ifDefined } from "lit-html/directives/if-defined";
 import "@material/mwc-icon";
 
+import { clickOutsideToDismiss } from "../util/mouse";
+
 export default class BTIcon extends BTBase {
   static get properties() {
     return {
       icon: { type: String },
 
-      small: { type: Boolean, reflect: true },
-      medium: { type: Boolean, reflect: true },
-      large: { type: Boolean, reflect: true },
       button: { type: Boolean, reflect: true },
       circle: { type: Boolean, reflect: true },
-
       muted: { type: Boolean, reflect: true },
+      popup: { type: Boolean, reflect: true },
 
       linkTo: { type: String },
       linkTarget: { type: String },
       tooltip: { type: String },
       tooltipPosition: { type: String },
+
+      _openMenu: { type: Boolean },
     };
   }
 
   constructor() {
     super();
+
+    this._openMenu = false;
   }
 
   render() {
@@ -65,17 +68,45 @@ export default class BTIcon extends BTBase {
     return html`
       ${style(this.linkTo, this.muted)}
       <div
-        class="icon-container relative inline-flex"
+        class="icon-container relative flex items-center justify-center"
         @click=${(e) => {
           // Prevent click from going to parent element.
           if (this.button && !this.linkTo) {
             e.preventDefault();
           }
+
+          if (this.popup) {
+            this._openMenu = !this._openMenu;
+          }
         }}
       >
-        ${contentTemplate} <slot name="dropdown"></slot>
+        <div>${contentTemplate}</div>
+        ${this.popup && this._openMenu
+          ? html`<div class="absolute right-0" style="top:100%;">
+              <slot name="popup"></slot>
+            </div>`
+          : html``}
       </div>
     `;
+  }
+
+  updated(changed) {
+    if (changed.has("_openMenu")) {
+      if (this._openMenu) {
+        this.__removeClickOutsideHandler =
+          this.__removeClickOutsideHandler ||
+          clickOutsideToDismiss(this, () => {
+            this._openMenu = false;
+          });
+      } else {
+        this.__removeClickOutsideHandler && this._removeClickOutsideHandler();
+        this.__removeClickOutsideHandler = null;
+      }
+    }
+  }
+
+  close() {
+    this._openMenu = false;
   }
 }
 customElements.get("bt-icon") || customElements.define("bt-icon", BTIcon);

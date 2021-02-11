@@ -67,11 +67,11 @@ export const BTIcon = () => `
   <bt-icon medium>navigate_before</bt-icon>
   <bt-icon large>navigate_before</bt-icon>
   <bt-icon large>navigate_before</bt-icon>
-
-  <bt-icon>
-    settings
-    <div class="absolute right-0" slot="dropdown">Dropdown</div>
+  <bt-icon popup>
+    add
+    <div class="p-1" slot="popup">Booyah</div>
   </bt-icon>
+
   <bt-icon button tooltip="Foo Bar Long Tooltip">
     navigate_before
   </bt-icon>
