@@ -101,14 +101,12 @@ export const BTButton = () => `
   <bt-button>Button</bt-button>
   <bt-button icon="add">Button</bt-button>
   <bt-button
-    narrow
     small
     icon="add"
   >Add Label</bt-button>
   <bt-button
     icononly
     small
-    narrow
     icon="add"
   ></bt-button>
   <bt-button
@@ -119,7 +117,25 @@ export const BTButton = () => `
   <bt-button
     border
     center
+    block
     icon="arrow_back"
+    style="width:300px;"
+    >
+    <span class="truncate">Move to left</span>
+  </bt-button>
+  <bt-button
+    border
+    block
+    icon="arrow_back"
+    style="width:300px;"
+    >
+    <span class="truncate">Move to left</span>
+  </bt-button>
+  <bt-button
+    border
+    block
+    left
+    style="width:300px;"
     >
     <span class="truncate">Move to left</span>
   </bt-button>
