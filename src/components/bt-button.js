@@ -99,7 +99,17 @@ export default class BTButton extends BTBase {
     if (this.large) (py = "py-2"), (px = "px-6");
 
     if (this.square) py = px = "p-3";
-    if (this.narrow) (px = "px-1"), (pl = "pl-1"), (pr = "pr-1");
+    if (this.narrow) {
+      px = "px-2";
+      if (this.icononly) {
+        px = "px-1";
+        pl = "pl-1";
+        pr = "pr-1";
+      } else {
+        if (this.icon) pl = "pl-1";
+        if (this.aftericon) pr = "pr-1";
+      }
+    }
     if (this.unpadded) (px = "px-0"), (py = "py-0");
 
     const buttonClasses = {

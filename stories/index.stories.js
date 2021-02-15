@@ -112,6 +112,11 @@ export const BTButton = () => `
     icon="add"
   ></bt-button>
   <bt-button
+    icononly
+    small
+    icon="add"
+  ></bt-button>
+  <bt-button
     border
     center
     icon="arrow_back"
