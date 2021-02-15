@@ -47,8 +47,8 @@ export default class BTButton extends BTBase {
 
       focus: { type: Boolean },
 
-      icon: { type: String },
-      aftericon: { type: String },
+      icon: { type: String, reflect: true },
+      aftericon: { type: String, reflect: true },
 
       height: { type: Number },
 
@@ -76,7 +76,7 @@ export default class BTButton extends BTBase {
     if (this.secondary) otherClasses.push("secondary");
     if (this.transparent) otherClasses.push("transparent");
     if (this.rounded) otherClasses.push("rounded");
-    if (this.icon) {
+    if (this.icon || this.aftericon) {
       otherClasses.push("items-center");
     } else if (this.left) {
       otherClasses.push("justify-start");
@@ -92,14 +92,14 @@ export default class BTButton extends BTBase {
     let px = "px-4";
     let pl, pr;
 
-    if (this.icon) (py = "py-2"), (px = "px-3"), (pl = "pl-2");
-    if (this.aftericon) (py = "py-2"), (px = "px-3"), (pr = "pr-2");
+    if (this.icon) (px = "px-3"), (pl = "pl-2");
+    if (this.aftericon) (px = "px-3"), (pr = "pr-2");
 
     if (this.small) (py = "py-1"), (px = "px-2");
     if (this.large) (py = "py-2"), (px = "px-6");
 
     if (this.square) py = px = "p-3";
-    if (this.narrow) px = "px-1";
+    if (this.narrow) (px = "px-1"), (pl = "pl-1"), (pr = "pr-1");
     if (this.unpadded) (px = "px-0"), (py = "py-0");
 
     const buttonClasses = {
@@ -138,7 +138,7 @@ export default class BTButton extends BTBase {
               >
             `
           : html``}
-        <slot></slot>
+        <div class="flex-1 flex-center"><slot></slot></div>
         ${this.aftericon
           ? html`
               <bt-icon small class="ml-1 mr-0 my-0">${this.aftericon}</bt-icon>

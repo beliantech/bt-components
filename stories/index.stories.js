@@ -100,6 +100,31 @@ export const BTButton = () => `
 
   <bt-button>Button</bt-button>
   <bt-button icon="add">Button</bt-button>
+  <bt-button
+    narrow
+    small
+    icon="add"
+  >Add Label</bt-button>
+  <bt-button
+    icononly
+    small
+    narrow
+    icon="add"
+  ></bt-button>
+  <bt-button
+    border
+    center
+    icon="arrow_back"
+    >
+    <span class="truncate">Move to left</span>
+  </bt-button>
+  <bt-button
+    border
+    center
+    aftericon="arrow_forward"
+    >
+    <span class="truncate">Move to right</span>
+  </bt-button>
 `;
 
 export const BTJsonEditor = () => `
