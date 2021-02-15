@@ -92,7 +92,7 @@ export default class BTButton extends BTBase {
     let px = "px-4";
     let pl, pr;
 
-    if (this.icon) (py = "py-2"), (px = "px-3");
+    if (this.icon) (py = "py-2"), (px = "px-3"), (pl = "pl-2");
     if (this.aftericon) (py = "py-2"), (px = "px-3"), (pr = "pr-2");
 
     if (this.small) (py = "py-1"), (px = "px-2");
