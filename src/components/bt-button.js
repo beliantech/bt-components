@@ -73,15 +73,13 @@ export default class BTButton extends BTBase {
     if (this.secondary) otherClasses.push("secondary");
     if (this.transparent) otherClasses.push("transparent");
     if (this.rounded) otherClasses.push("rounded");
-    if (this.icon || this.aftericon) {
-      otherClasses.push("items-center");
-    } else if (this.left) {
+    otherClasses.push("items-center");
+    if (this.left) {
       otherClasses.push("justify-start");
     } else {
-      otherClasses.push("flex-center");
+      otherClasses.push("justify-center");
     }
     if (this.uppercase) otherClasses.push("uppercase");
-    if (this.center) otherClasses.push("flex-center");
     if (this.border) otherClasses.push("border");
     if (this.danger) otherClasses.push("danger");
 
