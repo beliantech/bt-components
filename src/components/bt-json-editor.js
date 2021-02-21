@@ -22,6 +22,7 @@ class BTJSONEditor extends BTBase {
     super();
 
     this._errors = [];
+    this.readonly = false;
   }
 
   render() {
@@ -35,6 +36,7 @@ class BTJSONEditor extends BTBase {
       language: "js",
       lineNumbers: true,
       styleParent: this.shadowRoot,
+      readonly: this.readonly,
     });
 
     this._flask.onUpdate((code) => {
