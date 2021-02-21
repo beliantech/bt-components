@@ -26,7 +26,7 @@ class BTJSONEditor extends BTBase {
   }
 
   render() {
-    return html` <div id="editor"></div> `;
+    return html` <div class=${this.readonly && "readonly"} id="editor"></div> `;
   }
 
   firstUpdated() {
@@ -95,7 +95,14 @@ class BTJSONEditor extends BTBase {
   }
 
   static get styles() {
-    return [super.styles, css``];
+    return [
+      super.styles,
+      css`
+        .readonly .codeflask {
+          opacity: 0.725;
+        }
+      `,
+    ];
   }
 }
 customElements.get("bt-json-editor") ||
