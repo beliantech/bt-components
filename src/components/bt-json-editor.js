@@ -7,6 +7,7 @@ import { isEmpty } from "lodash";
 
 const ErrorInvalidJSON = "error_invalid_json";
 
+// A text editor for JSON, not meant to be used as a form field as yet.
 class BTJSONEditor extends BTBase {
   static get properties() {
     return {
@@ -37,7 +38,10 @@ class BTJSONEditor extends BTBase {
     });
 
     this._flask.onUpdate((code) => {
+      this._silentUpdateModel = true;
       this.model = code;
+      this._silentUpdateModel = false;
+
       this.validate();
       this._emit("model-change", { value: code });
     });
@@ -45,7 +49,9 @@ class BTJSONEditor extends BTBase {
 
   updated(changed) {
     if (changed.has("model")) {
-      this._flask.updateCode(this.model);
+      if (!this._silentUpdateModel) {
+        this._flask.updateCode(this.model);
+      }
     }
 
     if (changed.has("readonly")) {
@@ -72,6 +78,18 @@ class BTJSONEditor extends BTBase {
     this._errors = errors;
 
     return errors.length === 0;
+  }
+
+  format() {
+    try {
+      const json = JSON.parse(this.model);
+      this.model = JSON.stringify(json, null, 4);
+      return true;
+    } catch (e) {
+      console.error("Error formatting");
+    }
+
+    return false;
   }
 
   static get styles() {
