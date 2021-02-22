@@ -9,10 +9,7 @@ class BTTabContent extends BTBase {
       title: { type: String },
       icon: { type: String },
 
-      hidetitle: { type: Boolean },
       scroll: { type: Boolean },
-
-      nopadding: { type: Boolean },
 
       relPath: { type: String, attribute: false },
       templateFunc: { type: Object },
@@ -40,15 +37,8 @@ class BTTabContent extends BTBase {
       >
         <div
           class="absolute inset-x-0 inset-y-0
-            ${this.nopadding ? "" : "px-3 py-2"}"
         >
-          ${this.title && !this.hidetitle
-            ? html`
-                <div class="mt-2 mb-4">
-                  <h3 class="m-0 text-base font-semibold">${this.title}</h3>
-                </div>
-              `
-            : html``}
+          <slot name="title"></slot>
           ${this.templateFunc ? this.templateFunc() : html` <slot></slot> `}
         </div>
       </div>

@@ -37,7 +37,6 @@ class BTTabs extends BTBase {
           user-select: none;
           background-color: ${unsafeCSS(colors.inactive)};
           line-height: 1;
-          height: 35px;
         }
         .vertical .tab {
           min-width: 90px;
