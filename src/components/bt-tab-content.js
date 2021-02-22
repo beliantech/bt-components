@@ -35,9 +35,7 @@ class BTTabContent extends BTBase {
           this._emit("content-scroll", { scrollTop: e.target.scrollTop }, true);
         }}
       >
-        <div
-          class="absolute inset-x-0 inset-y-0
-        >
+        <div class="absolute inset-x-0 inset-y-0">
           <slot name="title"></slot>
           ${this.templateFunc ? this.templateFunc() : html` <slot></slot> `}
         </div>
