@@ -184,3 +184,14 @@ export const BTForm = () => {
 
   return form;
 };
+
+export const BTTabs = () => {
+  return `<bt-tabs horizontal="left">
+    <bt-tab-content title="Foo" tabid="foo" >
+      <div>Foo</div>
+    </bt-tab-content>
+    <bt-tab-content title="Bar" tabid="bar" >
+      <div>Bar</div>
+    </bt-tab-content>
+  </bt-tabs>`;
+};
