@@ -1,5 +1,4 @@
-import { html, css } from "lit-element";
-import { unsafeCSS } from "lit-element/lib/css-tag";
+import { html, css, unsafeCSS } from "lit-element";
 import { classMap } from "lit-html/directives/class-map";
 import BTBase from "../bt-base";
 
