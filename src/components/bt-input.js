@@ -214,9 +214,9 @@ class BTInput extends BTBase {
     }
 
     if (this.validator) {
-      const valid = this.validator(trimmedModel);
+      const { valid, error } = this.validator(trimmedModel);
       if (!valid) {
-        errors.push(ErrorValidation);
+        errors.push(error);
       }
     }
 
@@ -296,6 +296,9 @@ class BTInput extends BTBase {
         this.showErrorText,
         `${t(this.label)} is not a valid email`
       );
+    } else if (this._errors.length > 0) {
+      // Take message from errors object
+      return errorTemplate(this.showErrorText, this._errors[0]);
     } else if (this.errorMessage) {
       return errorTemplate(this.showErrorText, this.errorMessage);
     }
