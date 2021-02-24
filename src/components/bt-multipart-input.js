@@ -1,5 +1,6 @@
 import { html, css } from "lit-element";
 import { classMap } from "lit-html/directives/class-map";
+import { nothing } from "lit-html";
 import BTBase from "../bt-base";
 
 import "./bt-multirow-group";
@@ -19,6 +20,7 @@ class BTMultipartInput extends BTBase {
 
       layout: { type: String }, // horizontal|vertical|horizontal-wrap
       _modelMap: { type: Object },
+      _showAll: { type: Boolean },
     };
   }
 
@@ -27,6 +29,7 @@ class BTMultipartInput extends BTBase {
 
     this.layout = LayoutHorizontal;
     this._modelMap = {};
+    this._showAll = false;
   }
 
   get model() {
@@ -54,9 +57,16 @@ class BTMultipartInput extends BTBase {
       "justify-start": true,
     };
 
+    let didHideField = false;
+
     return html`
       <div class=${classMap(rowClasses)} id="fields">
         ${this.schema.map((s, idx) => {
+          if (!this._showAll && s.hide) {
+            didHideField = true;
+            return nothing;
+          }
+
           const fieldClasses = { "pb-2": true };
           if (idx !== 0) {
             fieldClasses["pl-2"] = this.layout === LayoutHorizontal;
@@ -72,7 +82,7 @@ class BTMultipartInput extends BTBase {
               return html`
                 <bt-input
                   class="block field ${classMap(fieldClasses)}"
-                  id="${s.id}"
+                  id=${s.id}
                   .required=${s.required}
                   .displaymode=${this.displaymode}
                   .placeholder=${s.placeholder}
@@ -92,7 +102,7 @@ class BTMultipartInput extends BTBase {
               return html`
                 <bt-radio
                   class="block field ${classMap(fieldClasses)}"
-                  id="${s.id}"
+                  id=${s.id}
                   .required=${s.required}
                   .displaymode=${this.displaymode}
                   .placeholder=${s.placeholder}
@@ -118,7 +128,7 @@ class BTMultipartInput extends BTBase {
             case "hidden": {
               return html`
                 <bt-hidden
-                  id="${s.id}"
+                  id=${s.id}
                   .model=${this._modelMap[s.id] ||
                   (s.default ? s.default() : "")}
                 ></bt-hidden>
@@ -130,7 +140,29 @@ class BTMultipartInput extends BTBase {
           }
         })}
       </div>
+      ${didHideField
+        ? html`<a
+            class="text-xs hover:underline"
+            href="#"
+            @click=${this._onShowMoreClick}
+            >Show more</a
+          >`
+        : html`<a
+            class="text-xs hover:underline"
+            href="#"
+            @click=${this._onShowLessClick}
+            >Show less</a
+          >`}
     `;
+  }
+
+  _onShowMoreClick(e) {
+    this._showAll = true;
+    e.preventDefault();
+  }
+  _onShowLessClick(e) {
+    this._showAll = false;
+    e.preventDefault();
   }
 
   validate() {
