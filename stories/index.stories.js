@@ -195,3 +195,9 @@ export const BTTabs = () => {
     </bt-tab-content>
   </bt-tabs>`;
 };
+
+export const BTCheckbox = () => {
+  return `
+  <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
+  <bt-checkbox label="Enable"></bt-checkbox>`;
+};
