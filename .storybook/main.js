@@ -19,8 +19,6 @@ module.exports = {
 
     config.resolve.modules.push(path.resolve(__dirname, "..", "src"));
 
-    console.debug("Current dir", path.resolve(__dirname));
-
     // Configure Storybook default .css test to ignore our code
     config.module.rules.forEach((rule) => {
       /* prettier-ignore */

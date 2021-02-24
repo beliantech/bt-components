@@ -26,7 +26,6 @@ export default class BTBase extends LitElement {
   }
 
   static get styles() {
-    console.debug("Tailwind injection", utilCSS);
     return [
       css`
         ${unsafeCSS(utilCSS)}

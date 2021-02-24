@@ -202,60 +202,86 @@ export const BTCheckbox = () => {
   <bt-checkbox label="Enable"></bt-checkbox>`;
 };
 
-export const BTMultipartInput = () => {
-  const schema = [
-    {
-      id: "name",
-      type: "short_text",
-      label: "Sender name",
-      placeholder: "My Company",
-      required: true,
-    },
-    {
-      id: "from",
-      type: "short_text",
-      label: "From",
-      placeholder: "support@mycompany.com",
-      validateAs: "email",
-      required: true,
-    },
-    {
-      id: "to",
-      type: "short_text",
-      label: "To",
-      placeholder: "support@mycompany.com",
-      validateAs: "email",
-      required: true,
-    },
-    {
-      id: "cc",
-      type: "short_text",
-      label: "CC",
-      placeholder: "support@mycompany.com",
-      validateAs: "email",
-      required: true,
-    },
-    {
-      id: "bcc",
-      type: "short_text",
-      label: "BCC",
-      placeholder: "support@mycompany.com",
-      validateAs: "email",
-      required: true,
-    },
-  ];
+const multipartSchema = [
+  {
+    id: "name",
+    type: "short_text",
+    label: "Sender name",
+    placeholder: "My Company",
+    required: true,
+  },
+  {
+    id: "from",
+    type: "short_text",
+    label: "From",
+    placeholder: "support@mycompany.com",
+    validateAs: "email",
+    required: true,
+  },
+  {
+    id: "to",
+    type: "short_text",
+    label: "To",
+    placeholder: "support@mycompany.com",
+    validateAs: "email",
+    required: true,
+  },
+  {
+    id: "cc",
+    type: "short_text",
+    label: "CC",
+    placeholder: "support@mycompany.com",
+    validateAs: "email",
+    required: true,
+  },
+  {
+    id: "bcc",
+    type: "short_text",
+    label: "BCC",
+    placeholder: "support@mycompany.com",
+    validateAs: "email",
+    required: true,
+  },
+  {
+    id: "random",
+    type: "radio",
+    label: "Random",
+    options: [
+      { id: "123", name: "Option 1" },
+      { id: "234", name: "Option 2" },
+    ],
+    horizontal: true,
+    required: true,
+  },
+];
 
+export const BTMultipartInput = () => {
   return `
     <bt-multipart-input schema='${JSON.stringify(
-      schema
+      multipartSchema
     )}' layout="horizontal"></bt-multipart-input>
     <hr/>
     <bt-multipart-input schema='${JSON.stringify(
-      schema
+      multipartSchema
     )}' layout="horizontal-wrap"></bt-multipart-input>
     <hr/>
     <bt-multipart-input schema='${JSON.stringify(
-      schema
+      multipartSchema
     )}' layout="vertical"></bt-multipart-input>
+  `;
+};
+
+export const BTMultirowGroup = () => {
+  const field = {
+    type: "multipart-input",
+    schema: multipartSchema,
+    layout: "vertical",
+  };
+
+  return `
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
+    <bt-multirow-group
+      field='${JSON.stringify(field)}'
+    ></bt-multirow-group>
   `;
 };

@@ -2,6 +2,7 @@ import { html, css } from "lit-element";
 import { classMap } from "lit-html/directives/class-map";
 import BTBase from "../bt-base";
 
+import "./bt-radio";
 import "./bt-input";
 import "./bt-hidden";
 
@@ -84,6 +85,27 @@ class BTMultipartInput extends BTBase {
                     });
                   }}
                 ></bt-input>
+              `;
+            }
+            case "radio": {
+              return html`
+                <bt-radio
+                  class="block field ${classMap(fieldClasses)}"
+                  id="${s.id}"
+                  .required=${s.required}
+                  .displaymode=${this.displaymode}
+                  .placeholder=${s.placeholder}
+                  .model=${this._modelMap[s.id]}
+                  .options=${s.options}
+                  .label=${s.label}
+                  .description=${s.description}
+                  ?horizontal=${s.horizontal}
+                  @model-change=${(e) => {
+                    this._emit("model-change", {
+                      value: this.model,
+                    });
+                  }}
+                ></bt-radio>
               `;
             }
             case "hidden": {
