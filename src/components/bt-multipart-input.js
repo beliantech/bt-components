@@ -2,6 +2,7 @@ import { html, css } from "lit-element";
 import { classMap } from "lit-html/directives/class-map";
 import BTBase from "../bt-base";
 
+import "./bt-multirow-group";
 import "./bt-radio";
 import "./bt-input";
 import "./bt-hidden";
@@ -106,6 +107,12 @@ class BTMultipartInput extends BTBase {
                     });
                   }}
                 ></bt-radio>
+              `;
+            }
+            case "multirow-group": {
+              return html`
+                <bt-multirow-group nested .field=${s.field} .label=${s.label}>
+                </bt-multirow-group>
               `;
             }
             case "hidden": {

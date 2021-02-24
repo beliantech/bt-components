@@ -272,15 +272,27 @@ export const BTMultipartInput = () => {
 };
 
 export const BTMultirowGroup = () => {
+  const schema = multipartSchema.slice();
+  schema.push({
+    type: "multirow-group",
+    label: "Array",
+    field: {
+      type: "multipart-input",
+      schema: multipartSchema,
+      layout: "vertical",
+    },
+  });
   const field = {
     type: "multipart-input",
-    schema: multipartSchema,
+    schema: schema,
     layout: "vertical",
   };
 
   return `
     <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
     <bt-multirow-group
+      label="Multirow Group"
+      description="Multirow group description"
       field='${JSON.stringify(field)}'
     ></bt-multirow-group>
   `;

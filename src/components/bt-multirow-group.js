@@ -19,7 +19,11 @@ class BTMultirowGroup extends BTBase {
       field: { type: Object },
       model: { type: Array }, // Array of row models
 
+      label: { type: String },
+      description: { type: String },
+
       required: { type: Boolean },
+      nested: { type: Boolean }, // if true, nesteds the rows inward
       displaymode: { type: Boolean, reflect: true },
 
       defaultRowCount: { type: Number }, // number of rows created by default on first render
@@ -54,7 +58,10 @@ class BTMultirowGroup extends BTBase {
 
     return html`
       <bt-field .field=${this}>
-        <div class="container">
+        <div
+          class="container ${this.nested ? "pl-4 pt-2 border-l-4" : ""}"
+          style="border-color:lightgray"
+        >
           <div id="fields">${this._renderRows()}</div>
           ${this.displaymode
             ? html``
@@ -177,7 +184,7 @@ class BTMultirowGroup extends BTBase {
     if (templates.length) {
       return templates.map((t, idx) => {
         return html`
-          <div class="flex items-center field-row pb-2">
+          <div class="flex items-center field-row py-4">
             <div class="flex-1">${t}</div>
             ${this.displaymode
               ? html``
@@ -246,7 +253,7 @@ class BTMultirowGroup extends BTBase {
           display: block;
         }
         .field-row:not(:last-child) {
-          border-bottom: 1px solid lightgray;
+          border-bottom: 2px solid lightgray;
         }
         .field-row:not(:first-child) {
           padding-top: 0.75rem;
