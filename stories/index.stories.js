@@ -201,3 +201,61 @@ export const BTCheckbox = () => {
   <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
   <bt-checkbox label="Enable"></bt-checkbox>`;
 };
+
+export const BTMultipartInput = () => {
+  const schema = [
+    {
+      id: "name",
+      type: "short_text",
+      label: "Sender name",
+      placeholder: "My Company",
+      required: true,
+    },
+    {
+      id: "from",
+      type: "short_text",
+      label: "From",
+      placeholder: "support@mycompany.com",
+      validateAs: "email",
+      required: true,
+    },
+    {
+      id: "to",
+      type: "short_text",
+      label: "To",
+      placeholder: "support@mycompany.com",
+      validateAs: "email",
+      required: true,
+    },
+    {
+      id: "cc",
+      type: "short_text",
+      label: "CC",
+      placeholder: "support@mycompany.com",
+      validateAs: "email",
+      required: true,
+    },
+    {
+      id: "bcc",
+      type: "short_text",
+      label: "BCC",
+      placeholder: "support@mycompany.com",
+      validateAs: "email",
+      required: true,
+    },
+  ];
+
+  return `
+    <bt-multipart-input schema='${JSON.stringify(
+      schema
+    )}' layout="horizontal"></bt-multipart-input>
+    <hr/>
+    <bt-multipart-input schema='${JSON.stringify(
+      schema
+    )}' layout="horizontal-wrap"></bt-multipart-input>
+    <hr/>
+    <bt-multipart-input schema='${JSON.stringify(
+      schema
+    )}' layout="vertical"></bt-multipart-input>
+  `;
+};
