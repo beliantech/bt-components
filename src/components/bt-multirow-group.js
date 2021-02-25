@@ -132,7 +132,7 @@ class BTMultirowGroup extends BTBase {
             <bt-multipart-input
               class="field"
               .schema=${this.field.schema}
-              .layout=${this.field.layout}
+              .layout=${ifDefined(this.field.layout)}
               .model=${this._model[idx]}
               ?displaymode=${this.displaymode}
               @model-change=${(e) => {
@@ -190,7 +190,9 @@ class BTMultirowGroup extends BTBase {
             class="flex items-center my-2 py-2 pl-4 border-l-4"
             style="border-color:lightgray"
           >
-            <div class="flex-1">${t}</div>
+            <div class="pr-2 mr-2 flex-1 border-r" style="border-color:#eee">
+              ${t}
+            </div>
             ${this.displaymode
               ? html``
               : html`

@@ -282,14 +282,12 @@ export const BTMultirowGroup = () => {
     field: {
       type: "multipart-input",
       schema: multipartSchema,
-      layout: "vertical",
     },
     hide: true,
   });
   const field = {
     type: "multipart-input",
     schema: schema,
-    layout: "vertical",
   };
 
   return `
