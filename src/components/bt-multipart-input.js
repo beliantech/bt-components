@@ -27,7 +27,7 @@ class BTMultipartInput extends BTBase {
   constructor() {
     super();
 
-    this.layout = LayoutHorizontal;
+    this.layout = LayoutVertical;
     this._modelMap = {};
     this._showAll = false;
   }
