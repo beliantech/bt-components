@@ -100,6 +100,13 @@ describe(ElementTag, () => {
       await delay();
 
       assert.strictEqual(el._id("show").textContent, "Show more");
+      // 1 field should be visible
+      assert.strictEqual(
+        Array.from(el._id("fields").children).filter(
+          (f) => !f.classList.contains("hidden")
+        ).length,
+        1
+      );
     });
 
     it("shows 'Show less' link when hidden fields are displayed", async () => {
@@ -126,6 +133,13 @@ describe(ElementTag, () => {
       await el.updateComplete;
 
       assert.strictEqual(el._id("show").textContent, "Show less");
+      // 2 fields should be visible
+      assert.strictEqual(
+        Array.from(el._id("fields").children).filter(
+          (f) => !f.classList.contains("hidden")
+        ).length,
+        2
+      );
     });
 
     it("hides 'Show more' link when there are no hidden fields", async () => {

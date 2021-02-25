@@ -73,7 +73,7 @@ class BTMultipartInput extends BTBase {
           if (idx === 0) {
             fieldClasses["pr-2"] = this.layout === LayoutHorizontalWrap;
           }
-          if (s.hide) {
+          if (s.hide && !this._showAll) {
             fieldClasses["hidden"] = true;
           }
 
