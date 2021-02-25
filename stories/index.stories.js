@@ -279,6 +279,7 @@ export const BTMultirowGroup = () => {
   schema.push({
     type: "multirow-group",
     label: "Array",
+    buttonText: "Add item",
     field: {
       type: "multipart-input",
       schema: multipartSchema,
