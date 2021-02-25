@@ -121,7 +121,11 @@ class BTMultipartInput extends BTBase {
             }
             case "multirow-group": {
               return html`
-                <bt-multirow-group nested .field=${s.field} .label=${s.label}>
+                <bt-multirow-group
+                  class=${classMap(fieldClasses)}
+                  .field=${s.field}
+                  .label=${s.label}
+                >
                 </bt-multirow-group>
               `;
             }

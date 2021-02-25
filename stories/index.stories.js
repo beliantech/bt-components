@@ -284,6 +284,7 @@ export const BTMultirowGroup = () => {
       schema: multipartSchema,
       layout: "vertical",
     },
+    hide: true,
   });
   const field = {
     type: "multipart-input",
