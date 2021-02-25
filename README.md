@@ -14,6 +14,27 @@ Unfortunately, accessibility has not been a priority given the push to make prod
 
 `bt-components` is primarily for Belian Tech use. If your use case does not align with ours we will probably not be developing your feature request due to lack of resources. That said, pull requests are highly welcome and will be merged if done well enough.
 
+### Install
+
+```
+npm install @beliantech/bt-components
+```
+
+### Usage
+
+Import the necessary components into your component like so:
+
+```
+import "@beliantech/bt-components/components/bt-icon";
+import "@beliantech/bt-components/components/bt-button";
+import "@beliantech/bt-components/components/bt-form";
+
+...
+
+<bt-icon>add</bt-icon>
+<bt-button>My Button</bt-button>
+```
+
 ### Storybook
 
 Run `npm run storybook` locally, or visit https://ui.beliantech.com for the latest Storybook release.
