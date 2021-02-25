@@ -56,14 +56,15 @@ class BTMultipartInput extends BTBase {
       "justify-start": true,
     };
 
-    let didHideField = false;
+    let didHaveHiddenField = false;
 
     return html`
       <div class=${classMap(rowClasses)} id="fields">
         ${this.schema.map((s, idx) => {
-          if (!this._showAll && s.hide) {
-            didHideField = true;
-            return nothing;
+          if (s.hide) {
+            didHaveHiddenField = true;
+            if (!this._showAll) return nothing;
+            // else continue
           }
 
           const fieldClasses = { "pb-2": true };
@@ -139,20 +140,36 @@ class BTMultipartInput extends BTBase {
           }
         })}
       </div>
-      ${didHideField
-        ? html`<a
-            class="text-xs hover:underline"
-            href="#"
-            @click=${this._onShowMoreClick}
-            >Show more</a
-          >`
-        : html`<a
+      ${this._showMoreTemplate(didHaveHiddenField)}
+    `;
+  }
+
+  _showMoreTemplate(didHideField) {
+    if (didHideField) {
+      if (this._showAll) {
+        return html`
+          <a
+            id="show"
             class="text-xs hover:underline"
             href="#"
             @click=${this._onShowLessClick}
             >Show less</a
-          >`}
-    `;
+          >
+        `;
+      } else {
+        return html`
+          <a
+            id="show"
+            class="text-xs hover:underline"
+            href="#"
+            @click=${this._onShowMoreClick}
+            >Show more</a
+          >
+        `;
+      }
+    }
+
+    return html``;
   }
 
   _onShowMoreClick(e) {

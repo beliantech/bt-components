@@ -77,4 +77,77 @@ describe(ElementTag, () => {
 
     assert.strictEqual(el.validate(), false);
   });
+
+  describe("hidden fields", () => {
+    it("adds 'Show more' link when there are hidden fields", async () => {
+      el.schema = [
+        {
+          id: "name",
+          type: "short_text",
+          required: true,
+        },
+        {
+          id: "email",
+          type: "short_text",
+          required: false,
+          hide: true,
+        },
+      ];
+      el.model = {
+        name: "Jonathan",
+        email: "hello@beliantech.com",
+      };
+      await delay();
+
+      assert.strictEqual(el._id("show").textContent, "Show more");
+    });
+
+    it("shows 'Show less' link when hidden fields are displayed", async () => {
+      el.schema = [
+        {
+          id: "name",
+          type: "short_text",
+          required: true,
+        },
+        {
+          id: "email",
+          type: "short_text",
+          required: false,
+          hide: true,
+        },
+      ];
+      el.model = {
+        name: "Jonathan",
+        email: "hello@beliantech.com",
+      };
+
+      await delay();
+      MockInteractions.click(el._id("show"));
+      await el.updateComplete;
+
+      assert.strictEqual(el._id("show").textContent, "Show less");
+    });
+
+    it("hides 'Show more' link when there are no hidden fields", async () => {
+      el.schema = [
+        {
+          id: "name",
+          type: "short_text",
+          required: true,
+        },
+        {
+          id: "email",
+          type: "short_text",
+          required: false,
+        },
+      ];
+      el.model = {
+        name: "Jonathan",
+        email: "hello@beliantech.com",
+      };
+      await delay();
+
+      assert.isNull(el._id("show"));
+    });
+  });
 });

@@ -232,8 +232,8 @@ const multipartSchema = [
     label: "CC",
     placeholder: "support@mycompany.com",
     validateAs: "email",
-    hide: true,
     required: true,
+    hide: true,
   },
   {
     id: "bcc",
@@ -253,8 +253,8 @@ const multipartSchema = [
       { id: "234", name: "Option 2" },
     ],
     horizontal: true,
-    hide: true,
     required: true,
+    hide: true,
   },
 ];
 
