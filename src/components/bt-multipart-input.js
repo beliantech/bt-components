@@ -125,6 +125,7 @@ class BTMultipartInput extends BTBase {
                   class=${classMap(fieldClasses)}
                   .field=${s.field}
                   .label=${s.label}
+                  .description=${s.description}
                 >
                 </bt-multirow-group>
               `;
