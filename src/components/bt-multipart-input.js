@@ -122,9 +122,11 @@ class BTMultipartInput extends BTBase {
             case "multirow-group": {
               return html`
                 <bt-multirow-group
+                  id=${s.id}
                   class=${classMap(fieldClasses)}
                   .field=${s.field}
                   .label=${s.label}
+                  .model=${this._modelMap[s.id]}
                   .description=${s.description}
                   .buttonText=${s.buttonText}
                 >

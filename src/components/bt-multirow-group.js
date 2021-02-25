@@ -48,7 +48,7 @@ class BTMultirowGroup extends BTBase {
 
   set model(model) {
     const oldValue = this._model;
-    this._model = model;
+    this._model = model || [];
     this.requestUpdate("model", oldValue);
   }
 

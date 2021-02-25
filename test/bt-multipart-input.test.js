@@ -30,10 +30,27 @@ describe(ElementTag, () => {
         id: "email",
         type: "short_text",
       },
+      {
+        id: "list",
+        type: "multirow-group",
+        field: {
+          type: "short_text",
+        },
+      },
+      {
+        id: "list2",
+        type: "multirow-group",
+        field: {
+          type: "multipart-input",
+          schema: [{ id: "foo", type: "short_text" }],
+        },
+      },
     ];
     el.model = {
       name: "Jonathan",
       email: "hello@beliantech.com",
+      list: ["abc@example.com"],
+      list2: [{ foo: "abc@example.com" }],
     };
   };
 
@@ -44,6 +61,8 @@ describe(ElementTag, () => {
     assert.deepEqual(el.model, {
       name: "Jonathan",
       email: "hello@beliantech.com",
+      list: ["abc@example.com"],
+      list2: [{ foo: "abc@example.com" }],
     });
   });
 
