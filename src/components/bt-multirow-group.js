@@ -59,7 +59,7 @@ class BTMultirowGroup extends BTBase {
     return html`
       <bt-field .field=${this}>
         <div
-          class="container ${this.nested ? "pl-4 pt-2 border-l-4" : ""}"
+          class="${this.nested ? "pl-4 pt-2 border-l-4" : ""}"
           style="border-color:lightgray"
         >
           <div id="fields">${this._renderRows()}</div>

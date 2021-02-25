@@ -34,16 +34,15 @@ class BTMultipartInput extends BTBase {
 
   get model() {
     const fields = Array.from(this._id("fields").children);
-    return fields.map((val) => ({
-      id: val.id,
-      value: val.model,
-    }));
-  }
-  set model(model = []) {
-    this._modelMap = {};
-    model.forEach((m) => {
-      this._modelMap[m.id] = m.value;
+
+    const model = {};
+    fields.forEach((val) => {
+      model[val.id] = val.model;
     });
+    return model;
+  }
+  set model(model = {}) {
+    this._modelMap = Object.assign({}, model);
   }
 
   render() {
