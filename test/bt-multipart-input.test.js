@@ -149,5 +149,31 @@ describe(ElementTag, () => {
 
       assert.isNull(el._id("show"));
     });
+
+    it("will return the model field even if field is hidden", async () => {
+      el.schema = [
+        {
+          id: "name",
+          type: "short_text",
+          required: true,
+        },
+        {
+          id: "email",
+          type: "short_text",
+          required: false,
+          hide: true,
+        },
+      ];
+      el.model = {
+        name: "Jonathan",
+        email: "hello@beliantech.com",
+      };
+      await delay();
+
+      assert.deepEqual(el.model, {
+        name: "Jonathan",
+        email: "hello@beliantech.com",
+      });
+    });
   });
 });

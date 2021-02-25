@@ -1,6 +1,5 @@
 import { html, css } from "lit-element";
 import { classMap } from "lit-html/directives/class-map";
-import { nothing } from "lit-html";
 import BTBase from "../bt-base";
 
 import "./bt-multirow-group";
@@ -63,8 +62,6 @@ class BTMultipartInput extends BTBase {
         ${this.schema.map((s, idx) => {
           if (s.hide) {
             didHaveHiddenField = true;
-            if (!this._showAll) return nothing;
-            // else continue
           }
 
           const fieldClasses = { "pb-2": true };
@@ -75,6 +72,9 @@ class BTMultipartInput extends BTBase {
           }
           if (idx === 0) {
             fieldClasses["pr-2"] = this.layout === LayoutHorizontalWrap;
+          }
+          if (s.hide) {
+            fieldClasses["hidden"] = true;
           }
 
           switch (s.type) {
