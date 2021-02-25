@@ -32,16 +32,16 @@ describe(ElementTag, () => {
       },
       {
         id: "list",
-        type: "multirow-group",
+        type: "multirow_group",
         field: {
           type: "short_text",
         },
       },
       {
         id: "list2",
-        type: "multirow-group",
+        type: "multirow_group",
         field: {
-          type: "multipart-input",
+          type: "multipart_input",
           schema: [{ id: "foo", type: "short_text" }],
         },
       },

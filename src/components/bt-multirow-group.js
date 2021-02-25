@@ -125,7 +125,7 @@ class BTMultirowGroup extends BTBase {
   _renderRows() {
     const templates = [];
     switch (this.field.type) {
-      case "multipart-input": {
+      case "multipart_input": {
         for (let i = 0; i < this._model.length; i++) {
           const idx = i;
           templates.push(html`
@@ -212,7 +212,7 @@ class BTMultirowGroup extends BTBase {
     // Append empty model
     const model = (this.model || []).slice();
     switch (this.field.type) {
-      case "multipart-input": {
+      case "multipart_input": {
         model.push([]);
         break;
       }

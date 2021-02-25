@@ -119,7 +119,7 @@ class BTMultipartInput extends BTBase {
                 ></bt-radio>
               `;
             }
-            case "multirow-group": {
+            case "multirow_group": {
               return html`
                 <bt-multirow-group
                   id=${s.id}
