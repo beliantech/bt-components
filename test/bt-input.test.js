@@ -354,6 +354,12 @@ describe("bt-input", () => {
           assert.notOk(el.validate());
         });
       });
+
+      it("validates regex", () => {
+        el.validateRegex = "[a-z]+";
+        el.model = "123";
+        assert.notOk(el.validate());
+      });
     });
   });
 

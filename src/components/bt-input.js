@@ -24,10 +24,10 @@ const TypeInput = "input";
 const TypeTextarea = "textarea";
 const TypeRichText = "richtext";
 
-const ErrorValidation = "validation";
-const ErrorInvalidEmail = "invalid-email";
-const ErrorRequired = "required";
-const ErrorMinLength = "minlength";
+const ErrorInvalidEmail = "error-invalid-email";
+const ErrorInvalid = "error-invalid";
+const ErrorRequired = "error-required";
+const ErrorMinLength = "error-minlength";
 
 const InputTypeNumber = "number";
 const InputTypeText = "text";
@@ -40,6 +40,7 @@ class BTInput extends BTBase {
       placeholder: { type: String },
       description: { type: String },
       validateAs: { type: String },
+      validateRegex: { type: String },
 
       // Annotation, e.g. "computed"
       annotation: { type: String },
@@ -226,6 +227,12 @@ class BTInput extends BTBase {
       }
     }
 
+    if (this.validateRegex) {
+      if (!trimmedModel.match(this.validateRegex)) {
+        errors.push(ErrorInvalid);
+      }
+    }
+
     if (!silent) {
       this._errors = errors;
       this._emit("errors-change", { id: this.id, errors: errors });
@@ -276,26 +283,24 @@ class BTInput extends BTBase {
   }
 
   _renderErrorTemplate() {
-    const errorRequired = this._errors.includes(ErrorRequired);
-    const errorMinLength = this._errors.includes(ErrorMinLength);
-    const errorInvalidEmail = this._errors.includes(ErrorInvalidEmail);
-
     // In order of importance
-    if (errorRequired) {
+    if (this._errors.includes(ErrorRequired)) {
       return errorTemplate(
         this.showErrorText,
         `${t(this.label)} cannot be blank`
       );
-    } else if (errorMinLength) {
+    } else if (this._errors.includes(ErrorMinLength)) {
       return errorTemplate(
         this.showErrorText,
         `${t(this.label)} should have at least length ${this.minlength}`
       );
-    } else if (errorInvalidEmail) {
+    } else if (this._errors.includes(ErrorInvalidEmail)) {
       return errorTemplate(
         this.showErrorText,
         `${t(this.label)} is not a valid email`
       );
+    } else if (this._errors.includes(ErrorInvalid)) {
+      return errorTemplate(this.showErrorText, `${t(this.label)} is invalid`);
     } else if (this._errors.length > 0) {
       // Take message from errors object
       return errorTemplate(this.showErrorText, this._errors[0]);

@@ -24,6 +24,8 @@ export const BTInput = () => `
   <bt-input inline></bt-input>
 
   <bt-input type="richtext"></bt-input>
+
+  <bt-input label="Portal ID" validateregex="^[a-z]+(-[a-z]+)*[a-z]$"></bt-input>
 `;
 
 export const BTInlineInput = () =>

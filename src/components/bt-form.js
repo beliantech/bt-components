@@ -300,11 +300,12 @@ class BTForm extends BTBase {
             .maxlength="${field.maxlength}"
             .placeholder="${field.placeholder}"
             .label="${field.label}"
-            .validator="${field.validator}"
             .corrector=${field.corrector}
             .transformer=${field.transformer}
             .allowedCharacters=${field.allowedCharacters}
-            .validateAs="${field.validateAs}"
+            .validator=${field.validator}
+            .validateAs=${ifDefined(field.validateAs)}
+            .validateRegex=${ifDefined(field.validateRegex)}
             .errorMessage="${this._errorMap[field.id]}"
             .rows=${ifDefined(field.rows)}
             .disableValidation=${!this.validate}
