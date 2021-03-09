@@ -9,7 +9,7 @@
     "deploy-storybook": "npm run build-storybook && npx firebase deploy",
     "publish-npm": "npm run build && wct --npm && npm publish dist --access public",
     "build-css": "npx tailwindcss build src/bt-utils.css -o dist/bt-utils-full.css && npm run purge-css",
-    "purge-css": "npx purgecss --css dist/bt-utils-full.css --content src/**/*.js -s w-1/12 w-2/12 w-3/12 w-4/12 w-5/12 w-6/12 w-7/12 w-8/12 w-9/12 w-10/12 w-11/12 w-12/12 -o dist/bt-utils.css && rm dist/bt-utils-full.css",
+    "purge-css": "npx purgecss --css dist/bt-utils-full.css --content src/**/*.js src/components/**/*.js -s w-1/12 w-2/12 w-3/12 w-4/12 w-5/12 w-6/12 w-7/12 w-8/12 w-9/12 w-10/12 w-11/12 w-12/12 -o dist/bt-utils.css && rm dist/bt-utils-full.css",
     "test": "npm run build && wct --npm",
     "test:debug": "npm run build && wct --npm -p --config-file wct.conf.local.json",
     "storybook": "start-storybook -p 6006",

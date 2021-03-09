@@ -113,6 +113,7 @@ class BTMultipartInput extends BTBase {
                   class="block field ${classMap(fieldClasses)}"
                   id=${s.id}
                   .required=${s.required}
+                  .filterable=${s.filterable}
                   .displaymode=${this.displaymode}
                   .placeholder=${ifDefined(s.placeholder)}
                   .model=${this._modelMap[s.id]}
