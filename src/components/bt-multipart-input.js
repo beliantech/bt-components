@@ -6,6 +6,7 @@ import "./bt-multirow-group";
 import "./bt-radio";
 import "./bt-input";
 import "./bt-hidden";
+import "./bt-checkbox";
 
 const LayoutHorizontal = "horizontal";
 const LayoutHorizontalWrap = "horizontal-wrap";
@@ -18,6 +19,8 @@ class BTMultipartInput extends BTBase {
       displaymode: { type: Boolean },
 
       layout: { type: String }, // horizontal|vertical|horizontal-wrap
+      hidelabel: { type: Boolean },
+
       _modelMap: { type: Object },
       _showAll: { type: Boolean },
     };
@@ -27,6 +30,8 @@ class BTMultipartInput extends BTBase {
     super();
 
     this.layout = LayoutVertical;
+    this.hidelabel = false;
+
     this._modelMap = {};
     this._showAll = false;
   }
@@ -67,7 +72,6 @@ class BTMultipartInput extends BTBase {
           const fieldClasses = { "pb-2": true };
           if (idx !== 0) {
             fieldClasses["pl-2"] = this.layout === LayoutHorizontal;
-            fieldClasses["flex-1"] = this.layout === LayoutHorizontal;
             fieldClasses["pr-2"] = this.layout === LayoutHorizontalWrap;
           }
           if (idx === 0) {
@@ -75,6 +79,9 @@ class BTMultipartInput extends BTBase {
           }
           if (s.hide && !this._showAll) {
             fieldClasses["hidden"] = true;
+          }
+          if (s.grid && this.layout == LayoutHorizontal) {
+            fieldClasses[`w-${s.grid}/12`] = true;
           }
 
           switch (s.type) {
@@ -88,8 +95,8 @@ class BTMultipartInput extends BTBase {
                   .placeholder=${s.placeholder}
                   .validateAs=${s.validateAs}
                   .model=${this._modelMap[s.id]}
-                  .label=${s.label}
-                  .description=${s.description}
+                  .label=${!this.hidelabel && s.label}
+                  .description=${!this.hidelabel && s.description}
                   @model-change=${(e) => {
                     this._emit("model-change", {
                       value: this.model,
@@ -108,8 +115,8 @@ class BTMultipartInput extends BTBase {
                   .placeholder=${s.placeholder}
                   .model=${this._modelMap[s.id]}
                   .options=${s.options}
-                  .label=${s.label}
-                  .description=${s.description}
+                  .label=${!this.hidelabel && s.label}
+                  .description=${!this.hidelabel && s.description}
                   ?horizontal=${s.horizontal}
                   @model-change=${(e) => {
                     this._emit("model-change", {
@@ -125,9 +132,9 @@ class BTMultipartInput extends BTBase {
                   id=${s.id}
                   class=${classMap(fieldClasses)}
                   .field=${s.field}
-                  .label=${s.label}
+                  .label=${this.hidelabel && s.label}
+                  .description=${this.hidelabel && s.description}
                   .model=${this._modelMap[s.id]}
-                  .description=${s.description}
                   .buttonText=${s.buttonText}
                 >
                 </bt-multirow-group>
@@ -142,6 +149,30 @@ class BTMultipartInput extends BTBase {
                 ></bt-hidden>
               `;
             }
+            case "checkbox": {
+              return html`
+                <bt-checkbox
+                  id=${s.id}
+                  class=${classMap(fieldClasses)}
+                  .model=${this._modelMap[s.id]}
+                  .label=${s.label}
+                  .inline=${s.inline != null ? s.inline : true}
+                ></bt-checkbox>
+              `;
+            }
+            case "label": {
+              return html`<div
+                class=${classMap(fieldClasses)}
+                style=${this.layout !== LayoutVertical
+                  ? "margin-top:16px;"
+                  : ""}
+              >
+                <span class="inline-block pt-1 pr-2 text-sm font-bold"
+                  >${s.label}</span
+                >
+              </div>`;
+            }
+
             default: {
               return html``;
             }

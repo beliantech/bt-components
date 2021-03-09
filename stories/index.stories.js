@@ -229,11 +229,25 @@ export const BTCheckbox = () => {
 
 const multipartSchema = [
   {
+    id: "__whatever",
+    type: "label",
+    label: "ITEM",
+    grid: 1,
+  },
+  {
+    id: "read",
+    type: "checkbox",
+    label: "Text",
+    inline: false,
+    grid: 1,
+  },
+  {
     id: "name",
     type: "short_text",
     label: "Sender name",
     placeholder: "My Company",
     required: true,
+    grid: 2,
   },
   {
     id: "from",
@@ -242,6 +256,7 @@ const multipartSchema = [
     placeholder: "support@mycompany.com",
     validateAs: "email",
     required: true,
+    grid: 2,
   },
   {
     id: "to",
@@ -250,24 +265,7 @@ const multipartSchema = [
     placeholder: "support@mycompany.com",
     validateAs: "email",
     required: true,
-  },
-  {
-    id: "cc",
-    type: "short_text",
-    label: "CC",
-    placeholder: "support@mycompany.com",
-    validateAs: "email",
-    required: true,
-    hide: true,
-  },
-  {
-    id: "bcc",
-    type: "short_text",
-    label: "BCC",
-    placeholder: "support@mycompany.com",
-    validateAs: "email",
-    required: true,
-    hide: true,
+    grid: 2,
   },
   {
     id: "random",
@@ -280,6 +278,7 @@ const multipartSchema = [
     horizontal: true,
     required: true,
     hide: true,
+    grid: 2,
   },
 ];
 

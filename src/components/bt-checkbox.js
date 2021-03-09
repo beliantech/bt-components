@@ -5,6 +5,7 @@ import BTBase from "../bt-base";
 import "./bt-icon";
 import "./bt-inline-input";
 import { urlify } from "../util/url";
+import labelTemplate from "./templates/label";
 
 import colors from "../colors";
 
@@ -16,12 +17,15 @@ export default class BTCheckbox extends BTBase {
       model: { type: Boolean },
       disabled: { type: Boolean, reflect: true },
       editable: { type: Boolean, reflect: true },
+
+      inline: { type: Boolean }, // whether or not label is inline
     };
   }
 
   constructor() {
     super();
 
+    this.inline = true;
     this._model = false;
   }
 
@@ -55,6 +59,12 @@ export default class BTCheckbox extends BTBase {
 
   render() {
     return html`
+      ${this.inline
+        ? html``
+        : labelTemplate({
+            label: this.label,
+            hideIndicator: true,
+          })}
       <div class="flex items-center container">
         <input
           id="input"
@@ -86,7 +96,8 @@ export default class BTCheckbox extends BTBase {
               >
               </bt-inline-input>
             `
-          : html`
+          : this.inline
+          ? html`
               <label
                 class="block text-sm w-full pl-1"
                 for="input"
@@ -96,7 +107,8 @@ export default class BTCheckbox extends BTBase {
                   >${unsafeHTML(urlify(this.label))}</span
                 >
               </label>
-            `}
+            `
+          : html``}
       </div>
       ${this.description
         ? html`<div class="text-xs mt-1">
