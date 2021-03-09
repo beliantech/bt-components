@@ -116,5 +116,10 @@ module.exports = {
   ],
   purge: {
     content: ["./src/**/*.js", "./src/components/**/*.js"],
+    options: {
+      safelist: {
+        standard: [/12$/], // whitelist w-1/12, w-2/12, ...
+      },
+    },
   },
 };
