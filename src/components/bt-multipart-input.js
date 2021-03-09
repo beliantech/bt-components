@@ -155,7 +155,7 @@ class BTMultipartInput extends BTBase {
                   id=${s.id}
                   class=${classMap(fieldClasses)}
                   .model=${this._modelMap[s.id]}
-                  .label=${s.label}
+                  .label=${!this.hidelabel && s.label}
                   .inline=${s.inline != null ? s.inline : true}
                 ></bt-checkbox>
               `;
@@ -163,7 +163,7 @@ class BTMultipartInput extends BTBase {
             case "label": {
               return html`<div
                 class=${classMap(fieldClasses)}
-                style=${this.layout !== LayoutVertical
+                style=${this.layout !== LayoutVertical && !this.hidelabel
                   ? "margin-top:16px;"
                   : ""}
               >

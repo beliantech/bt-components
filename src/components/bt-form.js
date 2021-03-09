@@ -175,10 +175,6 @@ class BTForm extends BTBase {
       return html``;
     }
 
-    let stepCount = 0;
-    this._didEncounterStep = false;
-    this._stepNumberByFieldIndex = {};
-
     return html`
       <div
         class="form"

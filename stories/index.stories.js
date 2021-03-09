@@ -275,7 +275,6 @@ const multipartSchema = [
       { id: "123", name: "Option 1" },
       { id: "234", name: "Option 2" },
     ],
-    horizontal: true,
     required: true,
     hide: true,
     grid: 2,
@@ -317,12 +316,25 @@ export const BTMultirowGroup = () => {
   };
   const model = [{ name: "Jon", array: [{ name: "Bob" }] }, { name: "James" }];
 
+  const field2 = {
+    type: "multipart_input",
+    schema: multipartSchema.slice(0, -1),
+    layout: "horizontal",
+  };
+
   return `
     <bt-multirow-group
       label="Multirow Group"
       description="Multirow group description"
       field='${JSON.stringify(field)}'
       model='${JSON.stringify(model)}'
+    ></bt-multirow-group>
+    <div style="height:1rem;"></div>
+    <bt-multirow-group
+      label="Table Mode"
+      field='${JSON.stringify(field2)}'
+      model='${JSON.stringify(model)}'
+      tablemode
     ></bt-multirow-group>
   `;
 };

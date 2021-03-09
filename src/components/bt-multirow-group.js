@@ -24,6 +24,7 @@ class BTMultirowGroup extends BTBase {
 
       required: { type: Boolean },
       displaymode: { type: Boolean, reflect: true },
+      tablemode: { type: Boolean, reflect: true }, // static number of rows, displayed in table-like manner
 
       defaultRowCount: { type: Number }, // number of rows created by default on first render
 
@@ -40,6 +41,7 @@ class BTMultirowGroup extends BTBase {
     this._model = [];
     this._errors = [];
     this.defaultRowCount = 0;
+    this.tablemode = false;
   }
 
   get model() {
@@ -59,7 +61,7 @@ class BTMultirowGroup extends BTBase {
       <bt-field .field=${this}>
         <div>
           <div id="fields">${this._renderRows()}</div>
-          ${this.displaymode
+          ${this.displaymode || this.tablemode
             ? html``
             : html`
                 <bt-button
@@ -135,6 +137,7 @@ class BTMultirowGroup extends BTBase {
               .layout=${ifDefined(this.field.layout)}
               .model=${this._model[idx]}
               ?displaymode=${this.displaymode}
+              ?hidelabel=${this.tablemode && idx > 0}
               @model-change=${(e) => {
                 this._model[idx] = e.detail.value;
 
@@ -179,6 +182,10 @@ class BTMultirowGroup extends BTBase {
     }
     if (templates.length) {
       return templates.map((t, idx) => {
+        if (this.tablemode) {
+          return t;
+        }
+
         return html`
           ${idx > 0
             ? html`<div
