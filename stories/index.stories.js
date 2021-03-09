@@ -1,4 +1,4 @@
-import { html } from "lit-element";
+import { html, render } from "lit-html";
 
 export default {
   title: "BT Components",
@@ -34,20 +34,30 @@ export const BTInlineInput = () =>
 export const BTSelect = () => {
   const options = [
     { id: "123", name: "Option 1", template: html`<div>Option 1</div>` },
-    { id: "234", name: "Option 2", template: html`<div>Option 1</div>` },
-    { id: "345", name: "Option 3", template: html`<div>Option 1</div>` },
-    { id: "456", name: "Option 4", template: html`<div>Option 1</div>` },
+    { id: "234", name: "Option 2", template: html`<div>Option 2</div>` },
+    { id: "345", name: "Option 3", template: html`<div>Option 3</div>` },
+    { id: "456", name: "Option 4", template: html`<div>Option 4</div>` },
   ];
-  return html`
+  // TODO: Hack to get lit-html working
+  const renderer = () => {
+    return html`
+      <bt-select .options=${options}></bt-select>
+      <div style="height:1rem;"></div>
+      <bt-select .options=${options} filterable></bt-select>
+      <div style="height:1rem;"></div>
+      <bt-select .options=${options} multiselect></bt-select>
+    `;
+  };
+  setTimeout(() => {
+    render(renderer(), document.getElementById("container"));
+  }, 100);
+
+  return `
     <link
       href="https://fonts.googleapis.com/css?family=Material+Icons&display=block"
       rel="stylesheet"
     />
-    <bt-select .options=${options}></bt-select>
-
-    <div style="height:1rem;"></div>
-
-    <bt-select options="${JSON.stringify(options)}" filterable></bt-select>
+    <div id="container"></div>
   `;
 };
 

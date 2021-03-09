@@ -21,6 +21,7 @@ class BTSelect extends BTBase {
       placeholder: { type: String },
 
       filterable: { type: Boolean },
+      multiselect: { type: Boolean },
       emptyPlaceholder: { type: Boolean },
 
       editable: { type: Boolean },
@@ -53,6 +54,8 @@ class BTSelect extends BTBase {
     this.placeholder = "Select an option";
     this.emptyPlaceholder = false;
     this.displaymode = false;
+    this.multiselect = false;
+    this.filterable = false;
     this.model = "";
 
     this._errors = [];
@@ -61,7 +64,12 @@ class BTSelect extends BTBase {
 
   set model(model) {
     const oldModel = this._model;
-    this._model = model == null ? "" : `${model}`; // convert to string...
+
+    if (Array.isArray(model)) {
+      this._model = model;
+    } else {
+      this._model = model == null ? "" : `${model}`; // convert to string...
+    }
     this.requestUpdate("model", oldModel);
   }
   get model() {
@@ -81,13 +89,14 @@ class BTSelect extends BTBase {
           <div class="text-gray-600 text-sm">(empty)</div>
         `;
       }
-    } else if (this.filterable) {
+    } else if (this.filterable || this.multiselect) {
       contentTemplate = html`
         <bt-filterable-items
           id="filterable"
           .items=${this.options}
-          .model=${this.model ? [this.model] : []}
-          .allowMultiselect=${false}
+          .model=${this.model || []}
+          .allowMultiselect=${this.multiselect}
+          .displayCheckboxes=${this.multiselect}
           @model-change=${(e) => {
             if (e.detail.value && e.detail.value.length) {
               this.model = e.detail.value;
@@ -104,7 +113,7 @@ class BTSelect extends BTBase {
       contentTemplate = html`
         <div class="relative">
           <select
-            class="block w-full px-3 ${this.small
+            class="block w-full px-2 ${this.small
               ? "small py-1"
               : "py-2"} mr-4 text-sm"
             id="select"
