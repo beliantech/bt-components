@@ -46,7 +46,7 @@ export default class BTIcon extends BTBase {
       contentTemplate = html`
         ${contentTemplate}
         <div
-          class="absolute tooltip font-bold text-xs py-2 px-3 mt-1 leading-normal text-white text-center z-20 whitespace-no-wrap"
+          class="absolute tooltip font-bold text-xs py-2 px-3 mt-1 leading-normal text-white text-center z-20 whitespace-nowrap"
         >
           ${this.tooltip}
         </div>

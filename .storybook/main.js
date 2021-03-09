@@ -31,10 +31,11 @@ module.exports = {
     config.module.rules.push({
       test: /\.css$/,
       use: [
+        { loader: "css-loader" },
         {
           loader: "postcss-loader",
           options: {
-            config: {
+            postcssOptions: {
               path: path.resolve(__dirname, "../"),
             },
           },

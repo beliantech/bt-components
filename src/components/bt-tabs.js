@@ -240,7 +240,7 @@ class BTTabs extends BTBase {
                           >
                         `
                       : html``}
-                    <span class="name whitespace-no-wrap">${t.title}</span>
+                    <span class="name whitespace-nowrap">${t.title}</span>
                   </div>
                 </div>
               `;

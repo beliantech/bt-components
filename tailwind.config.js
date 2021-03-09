@@ -118,7 +118,7 @@ module.exports = {
     content: ["./src/**/*.js", "./src/components/**/*.js"],
     options: {
       safelist: {
-        standard: [/12$/], // whitelist w-1/12, w-2/12, ...
+        standard: [/^w.*12$/], // whitelist w-1/12, w-2/12, ...
       },
     },
   },
