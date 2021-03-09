@@ -6,7 +6,11 @@ import { classMap } from "lit-html/directives/class-map";
 import { guard } from "lit-html/directives/guard";
 
 import BTBase from "../bt-base";
+
+// Only support basic form elements out of the box. For other fields, use customFieldsFunc
 import "./bt-input";
+import "./bt-select";
+import "./bt-radio";
 import "./bt-hidden";
 import "./bt-button";
 
@@ -317,9 +321,53 @@ class BTForm extends BTBase {
             style=${styleMap(fieldStyles)}
           ></bt-input>
         `;
+      case "radio": {
+        return html`
+          <bt-radio
+            class=${classMap(fieldClasses)}
+            id=${field.id}
+            ?required=${field.required}
+            .displaymode=${this.displaymode}
+            .clickToEdit=${this.clickToEdit}
+            .model=${model || ""}
+            .label=${field.label}
+            .description=${field.description}
+            .options=${field.options}
+            .disableValidation=${!this.validate}
+            @model-change=${this._onModelChange}
+            @input-submit=${this._onSubmit}
+            @input-cancel=${this._onInputCancel}
+            style=${styleMap(fieldStyles)}
+          ></bt-radio>
+        `;
+      }
+      case "dropdown": {
+        return html`
+          <bt-select
+            class=${classMap(fieldClasses)}
+            id=${field.id}
+            ?required=${field.required}
+            ?horizontal=${this.horizontal}
+            .displaymode=${this.displaymode}
+            .clickToEdit=${this.clickToEdit}
+            .placeholder=${ifDefined(field.placeholder)}
+            .model=${model || ""}
+            .label=${field.label}
+            .description=${field.description}
+            .options=${field.options}
+            .errorMessage=${this._errorMap[field.id]}
+            .disableValidation=${!this.validate}
+            @model-change=${this._onModelChange}
+            @input-submit=${this._onSubmit}
+            @input-cancel=${this._onInputCancel}
+            style=${styleMap(fieldStyles)}
+          ></bt-select>
+        `;
+      }
       case "hidden": {
         return html`<bt-hidden id=${field.id} .model=${model}></bt-hidden>`;
       }
+
       default: {
         if (this._fieldMapping && this._fieldMapping[field.type]) {
           return this._fieldMapping[field.type](model, field, this);

@@ -13,8 +13,6 @@ export default {
 // };
 
 export const BTInput = () => `
-  <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
-
   <bt-input label="Label" description="Description"></bt-input>
 
   <bt-input model="Model" displaymode clicktoedit></bt-input>
@@ -82,8 +80,6 @@ export const BTRadio = () => {
 export const BTSlider = () => '<bt-slider label="Label"></bt-slider>';
 
 export const BTIcon = () => `
-  <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
-
   <bt-icon>navigate_before</bt-icon>
   <bt-icon xsmall>navigate_before</bt-icon>
   <bt-icon small>navigate_before</bt-icon>
@@ -119,8 +115,6 @@ export const BTIcon = () => `
 `;
 
 export const BTButton = () => `
-  <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
-
   <bt-button>Button</bt-button>
   <bt-button icon="add">Button</bt-button>
   <bt-button
@@ -175,15 +169,15 @@ export const BTForm = () => {
 
   form.customFieldsFunc = function () {
     return {
-      radio: (model, field, form) => {
-        return html`<bt-radio
-          id=${field.id}
-          .model=${model}
-          .options=${field.options}
-          .label=${field.label}
-          @model-change=${form.onModelChange}
-        ></bt-radio>`;
-      },
+      // radio: (model, field, form) => {
+      //   return html`<bt-radio
+      //     id=${field.id}
+      //     .model=${model}
+      //     .options=${field.options}
+      //     .label=${field.label}
+      //     @model-change=${form.onModelChange}
+      //   ></bt-radio>`;
+      // },
     };
   };
   form.formSchema = {
@@ -192,6 +186,15 @@ export const BTForm = () => {
         id: "my_short_text",
         type: "short_text",
         label: "Short text",
+      },
+      {
+        id: "my_dropdown",
+        type: "dropdown",
+        label: "Short text",
+        options: [
+          { id: "foo", name: "Foo" },
+          { id: "bar", name: "Bar" },
+        ],
       },
       {
         id: "my_radio",
@@ -221,7 +224,6 @@ export const BTTabs = () => {
 
 export const BTCheckbox = () => {
   return `
-  <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
   <bt-checkbox label="Enable"></bt-checkbox>`;
 };
 
@@ -317,7 +319,6 @@ export const BTMultirowGroup = () => {
   const model = [{ name: "Jon", array: [{ name: "Bob" }] }, { name: "James" }];
 
   return `
-    <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
     <bt-multirow-group
       label="Multirow Group"
       description="Multirow group description"
