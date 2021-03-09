@@ -86,49 +86,6 @@ class BTFilterableItems extends BTBase {
     const displayChips = this.allowMultiselect && this.model.length > 0;
 
     return html`
-      <style>
-        :host {
-          max-width: 225px;
-        }
-        .container {
-          max-width: 225px;
-          background-color: white;
-        }
-        .title {
-          padding: var(--pd-unit) var(--pd-space);
-          border-bottom: 1px solid lightgray;
-          color: var(--pd-primary-color);
-
-          font-size: var(--pd-font-size-normal);
-        }
-        input {
-          width: 100%;
-          border: 0;
-          border-bottom: 1px solid lightgray;
-          height: 2.5rem;
-          font-size: 0.9rem;
-          padding: 0.5rem 1rem;
-        }
-        .checkbox-empty {
-          display: inline-block;
-          height: 18px;
-          opacity: 0.54;
-          width: 18px;
-          background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWw6c3BhY2U9InByZXNlcnZlIiB2ZXJzaW9uPSIxLjEiIHk9IjBweCIgeD0iMHB4IiB2aWV3Qm94PSIwIDAgMTggMTgiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDE4IDE4Ij4KICA8cGF0aCBkPSJtMTQgM2MwLjYgMCAxIDAuNCAxIDF2MTBjMCAwLjYtMC40IDEtMSAxaC0xMGMtMC42IDAtMS0wLjQtMS0xdi0xMGMwLTAuNiAwLjQtMSAxLTFoMTBtMC0xaC0xMGMtMS4xIDAtMiAwLjktMiAydjEwYzAgMS4xIDAuOSAyIDIgMmgxMGMxLjEgMCAyLTAuOSAyLTJ2LTEwYzAtMS4xLTAuOS0yLTItMnoiLz4KPC9zdmc+Cg==)
-            no-repeat center;
-          fill: var(--pd-primary-color);
-          outline: none;
-        }
-        .checkbox-checked {
-          display: inline-block;
-          height: 18px;
-          opacity: 0.54;
-          width: 18px;
-          background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWw6c3BhY2U9InByZXNlcnZlIiB2ZXJzaW9uPSIxLjEiIHk9IjBweCIgeD0iMHB4IiB2aWV3Qm94PSIwIDAgMTggMTgiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDE4IDE4Ij4KICA8cGF0aCBkPSJtMTQgMmgtMTBjLTEuMSAwLTIgMC45LTIgMnYxMGMwIDEuMSAwLjkgMiAyIDJoMTBjMS4xIDAgMi0wLjkgMi0ydi0xMGMwLTEuMS0wLjktMi0yLTJ6bS02LjYgMTAuOWwtMy44LTMuOSAxLjEtMS4xIDIuOCAyLjggNS45LTUuOSAxLjEgMS4xLTcuMSA3eiIvPgo8L3N2Zz4K)
-            no-repeat center;
-          outline: none;
-        }
-      </style>
       <div @keydown=${this.onKeydown} @click=${this._blockClick}>
         <bt-input
           class="block"
@@ -147,7 +104,7 @@ class BTFilterableItems extends BTBase {
             ? html`
                 <div
                   id="scroller"
-                  class="absolutex z-10 w-full overflow-y-auto bg-white border-b border-l border-r border-gray-400"
+                  class="absolute z-10 w-full overflow-y-auto bg-white border-b border-l border-r border-gray-400"
                   style="max-height:${ITEM_ROW_HEIGHT *
                   MAX_VISIBLE_TAG_ROWS}px;"
                 >
@@ -359,6 +316,54 @@ class BTFilterableItems extends BTBase {
   _blockClick(e) {
     e.preventDefault();
     e.stopPropagation();
+  }
+  static get styles() {
+    return [
+      super.styles,
+      css`
+        :host {
+          max-width: 225px;
+        }
+        .container {
+          max-width: 225px;
+          background-color: white;
+        }
+        .title {
+          padding: var(--pd-unit) var(--pd-space);
+          border-bottom: 1px solid lightgray;
+          color: var(--pd-primary-color);
+
+          font-size: var(--pd-font-size-normal);
+        }
+        input {
+          width: 100%;
+          border: 0;
+          border-bottom: 1px solid lightgray;
+          height: 2.5rem;
+          font-size: 0.9rem;
+          padding: 0.5rem 1rem;
+        }
+        .checkbox-empty {
+          display: inline-block;
+          height: 18px;
+          opacity: 0.54;
+          width: 18px;
+          background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWw6c3BhY2U9InByZXNlcnZlIiB2ZXJzaW9uPSIxLjEiIHk9IjBweCIgeD0iMHB4IiB2aWV3Qm94PSIwIDAgMTggMTgiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDE4IDE4Ij4KICA8cGF0aCBkPSJtMTQgM2MwLjYgMCAxIDAuNCAxIDF2MTBjMCAwLjYtMC40IDEtMSAxaC0xMGMtMC42IDAtMS0wLjQtMS0xdi0xMGMwLTAuNiAwLjQtMSAxLTFoMTBtMC0xaC0xMGMtMS4xIDAtMiAwLjktMiAydjEwYzAgMS4xIDAuOSAyIDIgMmgxMGMxLjEgMCAyLTAuOSAyLTJ2LTEwYzAtMS4xLTAuOS0yLTItMnoiLz4KPC9zdmc+Cg==)
+            no-repeat center;
+          fill: var(--pd-primary-color);
+          outline: none;
+        }
+        .checkbox-checked {
+          display: inline-block;
+          height: 18px;
+          opacity: 0.54;
+          width: 18px;
+          background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWw6c3BhY2U9InByZXNlcnZlIiB2ZXJzaW9uPSIxLjEiIHk9IjBweCIgeD0iMHB4IiB2aWV3Qm94PSIwIDAgMTggMTgiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDE4IDE4Ij4KICA8cGF0aCBkPSJtMTQgMmgtMTBjLTEuMSAwLTIgMC45LTIgMnYxMGMwIDEuMSAwLjkgMiAyIDJoMTBjMS4xIDAgMi0wLjkgMi0ydi0xMGMwLTEuMS0wLjktMi0yLTJ6bS02LjYgMTAuOWwtMy44LTMuOSAxLjEtMS4xIDIuOCAyLjggNS45LTUuOSAxLjEgMS4xLTcuMSA3eiIvPgo8L3N2Zz4K)
+            no-repeat center;
+          outline: none;
+        }
+      `,
+    ];
   }
 }
 

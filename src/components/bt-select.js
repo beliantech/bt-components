@@ -1,4 +1,4 @@
-import { html } from "lit-element";
+import { html, css, unsafeCSS } from "lit-element";
 import BTBase from "../bt-base";
 
 import "./internal/bt-editable-options";
@@ -7,8 +7,6 @@ import "./bt-icon";
 import "./bt-field";
 
 import errorTemplate from "./templates/error";
-
-import { clickOutsideToDismiss } from "../util/mouse";
 
 import colors from "../colors";
 
@@ -42,9 +40,6 @@ class BTSelect extends BTBase {
       errorMessage: { type: String },
 
       _errors: { type: Array },
-
-      _filterableShowItems: { type: Boolean },
-      _filterableModel: { type: String },
     };
   }
 
@@ -59,7 +54,6 @@ class BTSelect extends BTBase {
     this.model = "";
 
     this._errors = [];
-    this._filterableModel = "";
   }
 
   set model(model) {
@@ -148,7 +142,6 @@ class BTSelect extends BTBase {
     const errorRequired = this._errors.includes(ErrorRequired);
 
     return html`
-      ${style}
       <bt-field .field=${this}>
         <div class="${this.horizontal ? "flex" : ""}">
           ${contentTemplate}
@@ -174,32 +167,6 @@ class BTSelect extends BTBase {
     // Need to write the value of input explicitly because value attribute only sets the default value.
     if (this._id("select")) {
       this._id("select").value = this.model;
-    }
-
-    if (changed.has("_filterableShowItems")) {
-      if (this._filterableShowItems) {
-        this._removeClickOutsideHandler =
-          this._removeClickOutsideHandler ||
-          clickOutsideToDismiss(this, () => {
-            this._filterableShowItems = false;
-
-            // Restore input value to selected option
-            if (this.model) {
-              const option = this.options.find(
-                (option) => this.model === option.id
-              );
-              if (option) {
-                this._id("filterable").model = option.name;
-                this.model = option.id;
-              }
-            }
-
-            this.validate();
-          });
-      } else {
-        this._removeClickOutsideHandler && this._removeClickOutsideHandler();
-        this._removeClickOutsideHandler = null;
-      }
     }
   }
 
@@ -235,34 +202,36 @@ class BTSelect extends BTBase {
       value: this.options,
     });
   }
+  static get styles() {
+    return [
+      super.styles,
+      css`
+        select {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+
+          background-color: white;
+          border: 1px solid lightgray;
+          border-radius: 0;
+
+          outline: none;
+          height: 40px;
+        }
+        select.small {
+          height: 32px;
+        }
+
+        select:focus {
+          border: 1px solid ${unsafeCSS(colors.blue)};
+        }
+
+        bt-icon {
+          color: gray;
+          pointer-events: none;
+        }
+      `,
+    ];
+  }
 }
 customElements.define("bt-select", BTSelect);
-
-const style = html`
-  <style>
-    select {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-
-      background-color: white;
-      border: 1px solid lightgray;
-      border-radius: 0;
-
-      outline: none;
-      height: 40px;
-    }
-    select.small {
-      height: 32px;
-    }
-
-    select:focus {
-      border: 1px solid ${colors.blue};
-    }
-
-    bt-icon {
-      color: gray;
-      pointer-events: none;
-    }
-  </style>
-`;
