@@ -161,9 +161,7 @@ class BTMultirowGroup extends BTBase {
               .model=${this._model[idx]}
               ?displaymode=${this.displaymode}
               ?required=${this.field.required}
-              .inputType=${this.field.type === fields.FIELD_TYPE_NUMBER
-                ? "number"
-                : "text"}
+              .inputType=${this.field.type === "number" ? "number" : "text"}
               @model-change=${(e) => {
                 this._model[idx] = e.detail.value;
 
