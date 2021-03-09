@@ -268,6 +268,17 @@ const multipartSchema = [
     grid: 2,
   },
   {
+    id: "drop",
+    type: "dropdown",
+    label: "Select",
+    options: [
+      { id: "123", name: "Option 1" },
+      { id: "234", name: "Option 2" },
+    ],
+    required: true,
+    grid: 2,
+  },
+  {
     id: "random",
     type: "radio",
     label: "Random",

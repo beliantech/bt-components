@@ -1,10 +1,12 @@
 import { html, css } from "lit-element";
 import { classMap } from "lit-html/directives/class-map";
+import { ifDefined } from "lit-html/directives/if-defined";
 import BTBase from "../bt-base";
 
 import "./bt-multirow-group";
 import "./bt-radio";
 import "./bt-input";
+import "./bt-select";
 import "./bt-hidden";
 import "./bt-checkbox";
 
@@ -92,7 +94,7 @@ class BTMultipartInput extends BTBase {
                   id=${s.id}
                   .required=${s.required}
                   .displaymode=${this.displaymode}
-                  .placeholder=${s.placeholder}
+                  .placeholder=${ifDefined(s.placeholder)}
                   .validateAs=${s.validateAs}
                   .model=${this._modelMap[s.id]}
                   .label=${!this.hidelabel && s.label}
@@ -105,6 +107,26 @@ class BTMultipartInput extends BTBase {
                 ></bt-input>
               `;
             }
+            case "dropdown": {
+              return html`
+                <bt-select
+                  class="block field ${classMap(fieldClasses)}"
+                  id=${s.id}
+                  .required=${s.required}
+                  .displaymode=${this.displaymode}
+                  .placeholder=${ifDefined(s.placeholder)}
+                  .model=${this._modelMap[s.id]}
+                  .options=${s.options}
+                  .label=${!this.hidelabel && s.label}
+                  .description=${!this.hidelabel && s.description}
+                  @model-change=${(e) => {
+                    this._emit("model-change", {
+                      value: this.model,
+                    });
+                  }}
+                ></bt-select>
+              `;
+            }
             case "radio": {
               return html`
                 <bt-radio
@@ -112,7 +134,6 @@ class BTMultipartInput extends BTBase {
                   id=${s.id}
                   .required=${s.required}
                   .displaymode=${this.displaymode}
-                  .placeholder=${s.placeholder}
                   .model=${this._modelMap[s.id]}
                   .options=${s.options}
                   .label=${!this.hidelabel && s.label}
@@ -164,10 +185,10 @@ class BTMultipartInput extends BTBase {
               return html`<div
                 class=${classMap(fieldClasses)}
                 style=${this.layout !== LayoutVertical && !this.hidelabel
-                  ? "margin-top:16px;"
+                  ? "margin-top:24px;"
                   : ""}
               >
-                <span class="inline-block pt-1 pr-2 text-sm font-bold"
+                <span class="inline-block pr-2 -mt-4 text-sm font-bold"
                   >${s.label}</span
                 >
               </div>`;
