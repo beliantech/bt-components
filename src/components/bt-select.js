@@ -20,7 +20,7 @@ class BTSelect extends BTBase {
       label: { type: String },
       placeholder: { type: String },
 
-      autocomplete: { type: Boolean },
+      filterable: { type: Boolean },
       emptyPlaceholder: { type: Boolean },
 
       editable: { type: Boolean },
@@ -42,8 +42,8 @@ class BTSelect extends BTBase {
 
       _errors: { type: Array },
 
-      _autocompleteShowOptions: { type: Boolean },
-      _autocompleteModel: { type: String },
+      _filterableShowItems: { type: Boolean },
+      _filterableModel: { type: String },
     };
   }
 
@@ -56,7 +56,7 @@ class BTSelect extends BTBase {
     this.model = "";
 
     this._errors = [];
-    this._autocompleteModel = "";
+    this._filterableModel = "";
   }
 
   set model(model) {
@@ -81,12 +81,12 @@ class BTSelect extends BTBase {
           <div class="text-gray-600 text-sm">(empty)</div>
         `;
       }
-    } else if (this.autocomplete) {
+    } else if (this.filterable) {
       contentTemplate = html`
         <bt-filterable-items
+          id="filterable"
           .items=${this.options}
           .model=${this.model ? [this.model] : []}
-          .renderItem=${(option) => option.template}
           .allowMultiselect=${false}
           @model-change=${(e) => {
             if (e.detail.value && e.detail.value.length) {
@@ -167,12 +167,12 @@ class BTSelect extends BTBase {
       this._id("select").value = this.model;
     }
 
-    if (changed.has("_autocompleteShowOptions")) {
-      if (this._autocompleteShowOptions) {
+    if (changed.has("_filterableShowItems")) {
+      if (this._filterableShowItems) {
         this._removeClickOutsideHandler =
           this._removeClickOutsideHandler ||
           clickOutsideToDismiss(this, () => {
-            this._autocompleteShowOptions = false;
+            this._filterableShowItems = false;
 
             // Restore input value to selected option
             if (this.model) {
@@ -180,7 +180,7 @@ class BTSelect extends BTBase {
                 (option) => this.model === option.id
               );
               if (option) {
-                this._id("autocomplete").model = option.name;
+                this._id("filterable").model = option.name;
                 this.model = option.id;
               }
             }

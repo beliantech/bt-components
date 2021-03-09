@@ -31,34 +31,45 @@ export const BTInput = () => `
 export const BTInlineInput = () =>
   '<bt-inline-input model="Text"></bt-inline-input>';
 
-export const BTSlider = () => '<bt-slider label="Label"></bt-slider>';
+export const BTSelect = () => {
+  const options = [
+    { id: "123", name: "Option 1", template: html`<div>Option 1</div>` },
+    { id: "234", name: "Option 2", template: html`<div>Option 1</div>` },
+    { id: "345", name: "Option 3", template: html`<div>Option 1</div>` },
+    { id: "456", name: "Option 4", template: html`<div>Option 1</div>` },
+  ];
+  return html`
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons&display=block"
+      rel="stylesheet"
+    />
+    <bt-select .options=${options}></bt-select>
+
+    <div style="height:1rem;"></div>
+
+    <bt-select options="${JSON.stringify(options)}" filterable></bt-select>
+  `;
+};
 
 export const BTRadio = () => {
-  const radio = document.createElement("bt-radio");
-  radio.options = [
+  const options = [
     { id: "123", name: "Option 1" },
     { id: "234", name: "Option 2" },
     { id: "345", name: "Option 3" },
     { id: "456", name: "Option 4" },
   ];
-  radio.label = "Label";
-  radio.description = "Description";
-  return radio;
+  return `
+    <bt-radio label="Label" description="Description"
+      options='${JSON.stringify(options)}'></bt-radio>
+
+    <div style="height:1rem;"></div>
+
+    <bt-radio label="Label" description="Description" horizontal
+      options='${JSON.stringify(options)}'></bt-radio>
+  `;
 };
 
-export const BTRadioHorizontal = () => {
-  const radio = document.createElement("bt-radio");
-  radio.options = [
-    { id: "123", name: "Option 1" },
-    { id: "234", name: "Option 2" },
-    { id: "345", name: "Option 3" },
-    { id: "456", name: "Option 4" },
-  ];
-  radio.horizontal = true;
-  radio.label = "Label";
-  radio.description = "Description";
-  return radio;
-};
+export const BTSlider = () => '<bt-slider label="Label"></bt-slider>';
 
 export const BTIcon = () => `
   <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">

@@ -16,8 +16,6 @@ class BTFilterableItems extends BTBase {
       items: { type: Array }, // [{ id: String, name: String }]
       model: { type: Array }, // [ id ]
 
-      renderItem: { type: Object }, // If provided, will use this to render item
-
       placeholder: { type: String },
 
       dropdownMode: { type: Boolean }, // If true, items will only display when user clicks in input
@@ -179,8 +177,8 @@ class BTFilterableItems extends BTBase {
                               `
                             : html``}
                           <div class="ml-1 w-full">
-                            ${this.renderItem
-                              ? this.renderItem(r.value)
+                            ${r.value.template
+                              ? r.value.template
                               : html`
                                   <div class="text-sm">${r.value.name}</div>
                                 `}
