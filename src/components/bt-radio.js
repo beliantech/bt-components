@@ -3,7 +3,7 @@ import { classMap } from "lit-html/directives/class-map";
 
 import BTBase from "../bt-base";
 
-import "../support/bt-editable-options";
+import "./internal/bt-editable-options";
 import "./bt-field";
 
 import errorTemplate from "./templates/error";
@@ -72,11 +72,7 @@ class BTRadio extends BTBase {
                     style="margin-right:8px;"
                     name="radios"
                   />
-                  <span
-                    class="inline-block leading-none"
-                    style="padding-top:1px;"
-                    >${option.name}</span
-                  ></label
+                  <span class="inline-block">${option.name}</span></label
                 >
               `;
             })}
