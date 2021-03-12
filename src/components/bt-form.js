@@ -342,7 +342,9 @@ class BTForm extends BTBase {
             .description=${field.description}
             .filterable=${field.filterable}
             .multiselect=${field.multiselect}
-            .options=${field.options}
+            .options=${field.dynamicOptions
+              ? field.dynamicOptions(this.model)
+              : field.options}
             .errorMessage=${this.errorMap[field.id]}
             .disableValidation=${!this.validate}
             @model-change=${this.onModelChange}
