@@ -215,7 +215,9 @@ class BTFilterableItems extends BTBase {
       e.stopPropagation();
     } else if (e.key === "Enter") {
       const selectedRow = this._rows[this._selectedIndex];
-      selectedRow.action();
+      if (selectedRow) {
+        selectedRow.action();
+      }
     }
   }
 
@@ -306,6 +308,8 @@ class BTFilterableItems extends BTBase {
   }
 
   get _selectedIndex() {
+    if (this._rows.length === 0) return -1;
+
     let selectedIndex = this._selectedIndexCounter % this._rows.length;
     if (selectedIndex < 0) {
       selectedIndex += this._rows.length;

@@ -94,7 +94,7 @@ class BTSelect extends BTBase {
         <bt-filterable-items
           id="filterable"
           .items=${this.options}
-          .model=${this.model || []}
+          .model=${this.filterableItemsModel}
           .allowMultiselect=${this.multiselect}
           .displayCheckboxes=${this.multiselect}
           @model-change=${(e) => {
@@ -155,9 +155,9 @@ class BTSelect extends BTBase {
             ? html`
                 <bt-editable-options
                   class="mt-2"
-                  .model="${this.options}"
-                  @model-change="${this._onOptionsModelChange}"
-                  .type="${"dropdown"}"
+                  .model=${this.options}
+                  @model-change=${this._onOptionsModelChange}
+                  .type=${"dropdown"}
                 >
                 </bt-editable-options>
               `
@@ -189,6 +189,16 @@ class BTSelect extends BTBase {
     this._emit("errors-change", { id: this.id, errors: errors });
 
     return errors.length === 0;
+  }
+
+  get filterableItemsModel() {
+    if (Array.isArray(this.model)) {
+      return this.model;
+    }
+    if (this.model) {
+      return [this.model];
+    }
+    return [];
   }
 
   _onChange(e) {
