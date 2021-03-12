@@ -22,18 +22,15 @@ class BTForm extends BTBase {
       hideTitle: { type: Boolean },
 
       formErrorText: { type: String },
-
       formSchema: { type: Object },
-
       formHeight: { type: String },
 
-      hideHeaders: { type: Boolean, reflect: true },
-      formFocus: { type: Boolean, reflect: true },
       horizontal: { type: Boolean, reflect: true },
       displaymode: { type: Boolean, reflect: true },
+      hideHeaders: { type: Boolean, reflect: true },
+      formFocus: { type: Boolean, reflect: true },
       clickToEdit: { type: Boolean, reflect: true },
       validate: { type: Boolean },
-
       autosubmit: { type: Boolean },
 
       buttonPrimary: { type: Boolean },
@@ -49,12 +46,6 @@ class BTForm extends BTBase {
       prefillFields: { type: Object }, // { id/aliasId: value }
       hiddenFields: { type: Object }, // { id/aliasId: Bool }
       interpolateMap: { type: Object }, // { id/aliasId: value }
-
-      attachments: { type: Array },
-
-      // meta object to provide form with more information, e.g. { trackId, cardId, etc. }
-      // Used by file-input
-      meta: { type: Object },
 
       _fieldMapping: { type: Object },
 
@@ -97,8 +88,6 @@ class BTForm extends BTBase {
     this.hiddenFields = {};
     this.interpolateMap = {};
 
-    this.meta = {};
-
     this.shadowRoot.addEventListener("errors-change", (e) => {
       const errors = Object.assign({}, this._errors);
 
@@ -122,6 +111,8 @@ class BTForm extends BTBase {
     this.displaymode = false;
 
     this.formBottomTemplate = nothing;
+    // Function to be called right before submit, returns promise
+    this.presubmitFuncPromise = Promise.resolve();
   }
 
   // A function that preloads field components (import), and returns a map of field type to function that takes in (model,field,formEl) and returns html``,
@@ -547,7 +538,7 @@ class BTForm extends BTBase {
         this._disableSubmit = true;
       }
 
-      this._upload()
+      this.presubmitFuncPromise()
         .then(() => {
           // submit
           this._emit(
@@ -571,14 +562,6 @@ class BTForm extends BTBase {
         this._id(firstFieldWithErrorId).scrollIntoView({ behavior: "smooth" });
       }, 100);
     }
-  }
-
-  _upload() {
-    return Promise.all(
-      this._fields
-        .filter((f) => f.nodeName === "KR-FILE-INPUT")
-        .map((f) => f.upload(this.meta))
-    );
   }
 
   _onCancel(e) {
