@@ -112,7 +112,7 @@ class BTForm extends BTBase {
 
     this.formBottomTemplate = nothing;
     // Function to be called right before submit, returns promise
-    this.presubmitFuncPromise = Promise.resolve();
+    this.presubmitFuncPromise = () => Promise.resolve();
   }
 
   // A function that preloads field components (import), and returns a map of field type to function that takes in (model,field,formEl) and returns html``,
