@@ -96,7 +96,7 @@ class BTFilterableItems extends BTBase {
           .noline=${displayChips}
           .noindent=${displayChips}
           .model=${this._input}
-          @model-change=${this.onModelChange}
+          @model-change=${this._onModelChange}
           @focus=${() => (this._displayItems = true)}
         ></bt-input>
         <div class="relative">
@@ -119,7 +119,7 @@ class BTFilterableItems extends BTBase {
                             }
                           }}
                           @mouseenter=${r.onhover}
-                          class="flex items-center cursor-pointer py-1 outline-none
+                          class="item flex items-center cursor-pointer py-1 outline-none
                             ${selectedIndex === i ? "bg-gray-200" : ""}"
                           tabindex="0"
                         >
@@ -190,7 +190,7 @@ class BTFilterableItems extends BTBase {
     }
   }
 
-  onModelChange(e) {
+  _onModelChange(e) {
     this._input = e.detail.value.trim();
     this._selectedIndexCounter = 0;
     this._displayItems = true;

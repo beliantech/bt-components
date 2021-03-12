@@ -60,7 +60,13 @@ class BTSelect extends BTBase {
     const oldModel = this._model;
 
     if (Array.isArray(model)) {
-      this._model = model;
+      if (this.multiselect) {
+        this._model = model;
+      } else {
+        if (model.length > 0) {
+          this._model = model[0];
+        }
+      }
     } else {
       this._model = model == null ? "" : `${model}`; // convert to string...
     }

@@ -1,4 +1,4 @@
-import { changeSelectValue } from "./utils";
+import { changeSelectValue, delay } from "./utils";
 
 describe("bt-select", () => {
   let container;
@@ -193,6 +193,43 @@ describe("bt-select", () => {
 
         assert.isNull(el._select(".text-error"));
       });
+    });
+  });
+
+  describe("filterable=true,multiselect=false", () => {
+    it("returns a single model", async () => {
+      el.options = [
+        { id: "123", name: "Option 1" },
+        { id: "234", name: "Option 2" },
+      ];
+      el.filterable = true;
+
+      await delay();
+      MockInteractions.focus(el._id("filterable")._id("input"));
+      await delay();
+      MockInteractions.click(el._id("filterable")._id("scroller").children[0]);
+
+      await el.updateComplete;
+      assert.equal(el.model, "123");
+    });
+  });
+
+  describe("filterable=true,multiselect=true", () => {
+    it("returns an array model", async () => {
+      el.options = [
+        { id: "123", name: "Option 1" },
+        { id: "234", name: "Option 2" },
+      ];
+      el.filterable = true;
+      el.multiselect = true;
+
+      await delay();
+      MockInteractions.focus(el._id("filterable")._id("input"));
+      await delay();
+      MockInteractions.click(el._id("filterable")._id("scroller").children[0]);
+
+      await el.updateComplete;
+      assert.deepEqual(el.model, ["123"]);
     });
   });
 });
