@@ -130,8 +130,6 @@ describe("bt-form", () => {
       el.model = { foo: "Bar" };
       await el.updateComplete;
 
-      debugger;
-
       typeIntoInput(el._select("bt-input").inputEl, "Baz");
       el._id("submit").click();
 
@@ -280,5 +278,55 @@ describe("bt-form", () => {
 
     await delay();
     assert.ok(formSubmitSpy.notCalled);
+  });
+
+  describe("showRules", () => {
+    it("hides/shows fields according to showRules", async () => {
+      el.formSchema = {
+        fields: [
+          {
+            id: "abcd",
+            label: "ABCD",
+            type: "dropdown",
+            options: [
+              { id: "foo", name: "Foo" },
+              { id: "bar", name: "Bar" },
+            ],
+            required: true,
+          },
+          {
+            id: "bcde",
+            label: "BCDE",
+            type: "dropdown",
+            options: [{ id: "123", name: "One two three" }],
+            showRules: [
+              {
+                fieldId: "abcd",
+                matches: ["foo"],
+              },
+            ],
+            required: true,
+          },
+        ],
+      };
+
+      await el.updateComplete;
+
+      assert.strictEqual(el._fields.length, 1);
+      assert.strictEqual(el._fields[0].id, "abcd");
+
+      el.model = { abcd: "foo" };
+      await el.updateComplete;
+
+      assert.strictEqual(el._fields.length, 2);
+      assert.strictEqual(el._fields[0].id, "abcd");
+      assert.strictEqual(el._fields[1].id, "bcde");
+
+      el.model = { abcd: "bar" };
+      await el.updateComplete;
+
+      assert.strictEqual(el._fields.length, 1);
+      assert.strictEqual(el._fields[0].id, "abcd");
+    });
   });
 });

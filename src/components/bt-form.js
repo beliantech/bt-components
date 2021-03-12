@@ -174,10 +174,33 @@ class BTForm extends BTBase {
         ${this._formHeaderTemplate}
         <div class="form-fields flex-1" id="fields">
           ${this.formSchema.fields.map((field, fieldIdx, ary) => {
+            // Handle conditionals, decide whether or not this field should be shown
+            let showField = true;
+            if (field.showRules) {
+              // Found show rules, hide field by default
+              showField = false;
+              for (let i = 0; i < field.showRules.length; i++) {
+                const showRule = field.showRules[i];
+                if (showRule && showRule.matches) {
+                  const fieldValue = this._modelMap[showRule.fieldId];
+                  showField = showRule.matches.includes(fieldValue);
+
+                  if (showField) break;
+                }
+              }
+            }
+
             const model = this._modelForField(field);
             return guard(
-              [this.displaymode, this.formSchema, model, this.errorMap],
+              [
+                this.displaymode,
+                this.formSchema,
+                showField,
+                model,
+                this.errorMap,
+              ],
               () => {
+                if (!showField) return html``;
                 return this._fieldTemplate(model, field, fieldIdx);
               }
             );
