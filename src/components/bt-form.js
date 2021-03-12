@@ -4,6 +4,7 @@ import { ifDefined } from "lit-html/directives/if-defined";
 import { styleMap } from "lit-html/directives/style-map";
 import { classMap } from "lit-html/directives/class-map";
 import { guard } from "lit-html/directives/guard";
+import { replacePlaceholder } from "../util/string";
 
 import BTBase from "../bt-base";
 
@@ -25,8 +26,6 @@ class BTForm extends BTBase {
       formSchema: { type: Object },
 
       formHeight: { type: String },
-
-      fieldsonly: { type: Boolean, reflect: true },
 
       hideHeaders: { type: Boolean, reflect: true },
       formFocus: { type: Boolean, reflect: true },
@@ -89,7 +88,7 @@ class BTForm extends BTBase {
     this._errors = {};
 
     this._modelMap = {};
-    this._errorMap = {};
+    this.errorMap = {};
 
     // Not a property
     this._prevModelMap = {};
@@ -126,7 +125,7 @@ class BTForm extends BTBase {
   }
 
   // A function that preloads field components (import), and returns a map of field type to function that takes in (model,field,formEl) and returns html``,
-  // e.g. { "fieldtype": (model, field, form) => html`<my-field .model={model} .required=${field.required} @model-change(form.onModelChange)></my-field>` }
+  // e.g. { "fieldtype": (model, field, form, options, fieldIdx) => html`<my-field .model={model} .required=${field.required} @model-change(form.onModelChange)></my-field>` }
   set customFieldsFunc(func) {
     // Execute once only
     if (this._fieldMapping != null) return;
@@ -186,7 +185,7 @@ class BTForm extends BTBase {
           ${this.formSchema.fields.map((field, fieldIdx, ary) => {
             const model = this._modelForField(field);
             return guard(
-              [this.displaymode, this.formSchema, model, this._errorMap],
+              [this.displaymode, this.formSchema, model, this.errorMap],
               () => {
                 return this._fieldTemplate(model, field, fieldIdx);
               }
@@ -236,7 +235,7 @@ class BTForm extends BTBase {
               .disabled="${errorCount > 0 || this._disableSubmit}"
               id="submit"
               button
-              @click="${this._onSubmit}"
+              @click=${this.onSubmit}
               >${this.submitButtonText
                 ? this.submitButtonText
                 : "Submit"}</bt-button
@@ -259,7 +258,7 @@ class BTForm extends BTBase {
       : html``;
   }
 
-  get fields() {
+  get _fields() {
     return Array.from(this._id("fields").children);
   }
 
@@ -306,14 +305,14 @@ class BTForm extends BTBase {
             .validator=${field.validator}
             .validateAs=${ifDefined(field.validateAs)}
             .validateRegex=${ifDefined(field.validateRegex)}
-            .errorMessage="${this._errorMap[field.id]}"
+            .errorMessage=${this.errorMap[field.id]}
             .rows=${ifDefined(field.rows)}
             .disableValidation=${!this.validate}
             .model=${model}
             .annotation=${field.computed ? "computed" : ""}
-            @model-change="${this.onModelChange}"
-            @input-submit="${this._onSubmit}"
-            @input-cancel="${this._onInputCancel}"
+            @model-change=${this.onModelChange}
+            @input-submit=${this.onSubmit}
+            @input-cancel=${this.onInputCancel}
             style=${styleMap(fieldStyles)}
           ></bt-input>
         `;
@@ -330,9 +329,9 @@ class BTForm extends BTBase {
             .description=${field.description}
             .options=${field.options}
             .disableValidation=${!this.validate}
-            @model-change=${this._onModelChange}
-            @input-submit=${this._onSubmit}
-            @input-cancel=${this._onInputCancel}
+            @model-change=${this.onModelChange}
+            @input-submit=${this.onSubmit}
+            @input-cancel=${this.onInputCancel}
             style=${styleMap(fieldStyles)}
           ></bt-radio>
         `;
@@ -350,12 +349,14 @@ class BTForm extends BTBase {
             .model=${model || ""}
             .label=${field.label}
             .description=${field.description}
+            .filterable=${field.filterable}
+            .multiselect=${field.multiselect}
             .options=${field.options}
-            .errorMessage=${this._errorMap[field.id]}
+            .errorMessage=${this.errorMap[field.id]}
             .disableValidation=${!this.validate}
-            @model-change=${this._onModelChange}
-            @input-submit=${this._onSubmit}
-            @input-cancel=${this._onInputCancel}
+            @model-change=${this.onModelChange}
+            @input-submit=${this.onSubmit}
+            @input-cancel=${this.onInputCancel}
             style=${styleMap(fieldStyles)}
           ></bt-select>
         `;
@@ -366,7 +367,13 @@ class BTForm extends BTBase {
 
       default: {
         if (this._fieldMapping && this._fieldMapping[field.type]) {
-          return this._fieldMapping[field.type](model, field, this);
+          return this._fieldMapping[field.type](
+            model,
+            field,
+            this,
+            { styles: fieldStyles, classes: fieldClasses },
+            fieldIdx
+          );
         }
         return html``;
       }
@@ -374,6 +381,16 @@ class BTForm extends BTBase {
   }
 
   _modelForField(field) {
+    if (field.computed && field.computedExpression) {
+      // Use interpolate map to get resolved computed expression from backend
+      if (this.interpolateMap && this.interpolateMap[field.aliasId]) {
+        return this.interpolateMap[field.aliasId];
+      }
+
+      // Fallback to frontend interpolation
+      return replacePlaceholder(field.computedExpression, this.interpolateMap);
+    }
+
     let model = this._modelMap[field.id];
     if (model == null || model === "") {
       // 0 is valid value
@@ -385,8 +402,8 @@ class BTForm extends BTBase {
   firstUpdated(changedProperties) {
     if (this.formSchema && this.formFocus) {
       setTimeout(() => {
-        if (this.fields.length) {
-          const firstInput = this.fields[0];
+        if (this._fields.length) {
+          const firstInput = this._fields[0];
           if (firstInput && firstInput.focus) {
             firstInput.focus();
           }
@@ -412,28 +429,28 @@ class BTForm extends BTBase {
       this.requestUpdate();
     }
 
-    if (this._errorMap[fieldId]) {
+    if (this.errorMap[fieldId]) {
       // this field has error, try to revalidate
       this.validator && this._validateForm(this._modelMap);
     }
 
     if (this.autosubmit) {
-      this._onSubmit();
+      this.onSubmit();
     }
   }
 
   _validateForm(model) {
     const validationErrorMap = this.validator(model);
     if (validationErrorMap && Object.keys(validationErrorMap).length) {
-      this._errorMap = validationErrorMap;
+      this.errorMap = validationErrorMap;
     } else {
-      this._errorMap = {};
+      this.errorMap = {};
     }
     // true if no error
-    return Object.keys(this._errorMap).length === 0;
+    return Object.keys(this.errorMap).length === 0;
   }
 
-  _onInputCancel(e) {
+  onInputCancel(e) {
     const fieldId = e.currentTarget.id;
 
     // Revert to old model if available
@@ -450,11 +467,7 @@ class BTForm extends BTBase {
     }
   }
 
-  _onCopy(e) {
-    snackbar(`Copied "${e.detail.text}" to clipboard`);
-  }
-
-  _onSubmit(e) {
+  onSubmit(e) {
     if (Object.keys(this._errors).length > 0 || this._disableSubmit) return;
 
     if (this.clickToEdit) {
@@ -486,7 +499,7 @@ class BTForm extends BTBase {
     const model = {};
     let firstFieldWithErrorId; // id of first field with error
 
-    this.fields.forEach((f) => {
+    this._fields.forEach((f) => {
       const fieldModel = typeof f.model === "string" ? f.model.trim() : f.model;
 
       // Update fresh model object
@@ -517,11 +530,11 @@ class BTForm extends BTBase {
 
       // Try to identify first problematic field
       if (
-        Object.keys(this._errorMap).length > 0 &&
+        Object.keys(this.errorMap).length > 0 &&
         firstFieldWithErrorId == null
       ) {
-        this.fields.forEach((f) => {
-          if (this._errorMap[f.id] && firstFieldWithErrorId == null) {
+        this._fields.forEach((f) => {
+          if (this.errorMap[f.id] && firstFieldWithErrorId == null) {
             firstFieldWithErrorId = f.id;
           }
         });
@@ -562,7 +575,7 @@ class BTForm extends BTBase {
 
   _upload() {
     return Promise.all(
-      this.fields
+      this._fields
         .filter((f) => f.nodeName === "KR-FILE-INPUT")
         .map((f) => f.upload(this.meta))
     );
@@ -580,7 +593,7 @@ class BTForm extends BTBase {
 
   // Set field errors due to external validation
   setError(fieldId, errorMessage) {
-    this._errorMap = Object.assign({}, this._errorMap, {
+    this.errorMap = Object.assign({}, this.errorMap, {
       [fieldId]: errorMessage,
     });
   }
