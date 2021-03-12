@@ -183,7 +183,15 @@ class BTForm extends BTBase {
                 const showRule = field.showRules[i];
                 if (showRule && showRule.matches) {
                   const fieldValue = this._modelMap[showRule.fieldId];
-                  showField = showRule.matches.includes(fieldValue);
+                  if (fieldValue != null && fieldValue != "") {
+                    for (let j = 0; j < showRule.matches.length; j++) {
+                      const match = showRule.matches[j];
+                      if (match === fieldValue || match === "ANY") {
+                        showField = true;
+                        break;
+                      }
+                    }
+                  }
 
                   if (showField) break;
                 }

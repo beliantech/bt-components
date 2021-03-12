@@ -328,5 +328,54 @@ describe("bt-form", () => {
       assert.strictEqual(el._fields.length, 1);
       assert.strictEqual(el._fields[0].id, "abcd");
     });
+
+    it("the ANY selector will match any result except empty", async () => {
+      el.formSchema = {
+        fields: [
+          {
+            id: "abcd",
+            label: "ABCD",
+            type: "dropdown",
+            options: [
+              { id: "foo", name: "Foo" },
+              { id: "bar", name: "Bar" },
+            ],
+            required: true,
+          },
+          {
+            id: "bcde",
+            label: "BCDE",
+            type: "dropdown",
+            options: [{ id: "123", name: "One two three" }],
+            showRules: [
+              {
+                fieldId: "abcd",
+                matches: ["ANY"],
+              },
+            ],
+            required: true,
+          },
+        ],
+      };
+
+      await el.updateComplete;
+
+      assert.strictEqual(el._fields.length, 1);
+      assert.strictEqual(el._fields[0].id, "abcd");
+
+      el.model = { abcd: "foo" };
+      await el.updateComplete;
+
+      assert.strictEqual(el._fields.length, 2);
+      assert.strictEqual(el._fields[0].id, "abcd");
+      assert.strictEqual(el._fields[1].id, "bcde");
+
+      el.model = { abcd: "bar" };
+      await el.updateComplete;
+
+      assert.strictEqual(el._fields.length, 2);
+      assert.strictEqual(el._fields[0].id, "abcd");
+      assert.strictEqual(el._fields[1].id, "bcde");
+    });
   });
 });
