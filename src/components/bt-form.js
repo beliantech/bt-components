@@ -113,6 +113,8 @@ class BTForm extends BTBase {
     this.formBottomTemplate = nothing;
     // Function to be called right before submit, returns promise
     this.presubmitFuncPromise = () => Promise.resolve();
+
+    this._fieldsById = {};
   }
 
   // A function that preloads field components (import), and returns a map of field type to function that takes in (model,field,formEl) and returns html``,
@@ -139,16 +141,11 @@ class BTForm extends BTBase {
   }
 
   set formSchema(formSchema = {}) {
-    // A map of field ids that, when value changes, should cause form re-render
-    this._shouldUpdateFormByFieldId = {};
+    this._fieldsById = {};
 
     const fields = formSchema.fields || [];
     fields.forEach((f) => {
-      if (f.showRules) {
-        f.showRules.forEach((rule) => {
-          this._shouldUpdateFormByFieldId[rule.fieldId] = true;
-        });
-      }
+      this._fieldsById[f.id] = f;
     });
 
     const oldFormSchema = this._formSchema;
@@ -176,6 +173,7 @@ class BTForm extends BTBase {
           ${this.formSchema.fields.map((field, fieldIdx, ary) => {
             // Handle conditionals, decide whether or not this field should be shown
             let showField = true;
+            const dependentFields = [];
             if (field.showRules) {
               // Found show rules, hide field by default
               showField = false;
@@ -188,6 +186,9 @@ class BTForm extends BTBase {
                       const match = showRule.matches[j];
                       if (match === fieldValue || match === "ANY") {
                         showField = true;
+                        dependentFields.push(
+                          this._fieldsById[showRule.fieldId]
+                        );
                         break;
                       }
                     }
@@ -199,13 +200,16 @@ class BTForm extends BTBase {
             }
 
             const model = this._modelForField(field);
+            const models = [model].concat(
+              dependentFields.map((f) => this._modelForField(f))
+            );
             return guard(
               [
                 this.displaymode,
                 this.formSchema,
                 showField,
-                model,
                 this.errorMap,
+                ...models,
               ],
               () => {
                 if (!showField) return html``;
@@ -449,9 +453,6 @@ class BTForm extends BTBase {
     this._modelMap = Object.assign({}, this._modelMap, {
       [fieldId]: e.detail.value,
     });
-    if (this._shouldUpdateFormByFieldId[fieldId]) {
-      this.requestUpdate();
-    }
 
     if (this.errorMap[fieldId]) {
       // this field has error, try to revalidate

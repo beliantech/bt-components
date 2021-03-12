@@ -377,5 +377,57 @@ describe("bt-form", () => {
       assert.strictEqual(el._fields[0].id, "abcd");
       assert.strictEqual(el._fields[1].id, "bcde");
     });
+
+    it("re-renders item with showRules when field changes", async () => {
+      el.formSchema = {
+        fields: [
+          {
+            id: "abcd",
+            label: "ABCD",
+            type: "dropdown",
+            options: [
+              { id: "foo", name: "Foo" },
+              { id: "bar", name: "Bar" },
+            ],
+            required: true,
+          },
+          {
+            id: "bcde",
+            label: "BCDE",
+            type: "dropdown",
+            dynamicOptions: (formModel) => {
+              if (formModel.abcd === "foo")
+                return [{ id: "123", name: "One two three" }];
+              if (formModel.abcd === "bar")
+                return [{ id: "234", name: "Two three four" }];
+            },
+            showRules: [
+              {
+                fieldId: "abcd",
+                matches: ["ANY"],
+              },
+            ],
+            required: true,
+          },
+        ],
+      };
+
+      await el.updateComplete;
+
+      assert.strictEqual(el._fields.length, 1);
+      assert.strictEqual(el._fields[0].id, "abcd");
+
+      el.model = { abcd: "foo" };
+      await el.updateComplete;
+
+      assert.strictEqual(el._fields.length, 2);
+      assert.strictEqual(el._fields[1].options[0].id, "123");
+
+      el.model = { abcd: "bar" };
+      await el.updateComplete;
+
+      assert.strictEqual(el._fields.length, 2);
+      assert.strictEqual(el._fields[1].options[0].id, "234");
+    });
   });
 });
