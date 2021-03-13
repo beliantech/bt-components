@@ -131,9 +131,13 @@ class BTInput extends BTBase {
     this._name = name;
   }
   get model() {
-    return this.inputType === InputTypeNumber
-      ? +this._model
-      : this._model || "";
+    if (this.inputType === InputTypeNumber) {
+      if (this._model) {
+        return +this._model;
+      }
+    }
+
+    return this._model || "";
   }
   set model(model) {
     if (model == null) {

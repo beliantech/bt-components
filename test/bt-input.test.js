@@ -88,12 +88,12 @@ describe("bt-input", () => {
       assert.strictEqual(el.model, 123);
     });
 
-    it("empty model should return a zero", async () => {
+    it("empty model should return empty", async () => {
       el.inputType = "number";
       el.model = "";
 
       await el.updateComplete;
-      assert.strictEqual(el.model, 0);
+      assert.strictEqual(el.model, "");
     });
 
     it("model value of 0 is shown", async () => {
