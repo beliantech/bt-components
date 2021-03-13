@@ -3,6 +3,8 @@ import { classMap } from "lit-html/directives/class-map";
 import { ifDefined } from "lit-html/directives/if-defined";
 import BTBase from "../bt-base";
 
+import labelTemplate from "./templates/label";
+
 import "./bt-multirow-group";
 import "./bt-radio";
 import "./bt-input";
@@ -183,14 +185,12 @@ class BTMultipartInput extends BTBase {
               `;
             }
             case "label": {
-              return html`<div
-                class=${classMap(fieldClasses)}
-                style=${this.layout !== LayoutVertical && !this.hidelabel
-                  ? "margin-top:24px;"
-                  : ""}
-              >
-                <span class="inline-block pr-2 -mt-4 text-sm font-bold"
-                  >${s.label}</span
+              return html`<div class=${classMap(fieldClasses)}>
+                ${!this.hidelabel
+                  ? labelTemplate({ label: s.label, hideIndicator: true })
+                  : html``}
+                <span class="inline-block pr-2 -mt-4 text-sm"
+                  >${this._modelMap[s.id]}</span
                 >
               </div>`;
             }

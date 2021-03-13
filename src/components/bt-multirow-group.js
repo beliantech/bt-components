@@ -18,6 +18,7 @@ class BTMultirowGroup extends BTBase {
     return {
       field: { type: Object },
       model: { type: Array }, // Array of row models
+      rows: { type: Array }, // Array of rows, used in tablemode to fix the row content
 
       label: { type: String },
       description: { type: String },
@@ -128,14 +129,21 @@ class BTMultirowGroup extends BTBase {
     const templates = [];
     switch (this.field.type) {
       case "multipart_input": {
-        for (let i = 0; i < this._model.length; i++) {
+        let array = [];
+        if (this.tablemode && this.rows) {
+          array = this.rows;
+        } else {
+          array = this._model;
+        }
+
+        for (let i = 0; i < array.length; i++) {
           const idx = i;
           templates.push(html`
             <bt-multipart-input
               class="field"
               .schema=${this.field.schema}
               .layout=${ifDefined(this.field.layout)}
-              .model=${this._model[idx]}
+              .model=${array[idx]}
               ?displaymode=${this.displaymode}
               ?hidelabel=${this.tablemode && idx > 0}
               @model-change=${(e) => {
