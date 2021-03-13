@@ -48,6 +48,13 @@ class BTMultirowGroup extends BTBase {
   }
 
   get model() {
+    if (this.rows != null) {
+      // Don't return unrelated models
+      const rowByModelId = keyBy(this.rows, "modelValue");
+      return this._model.filter(
+        (m) => rowByModelId[m[this.rows[0].modelId]] != null
+      );
+    }
     return this._model || [];
   }
 

@@ -61,6 +61,7 @@ describe(ElementTag, () => {
       el.model = [
         { myid: "123", name: "Jonathan" },
         { myid: "234", name: "James" },
+        { myid: "somethingunrelated", name: "Foo" },
       ];
 
       await delay();
