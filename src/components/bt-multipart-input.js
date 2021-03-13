@@ -3,8 +3,6 @@ import { classMap } from "lit-html/directives/class-map";
 import { ifDefined } from "lit-html/directives/if-defined";
 import BTBase from "../bt-base";
 
-import labelTemplate from "./templates/label";
-
 import "./bt-multirow-group";
 import "./bt-radio";
 import "./bt-input";
@@ -21,6 +19,8 @@ class BTMultipartInput extends BTBase {
     return {
       schema: { type: Array },
       displaymode: { type: Boolean },
+
+      label: { type: String }, // Label on left side of row
 
       layout: { type: String }, // horizontal|vertical|horizontal-wrap
       hidelabel: { type: Boolean },
@@ -41,7 +41,9 @@ class BTMultipartInput extends BTBase {
   }
 
   get model() {
-    const fields = Array.from(this._id("fields").children);
+    const fields = Array.from(this._id("fields").children).filter(
+      (node) => node.nodeName !== "DIV"
+    );
 
     const model = {};
     fields.forEach((val) => {
@@ -68,6 +70,14 @@ class BTMultipartInput extends BTBase {
 
     return html`
       <div class=${classMap(rowClasses)} id="fields">
+        ${this.label
+          ? html`<div
+              class="font-bold pr-2 text-sm"
+              style="margin-top:${this.hidelabel ? "-1px" : "23px"};"
+            >
+              ${this.label}
+            </div>`
+          : html``}
         ${this.schema.map((s, idx) => {
           if (s.hide) {
             didHaveHiddenField = true;
@@ -160,6 +170,11 @@ class BTMultipartInput extends BTBase {
                   .description=${this.hidelabel && s.description}
                   .model=${this._modelMap[s.id]}
                   .buttonText=${s.buttonText}
+                  @model-change=${(e) => {
+                    this._emit("model-change", {
+                      value: this.model,
+                    });
+                  }}
                 >
                 </bt-multirow-group>
               `;
@@ -181,18 +196,13 @@ class BTMultipartInput extends BTBase {
                   .model=${this._modelMap[s.id]}
                   .label=${!this.hidelabel && s.label}
                   .inline=${s.inline != null ? s.inline : true}
+                  @model-change=${(e) => {
+                    this._emit("model-change", {
+                      value: this.model,
+                    });
+                  }}
                 ></bt-checkbox>
               `;
-            }
-            case "label": {
-              return html`<div class=${classMap(fieldClasses)}>
-                ${!this.hidelabel
-                  ? labelTemplate({ label: s.label, hideIndicator: true })
-                  : html``}
-                <span class="inline-block pr-2 -mt-4 text-sm"
-                  >${this._modelMap[s.id]}</span
-                >
-              </div>`;
             }
 
             default: {

@@ -229,10 +229,8 @@ export const BTCheckbox = () => {
 
 const multipartSchema = [
   {
-    id: "name",
-    type: "label",
-    label: "Name",
-    grid: 1,
+    id: "myid",
+    type: "hidden",
   },
   {
     id: "read",
@@ -242,7 +240,7 @@ const multipartSchema = [
     grid: 1,
   },
   {
-    id: "sender",
+    id: "name",
     type: "short_text",
     label: "Sender name",
     placeholder: "My Company",
@@ -325,14 +323,20 @@ export const BTMultirowGroup = () => {
     type: "multipart_input",
     schema: schema,
   };
-  const model = [{ name: "Jon", array: [{ name: "Bob" }] }, { name: "James" }];
+  const model = [
+    { myid: "123", name: "Jon", array: [{ name: "Bob" }] },
+    { myid: "234", name: "James" },
+  ];
 
   const field2 = {
     type: "multipart_input",
     schema: multipartSchema.slice(0, -1),
     layout: "horizontal",
   };
-  const rows = [{ name: "Jon" }, { name: "Joanne" }];
+  const rows = [
+    { label: "Row 1", modelId: "myid", modelValue: "234" },
+    { label: "Row 2", modelId: "myid", modelValue: "123" },
+  ];
 
   return `
     <bt-multirow-group
@@ -347,7 +351,6 @@ export const BTMultirowGroup = () => {
       field='${JSON.stringify(field2)}'
       model='${JSON.stringify(model)}'
       rows='${JSON.stringify(rows)}'
-      tablemode
     ></bt-multirow-group>
   `;
 };
