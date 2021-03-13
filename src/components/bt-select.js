@@ -124,20 +124,19 @@ class BTSelect extends BTBase {
               : html``}
             ${this.options &&
             this.options.map((option) => {
-              if (this.model === option.id) optionPresent = true;
+              // Interpolate option.id to string
+              const optionId = `${option.id}`;
+              if (this.model === optionId) optionPresent = true;
 
               return html`
-                <option
-                  value=${option.id}
-                  ?selected=${this.model === option.id}
+                <option value=${option.id} ?selected=${this.model === optionId}
+                  >${option.name}</option
                 >
-                  ${option.name}
-                </option>
               `;
             })}
             ${!optionPresent && this.model
               ? html`<option value=${this.model} selected
-                  ><span class="text-gray-200">(invalid option)</span></option
+                  >(invalid option)</option
                 >`
               : html``}
           </select>
