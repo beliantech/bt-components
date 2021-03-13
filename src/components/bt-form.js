@@ -284,7 +284,7 @@ class BTForm extends BTBase {
       : html``;
   }
 
-  get _fields() {
+  get fields() {
     return Array.from(this._id("fields").children);
   }
 
@@ -310,21 +310,21 @@ class BTForm extends BTBase {
             class=${classMap(fieldClasses)}
             id="${field.id}"
             ?required="${field.required}"
-            ?horizontal="${this.horizontal}"
-            .displaymode="${this.displaymode}"
-            .clickToEdit="${this.clickToEdit}"
-            .description="${field.description}"
-            .type="${field.type === "long_text" ? "textarea" : null}"
-            .inputType="${field.type === "number"
+            ?horizontal=${this.horizontal}
+            .displaymode=${this.displaymode}
+            .clickToEdit=${this.clickToEdit}
+            .description=${field.description}
+            .type=${field.type === "long_text" ? "textarea" : null}
+            .inputType=${field.type === "number"
               ? "number"
-              : field.inputType || "text"}"
-            .disabled="${field.disabled || field.computed || false}"
-            .min="${field.min}"
-            .max="${field.max}"
-            .minlength="${field.minlength}"
-            .maxlength="${field.maxlength}"
-            .placeholder="${field.placeholder}"
-            .label="${field.label}"
+              : field.inputType || "text"}
+            .disabled=${field.disabled || field.computed || false}
+            .min=${field.min}
+            .max=${field.max}
+            .minlength=${field.minlength}
+            .maxlength=${field.maxlength}
+            .placeholder=${field.placeholder}
+            .label=${field.label}
             .corrector=${field.corrector}
             .transformer=${field.transformer}
             .allowedCharacters=${field.allowedCharacters}
@@ -430,8 +430,8 @@ class BTForm extends BTBase {
   firstUpdated(changedProperties) {
     if (this.formSchema && this.formFocus) {
       setTimeout(() => {
-        if (this._fields.length) {
-          const firstInput = this._fields[0];
+        if (this.fields.length) {
+          const firstInput = this.fields[0];
           if (firstInput && firstInput.focus) {
             firstInput.focus();
           }
@@ -524,7 +524,7 @@ class BTForm extends BTBase {
     const model = {};
     let firstFieldWithErrorId; // id of first field with error
 
-    this._fields.forEach((f) => {
+    this.fields.forEach((f) => {
       const fieldModel = typeof f.model === "string" ? f.model.trim() : f.model;
 
       // Update fresh model object
@@ -558,7 +558,7 @@ class BTForm extends BTBase {
         Object.keys(this.errorMap).length > 0 &&
         firstFieldWithErrorId == null
       ) {
-        this._fields.forEach((f) => {
+        this.fields.forEach((f) => {
           if (this.errorMap[f.id] && firstFieldWithErrorId == null) {
             firstFieldWithErrorId = f.id;
           }

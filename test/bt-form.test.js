@@ -312,21 +312,21 @@ describe("bt-form", () => {
 
       await el.updateComplete;
 
-      assert.strictEqual(el._fields.length, 1);
-      assert.strictEqual(el._fields[0].id, "abcd");
+      assert.strictEqual(el.fields.length, 1);
+      assert.strictEqual(el.fields[0].id, "abcd");
 
       el.model = { abcd: "foo" };
       await el.updateComplete;
 
-      assert.strictEqual(el._fields.length, 2);
-      assert.strictEqual(el._fields[0].id, "abcd");
-      assert.strictEqual(el._fields[1].id, "bcde");
+      assert.strictEqual(el.fields.length, 2);
+      assert.strictEqual(el.fields[0].id, "abcd");
+      assert.strictEqual(el.fields[1].id, "bcde");
 
       el.model = { abcd: "bar" };
       await el.updateComplete;
 
-      assert.strictEqual(el._fields.length, 1);
-      assert.strictEqual(el._fields[0].id, "abcd");
+      assert.strictEqual(el.fields.length, 1);
+      assert.strictEqual(el.fields[0].id, "abcd");
     });
 
     it("the ANY selector will match any result except empty", async () => {
@@ -360,22 +360,22 @@ describe("bt-form", () => {
 
       await el.updateComplete;
 
-      assert.strictEqual(el._fields.length, 1);
-      assert.strictEqual(el._fields[0].id, "abcd");
+      assert.strictEqual(el.fields.length, 1);
+      assert.strictEqual(el.fields[0].id, "abcd");
 
       el.model = { abcd: "foo" };
       await el.updateComplete;
 
-      assert.strictEqual(el._fields.length, 2);
-      assert.strictEqual(el._fields[0].id, "abcd");
-      assert.strictEqual(el._fields[1].id, "bcde");
+      assert.strictEqual(el.fields.length, 2);
+      assert.strictEqual(el.fields[0].id, "abcd");
+      assert.strictEqual(el.fields[1].id, "bcde");
 
       el.model = { abcd: "bar" };
       await el.updateComplete;
 
-      assert.strictEqual(el._fields.length, 2);
-      assert.strictEqual(el._fields[0].id, "abcd");
-      assert.strictEqual(el._fields[1].id, "bcde");
+      assert.strictEqual(el.fields.length, 2);
+      assert.strictEqual(el.fields[0].id, "abcd");
+      assert.strictEqual(el.fields[1].id, "bcde");
     });
 
     it("re-renders item with showRules when field changes", async () => {
@@ -414,20 +414,20 @@ describe("bt-form", () => {
 
       await el.updateComplete;
 
-      assert.strictEqual(el._fields.length, 1);
-      assert.strictEqual(el._fields[0].id, "abcd");
+      assert.strictEqual(el.fields.length, 1);
+      assert.strictEqual(el.fields[0].id, "abcd");
 
       el.model = { abcd: "foo" };
       await el.updateComplete;
 
-      assert.strictEqual(el._fields.length, 2);
-      assert.strictEqual(el._fields[1].options[0].id, "123");
+      assert.strictEqual(el.fields.length, 2);
+      assert.strictEqual(el.fields[1].options[0].id, "123");
 
       el.model = { abcd: "bar" };
       await el.updateComplete;
 
-      assert.strictEqual(el._fields.length, 2);
-      assert.strictEqual(el._fields[1].options[0].id, "234");
+      assert.strictEqual(el.fields.length, 2);
+      assert.strictEqual(el.fields[1].options[0].id, "234");
     });
   });
 });
