@@ -156,7 +156,9 @@ class BTMultirowGroup extends BTBase {
             <bt-multipart-input
               class="field"
               .schema=${this.field.schema}
-              .layout=${ifDefined(this.field.layout)}
+              .layout=${this.rows != null
+                ? "horizontal"
+                : ifDefined(this.field.layout)}
               .model=${this.rows != null
                 ? modelById[this.rows[idx].modelValue]
                 : this._model[idx]}
