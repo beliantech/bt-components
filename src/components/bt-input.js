@@ -393,7 +393,7 @@ ${this.model}</textarea
             ? this.chips.map(
                 (chip) =>
                   html`
-                    <span class="px-2 py-1 text-sm bg-gray-300 mr-2"
+                    <span class="px-2 py-1 text-sm bg-gray-200 mr-2"
                       >${chip}</span
                     >
                   `

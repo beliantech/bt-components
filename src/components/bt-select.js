@@ -20,7 +20,6 @@ class BTSelect extends BTBase {
 
       filterable: { type: Boolean },
       multiselect: { type: Boolean },
-      emptyPlaceholder: { type: Boolean },
 
       editable: { type: Boolean },
       required: { type: Boolean },
@@ -47,7 +46,6 @@ class BTSelect extends BTBase {
     super();
 
     this.placeholder = "Select an option";
-    this.emptyPlaceholder = false;
     this.displaymode = false;
     this.multiselect = false;
     this.filterable = false;
@@ -110,6 +108,7 @@ class BTSelect extends BTBase {
         ></bt-filterable-items>
       `;
     } else {
+      let optionPresent = false;
       contentTemplate = html`
         <div class="relative">
           <select
@@ -117,24 +116,30 @@ class BTSelect extends BTBase {
               ? "small py-1"
               : "py-2"} mr-4 text-sm"
             id="select"
-            @change="${this._onChange}"
+            @change=${this._onChange}
             ?disabled=${this.disabled}
           >
-            ${this.placeholder || this.emptyPlaceholder
-              ? html` <option value="${""}">${this.placeholder}</option> `
+            ${this.placeholder
+              ? html` <option value="">${this.placeholder}</option> `
               : html``}
             ${this.options &&
-            this.options.map(
-              (option) =>
-                html`
-                  <option
-                    value="${option.id}"
-                    ?selected="${this.model === option.id}"
-                  >
-                    ${option.name}
-                  </option>
-                `
-            )}
+            this.options.map((option) => {
+              if (this.model === option.id) optionPresent = true;
+
+              return html`
+                <option
+                  value=${option.id}
+                  ?selected=${this.model === option.id}
+                >
+                  ${option.name}
+                </option>
+              `;
+            })}
+            ${!optionPresent && this.model
+              ? html`<option value=${this.model} selected
+                  ><span class="text-gray-200">(invalid option)</span></option
+                >`
+              : html``}
           </select>
           <bt-icon
             class="absolute right-0 ${this.small ? "" : "my-2"}"

@@ -79,6 +79,25 @@ describe("bt-select", () => {
       assert.strictEqual(selectedOption.value, "");
       assert.equal(selectedOption.innerText, "Select an option");
     });
+
+    it("renders non-existent option if no model match, retaining model", async () => {
+      el.placeholder = "Select an option";
+      el.options = [
+        { id: "123", name: "Option 1" },
+        { id: "234", name: "Option 2" },
+        { id: "345", name: "Option 3" },
+        { id: "456", name: "Option 4" },
+      ];
+      el.model = "abcd";
+
+      await el.updateComplete;
+
+      const selectedOption = el._select(`option[selected=""]`);
+
+      assert.strictEqual(selectedOption.value, "abcd");
+      assert.equal(selectedOption.innerText, "(invalid option)");
+      assert.equal(el.model, "abcd");
+    });
   });
 
   describe("validation", () => {
