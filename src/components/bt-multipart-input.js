@@ -108,9 +108,9 @@ class BTMultipartInput extends BTBase {
                   .displaymode=${this.displaymode}
                   .placeholder=${ifDefined(s.placeholder)}
                   .validateAs=${s.validateAs}
-                  .model=${this._modelMap[s.id]}
                   .label=${!this.hidelabel && s.label}
                   .description=${!this.hidelabel && s.description}
+                  .model=${this._modelMap[s.id]}
                   @model-change=${(e) => {
                     this._emit("model-change", {
                       value: this.model,
@@ -128,10 +128,10 @@ class BTMultipartInput extends BTBase {
                   .filterable=${s.filterable}
                   .displaymode=${this.displaymode}
                   .placeholder=${ifDefined(s.placeholder)}
-                  .model=${this._modelMap[s.id]}
                   .options=${s.options}
                   .label=${!this.hidelabel && s.label}
                   .description=${!this.hidelabel && s.description}
+                  .model=${this._modelMap[s.id]}
                   @model-change=${(e) => {
                     this._emit("model-change", {
                       value: this.model,
@@ -147,11 +147,11 @@ class BTMultipartInput extends BTBase {
                   id=${s.id}
                   .required=${s.required}
                   .displaymode=${this.displaymode}
-                  .model=${this._modelMap[s.id]}
                   .options=${s.options}
                   .label=${!this.hidelabel && s.label}
                   .description=${!this.hidelabel && s.description}
                   ?horizontal=${s.horizontal}
+                  .model=${this._modelMap[s.id]}
                   @model-change=${(e) => {
                     this._emit("model-change", {
                       value: this.model,
@@ -168,8 +168,8 @@ class BTMultipartInput extends BTBase {
                   .field=${s.field}
                   .label=${this.hidelabel && s.label}
                   .description=${this.hidelabel && s.description}
-                  .model=${this._modelMap[s.id]}
                   .buttonText=${s.buttonText}
+                  .model=${this._modelMap[s.id]}
                   @model-change=${(e) => {
                     this._emit("model-change", {
                       value: this.model,

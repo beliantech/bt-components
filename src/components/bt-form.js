@@ -334,8 +334,8 @@ class BTForm extends BTBase {
             .errorMessage=${this.errorMap[field.id]}
             .rows=${ifDefined(field.rows)}
             .disableValidation=${!this.validate}
-            .model=${model}
             .annotation=${field.computed ? "computed" : ""}
+            .model=${model}
             @model-change=${this.onModelChange}
             @input-submit=${this.onSubmit}
             @input-cancel=${this.onInputCancel}
@@ -350,11 +350,11 @@ class BTForm extends BTBase {
             ?required=${field.required}
             .displaymode=${this.displaymode}
             .clickToEdit=${this.clickToEdit}
-            .model=${model || ""}
             .label=${field.label}
             .description=${field.description}
             .options=${field.options}
             .disableValidation=${!this.validate}
+            .model=${model || ""}
             @model-change=${this.onModelChange}
             @input-submit=${this.onSubmit}
             @input-cancel=${this.onInputCancel}
@@ -372,7 +372,6 @@ class BTForm extends BTBase {
             .displaymode=${this.displaymode}
             .clickToEdit=${this.clickToEdit}
             .placeholder=${ifDefined(field.placeholder)}
-            .model=${model || ""}
             .label=${field.label}
             .description=${field.description}
             .filterable=${field.filterable}
@@ -382,6 +381,7 @@ class BTForm extends BTBase {
               : field.options}
             .errorMessage=${this.errorMap[field.id]}
             .disableValidation=${!this.validate}
+            .model=${model || ""}
             @model-change=${this.onModelChange}
             @input-submit=${this.onSubmit}
             @input-cancel=${this.onInputCancel}
