@@ -83,14 +83,7 @@ class BTMultipartInput extends BTBase {
             didHaveHiddenField = true;
           }
 
-          const fieldClasses = { "pb-2": true };
-          if (idx !== 0) {
-            fieldClasses["pl-2"] = this.layout === LayoutHorizontal;
-            fieldClasses["pr-2"] = this.layout === LayoutHorizontalWrap;
-          }
-          if (idx === 0) {
-            fieldClasses["pr-2"] = this.layout === LayoutHorizontalWrap;
-          }
+          const fieldClasses = { "pb-2": true, "pr-2": true };
           if (s.hide && !this._showAll) {
             fieldClasses["hidden"] = true;
           }
