@@ -108,6 +108,7 @@ class BTMultipartInput extends BTBase {
                   .displaymode=${this.displaymode}
                   .placeholder=${ifDefined(s.placeholder)}
                   .validateAs=${s.validateAs}
+                  .hideIndicator=${s.hideIndicator}
                   .label=${!this.hidelabel && s.label}
                   .description=${!this.hidelabel && s.description}
                   .model=${this._modelMap[s.id]}
@@ -193,9 +194,9 @@ class BTMultipartInput extends BTBase {
                 <bt-checkbox
                   id=${s.id}
                   class=${classMap(fieldClasses)}
-                  .model=${this._modelMap[s.id]}
                   .label=${!this.hidelabel && s.label}
                   .inline=${s.inline != null ? s.inline : true}
+                  .model=${this._modelMap[s.id]}
                   @model-change=${(e) => {
                     this._emit("model-change", {
                       value: this.model,
