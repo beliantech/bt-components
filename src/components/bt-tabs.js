@@ -281,6 +281,8 @@ class BTTabs extends BTBase {
   }
 
   _onTabChange() {
+    if (!this.activeTabId) return;
+
     const tab = this.tabs.find((t) => this.activeTabId === t.tabId);
     const tabRelPath = tab.relPath;
 
