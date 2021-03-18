@@ -262,4 +262,24 @@ describe("bt-select", () => {
       assert.deepEqual(el.model, ["123"]);
     });
   });
+
+  describe("filterable=false,multiselect=true", () => {
+    it("returns empty array model when all unchecked", async () => {
+      el.options = [
+        { id: "123", name: "Option 1" },
+        { id: "234", name: "Option 2" },
+      ];
+      el.filterable = false;
+      el.multiselect = true;
+      el.model = ["123"];
+
+      await delay();
+      MockInteractions.focus(el._id("filterable")._id("input"));
+      await delay();
+      MockInteractions.click(el._id("filterable")._id("scroller").children[0]);
+
+      await el.updateComplete;
+      assert.deepEqual(el.model, []);
+    });
+  });
 });
