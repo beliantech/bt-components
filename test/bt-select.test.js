@@ -264,6 +264,18 @@ describe("bt-select", () => {
   });
 
   describe("filterable=false,multiselect=true", () => {
+    it("returns empty array model by default", async () => {
+      el.options = [
+        { id: "123", name: "Option 1" },
+        { id: "234", name: "Option 2" },
+      ];
+      el.filterable = false;
+      el.multiselect = true;
+
+      await el.updateComplete;
+      assert.deepEqual(el.model, []);
+    });
+
     it("returns empty array model when all unchecked", async () => {
       el.options = [
         { id: "123", name: "Option 1" },
