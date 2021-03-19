@@ -8,6 +8,7 @@ class BTTabContent extends BTBase {
       currentTabId: { type: String },
       title: { type: String },
       icon: { type: String },
+      iconColor: { type: String },
 
       scroll: { type: Boolean },
 

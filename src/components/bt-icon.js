@@ -103,14 +103,16 @@ const style = (linkTo = false, muted = false) => {
   return html`
     <style>
       :host {
+        --mdc-icon-size: 20px;
+        --bt-icon-color: inherit;
+
         margin: 0.25rem;
         user-select: none;
         position: relative;
-        color: inherit;
         display: inline-flex;
         ${muted ? "opacity: 0.5" : ""};
 
-        --mdc-icon-size: 20px;
+        color: var(--bt-icon-color);
       }
 
       :host([xsmall]) {

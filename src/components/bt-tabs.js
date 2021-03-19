@@ -242,6 +242,9 @@ class BTTabs extends BTBase {
                           <bt-icon
                             muted
                             small
+                            style="${t.iconColor
+                              ? `--bt-icon-color:${t.iconColor};`
+                              : ""}"
                             class="m-0 ${this.horizontal
                               ? "mr-2"
                               : "ml-1 mr-2"}"
