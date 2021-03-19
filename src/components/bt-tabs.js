@@ -20,6 +20,9 @@ class BTTabs extends BTBase {
       tabs: { type: Array },
       tabParam: { type: String },
 
+      // If enabled, tabs will not cause changes to routing
+      noroute: { type: Boolean },
+
       // Array of tabIds to set active border, otherwise active border will be blank when it hits the content
       activeBorderIds: { type: Array },
     };
@@ -129,6 +132,7 @@ class BTTabs extends BTBase {
 
     this.tabAlign = "left";
     this.tabParam = "tab";
+    this.noroute = false;
   }
 
   connectedCallback() {
@@ -162,8 +166,8 @@ class BTTabs extends BTBase {
           this.activeTabId = matchingTab.tabId;
         }
       }
+    } else if (!this.noroute) {
       // else default root tab
-    } else {
       const params = new URLSearchParams(window.location.search);
       if (params.get(this.tabParam)) {
         this.activeTabId = params.get(this.tabParam);
@@ -275,7 +279,6 @@ class BTTabs extends BTBase {
     });
 
     if (changed.has("activeTabId")) {
-      // Don't trigger on the first time
       this._onTabChange();
     }
   }
@@ -307,7 +310,7 @@ class BTTabs extends BTBase {
           this.navigate(newPath);
         }
       }
-    } else {
+    } else if (!this.noroute) {
       // Query-based tabs, e.g. ?tab=fooTab
       const params = new URLSearchParams(window.location.search);
       // Should try to not need push tab param if on root path, just show first
