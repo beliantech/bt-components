@@ -126,7 +126,7 @@ class BTTabs extends BTBase {
   constructor() {
     super();
 
-    this.horizontal = false;
+    this.horizontal = "";
     this.right = false;
     this.activeBorderIds = [];
 
@@ -239,7 +239,12 @@ class BTTabs extends BTBase {
                   >
                     ${t.icon
                       ? html`
-                          <bt-icon muted class="m-0 ml-1 mr-3"
+                          <bt-icon
+                            muted
+                            small
+                            class="m-0 ${this.horizontal
+                              ? "mr-2"
+                              : "ml-1 mr-2"}"
                             >${t.icon}</bt-icon
                           >
                         `

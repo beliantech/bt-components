@@ -212,14 +212,25 @@ export const BTForm = () => {
 };
 
 export const BTTabs = () => {
-  return `<bt-tabs horizontal="left">
-    <bt-tab-content title="Foo" tabid="foo" >
+  return `
+  <bt-tabs horizontal="left">
+    <bt-tab-content icon="unpublished" title="Foo" tabid="foo" >
       <div>Foo</div>
     </bt-tab-content>
-    <bt-tab-content title="Bar" tabid="bar" >
+    <bt-tab-content icon="unpublished" title="Bar" tabid="bar" >
       <div>Bar</div>
     </bt-tab-content>
-  </bt-tabs>`;
+  </bt-tabs>
+  <div style="height:2rem;"></div>
+  <bt-tabs>
+    <bt-tab-content icon="unpublished" title="Foo" tabid="foo" >
+      <div>Foo</div>
+    </bt-tab-content>
+    <bt-tab-content icon="unpublished" title="Bar" tabid="bar" >
+      <div>Bar</div>
+    </bt-tab-content>
+  </bt-tabs>
+  `;
 };
 
 export const BTCheckbox = () => {
