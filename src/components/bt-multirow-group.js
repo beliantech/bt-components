@@ -2,7 +2,6 @@ import { html, css } from "lit-element";
 import { ifDefined } from "lit-html/directives/if-defined";
 import BTBase from "../bt-base";
 
-import keyBy from "lodash/keyBy";
 import errorTemplate from "./templates/error";
 
 import "./bt-multipart-input";
@@ -19,10 +18,6 @@ class BTMultirowGroup extends BTBase {
     return {
       field: { type: Object },
       model: { type: Array }, // Array of row models
-
-      // Array of rows, if provided will fix the rows. [{label,id}]
-      // id should point to the id of the model that indicates the ID of the model (for merging purposes)
-      rows: { type: Array },
 
       label: { type: String },
       description: { type: String },
@@ -48,13 +43,6 @@ class BTMultirowGroup extends BTBase {
   }
 
   get model() {
-    if (this.rows != null) {
-      // Don't return unrelated models
-      const rowByModelId = keyBy(this.rows, "modelValue");
-      return this._model.filter(
-        (m) => rowByModelId[m[this.rows[0].modelId]] != null
-      );
-    }
     return this._model || [];
   }
 
@@ -71,7 +59,7 @@ class BTMultirowGroup extends BTBase {
       <bt-field .field=${this}>
         <div>
           <div id="fields">${this._renderRows()}</div>
-          ${this.displaymode || this.rows != null
+          ${this.displaymode
             ? html``
             : html`
                 <bt-button
@@ -138,45 +126,18 @@ class BTMultirowGroup extends BTBase {
     const templates = [];
     switch (this.field.type) {
       case "multipart_input": {
-        let array = [];
-        let modelById = {};
-
-        // If .rows present, .rows drive the rows
-        if (this.rows != null) {
-          array = this.rows;
-          modelById = keyBy(this._model, this.rows[0].modelId);
-        } else {
-          array = this._model;
-        }
-
-        for (let i = 0; i < array.length; i++) {
+        for (let i = 0; i < this._model.length; i++) {
           const idx = i;
 
           templates.push(html`
             <bt-multipart-input
               class="field"
               .schema=${this.field.schema}
-              .layout=${this.rows != null
-                ? "horizontal"
-                : ifDefined(this.field.layout)}
-              .model=${this.rows != null
-                ? modelById[this.rows[idx].modelValue]
-                : this._model[idx]}
-              .label=${this.rows != null ? this.rows[idx].label : null}
+              .layout=${ifDefined(this.field.layout)}
+              .model=${this._model[idx]}
               ?displaymode=${this.displaymode}
-              ?hidelabel=${this.rows != null && idx > 0}
               @model-change=${(e) => {
-                if (this.rows != null) {
-                  this._model = this._model.map((m) => {
-                    const modelId = this.rows[0].modelId;
-                    if (m[modelId] === e.detail.value[modelId]) {
-                      return e.detail.value;
-                    }
-                    return m;
-                  });
-                } else {
-                  this._model[idx] = e.detail.value;
-                }
+                this._model[idx] = e.detail.value;
 
                 this._emit("model-change", {
                   value: this._model,
@@ -217,10 +178,6 @@ class BTMultirowGroup extends BTBase {
     }
     if (templates.length) {
       return templates.map((t, idx) => {
-        if (this.rows != null) {
-          return t;
-        }
-
         return html`
           ${idx > 0
             ? html`<div

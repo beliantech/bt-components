@@ -20,10 +20,7 @@ class BTMultipartInput extends BTBase {
       schema: { type: Array },
       displaymode: { type: Boolean },
 
-      label: { type: String }, // Label on left side of row
-
       layout: { type: String }, // horizontal|vertical|horizontal-wrap
-      hidelabel: { type: Boolean },
 
       _modelMap: { type: Object },
       _showAll: { type: Boolean },
@@ -34,7 +31,6 @@ class BTMultipartInput extends BTBase {
     super();
 
     this.layout = LayoutVertical;
-    this.hidelabel = false;
 
     this._modelMap = {};
     this._showAll = false;
@@ -70,14 +66,6 @@ class BTMultipartInput extends BTBase {
 
     return html`
       <div class=${classMap(rowClasses)} id="fields">
-        ${this.label
-          ? html`<div
-              class="font-bold pr-2 text-sm"
-              style="margin-top:${this.hidelabel ? "-1px" : "23px"};"
-            >
-              ${this.label}
-            </div>`
-          : html``}
         ${this.schema.map((s, idx) => {
           if (s.hide) {
             didHaveHiddenField = true;
@@ -102,8 +90,8 @@ class BTMultipartInput extends BTBase {
                   .placeholder=${ifDefined(s.placeholder)}
                   .validateAs=${s.validateAs}
                   .hideIndicator=${s.hideIndicator}
-                  .label=${!this.hidelabel && s.label}
-                  .description=${!this.hidelabel && s.description}
+                  .label=${s.label}
+                  .description=${s.description}
                   .model=${this._modelMap[s.id]}
                   @model-change=${(e) => {
                     this._emit("model-change", {
