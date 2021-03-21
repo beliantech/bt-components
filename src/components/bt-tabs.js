@@ -262,7 +262,7 @@ class BTTabs extends BTBase {
         </div>
         <div
           class="flex-grow relative tab-content"
-          @title-change=${(e) => {
+          @tabtitle-change=${(e) => {
             this.requestUpdate("tabs");
           }}
         >
@@ -297,7 +297,7 @@ class BTTabs extends BTBase {
     const tab = this.tabs.find((t) => this.activeTabId === t.tabId);
     const tabRelPath = tab.relPath;
 
-    this._emit("tabchange", { tabId: this.activeTabId });
+    this._emit("tab-change", { tabId: this.activeTabId });
 
     let query = "";
     if (this.rootPath) {

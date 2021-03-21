@@ -45,8 +45,13 @@ class BTTabContent extends BTBase {
   }
 
   updated(changed) {
-    if (changed.has("title")) {
-      this._emit("title-change");
+    // If any of these props changed in value from a non-empty value...
+    if (
+      changed.get("title") ||
+      changed.get("icon") ||
+      changed.get("iconColor")
+    ) {
+      this._emit("tabtitle-change");
     }
   }
 }
