@@ -231,7 +231,7 @@ class BTInput extends BTBase {
       }
     }
 
-    if (this.validateRegex) {
+    if (trimmedModel && this.validateRegex) {
       if (!trimmedModel.match(this.validateRegex)) {
         errors.push(ErrorInvalid);
       }

@@ -360,6 +360,12 @@ describe("bt-input", () => {
         el.model = "123";
         assert.notOk(el.validate());
       });
+
+      it("validates regex does not fail if empty", () => {
+        el.validateRegex = "[a-z]+";
+        el.model = "";
+        assert.ok(el.validate());
+      });
     });
   });
 
