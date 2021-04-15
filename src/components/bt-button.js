@@ -29,7 +29,6 @@ export default class BTButton extends BTBase {
 
       small: { type: Boolean, reflect: true },
 
-      block: { type: Boolean, reflect: true },
       rounded: { type: Boolean, reflect: true },
       center: { type: Boolean, reflect: true },
       border: { type: Boolean, reflect: true },
@@ -61,7 +60,6 @@ export default class BTButton extends BTBase {
     this.primary = false;
     this.square = false;
     this.popup = false;
-    this.block = false;
 
     this._showPopup = false;
   }
@@ -164,7 +162,7 @@ export default class BTButton extends BTBase {
 
     return html`
       <div
-        class="relative ${this.block ? "block" : "inline-block"}"
+        class="relative block"
         @dismiss=${() => (this._showPopup = false)}
         @click=${this._onClick}
       >
