@@ -95,6 +95,7 @@ class BTSelect extends BTBase {
           .model=${this.filterableItemsModel}
           .allowMultiselect=${this.multiselect}
           .displayCheckboxes=${this.multiselect}
+          .placeholder=${this.placeholder}
           @model-change=${(e) => {
             if (e.detail.value) {
               this.model = e.detail.value;
