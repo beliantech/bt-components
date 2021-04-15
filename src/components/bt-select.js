@@ -230,6 +230,13 @@ class BTSelect extends BTBase {
       value: this.options,
     });
   }
+
+  focus() {
+    if (this.filterable || this.multiselect) {
+      this._id("filterable").focus();
+    }
+  }
+
   static get styles() {
     return [
       super.styles,

@@ -321,6 +321,11 @@ class BTFilterableItems extends BTBase {
     e.preventDefault();
     e.stopPropagation();
   }
+
+  focus() {
+    this._id("input").focus();
+  }
+
   static get styles() {
     return [
       super.styles,
