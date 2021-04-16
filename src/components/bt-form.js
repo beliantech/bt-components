@@ -251,7 +251,7 @@ class BTForm extends BTBase {
           <div
             class="
               ${this.buttonsHorizontal ? "flex align-items-center" : ""}
-              ${this.buttonsClass || "pt-4"}"
+              ${this.buttonsClass || "py-4"}"
           >
             <bt-button
               block
