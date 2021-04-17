@@ -66,6 +66,32 @@ describe(ElementTag, () => {
     });
   });
 
+  it("sets and gets model correctly (2)", async () => {
+    el.schema = [
+      {
+        id: "bool",
+        type: "checkbox",
+      },
+    ];
+    el.model = {
+      bool: false,
+    };
+    await el.updateComplete;
+
+    assert.deepEqual(el.model, {
+      bool: false,
+    });
+
+    el.model = {
+      bool: true,
+    };
+    await el.updateComplete;
+
+    assert.deepEqual(el.model, {
+      bool: true,
+    });
+  });
+
   it("sets underlying models", async () => {
     setupTestData();
     await el.updateComplete;

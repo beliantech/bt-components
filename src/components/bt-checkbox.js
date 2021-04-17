@@ -70,9 +70,9 @@ export default class BTCheckbox extends BTBase {
           id="input"
           class="mr-1"
           type="checkbox"
-          ?disabled="${this.disabled}"
-          ?checked="${this.model}"
-          @change="${this._onChange}"
+          ?disabled=${this.disabled}
+          ?checked=${this.model}
+          @change=${this._onChange}
         />
         <bt-icon class="o m-0" small @click=${(e) => this._onIconClick(e, true)}
           >check_box_outline_blank</bt-icon
