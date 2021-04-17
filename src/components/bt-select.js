@@ -182,9 +182,7 @@ class BTSelect extends BTBase {
 
     if (changed.has("multiselect") && this.multiselect) {
       // Change the default model to array-based
-      if (this.multiselect) {
-        this._model = [];
-      }
+      this._model = this._model || [];
     }
   }
 
