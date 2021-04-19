@@ -30,7 +30,7 @@ describe("bt-form", () => {
         fields: [
           {
             id: "foo",
-            label: "Foo",
+            name: "Foo",
             type: "short_text",
             required: false,
           },
@@ -54,13 +54,13 @@ describe("bt-form", () => {
         fields: [
           {
             id: "foo",
-            label: "Foo",
+            name: "Foo",
             type: "short_text",
             required: false,
           },
           {
             id: "bar",
-            label: "Bar",
+            name: "Bar",
             type: "short_text",
             required: false,
           },
@@ -89,13 +89,13 @@ describe("bt-form", () => {
         fields: [
           {
             id: "foo",
-            label: "Foo",
+            name: "Foo",
             type: "number",
             required: false,
           },
           {
             id: "check",
-            label: "Checklist",
+            name: "Checklist",
             type: "checklist",
             options: [
               { id: "bar", value: 2 },
@@ -121,7 +121,7 @@ describe("bt-form", () => {
         fields: [
           {
             id: "foo",
-            label: "Foo",
+            name: "Foo",
             type: "short_text",
             required: false,
           },
@@ -146,7 +146,7 @@ describe("bt-form", () => {
         fields: [
           {
             id: "foo",
-            label: "Foo",
+            name: "Foo",
             type: "short_text",
             required: false,
           },
@@ -169,7 +169,7 @@ describe("bt-form", () => {
         fields: [
           {
             id: "foo",
-            label: "Foo",
+            name: "Foo",
             type: "short_text",
             required: false,
           },
@@ -190,7 +190,7 @@ describe("bt-form", () => {
         fields: [
           {
             id: "foo",
-            label: "Foo",
+            name: "Foo",
             type: "number",
             required: false,
           },
@@ -208,7 +208,7 @@ describe("bt-form", () => {
       fields: [
         {
           id: "foo",
-          label: "Foo",
+          name: "Foo",
           type: "short_text",
           required: false,
         },
@@ -232,7 +232,7 @@ describe("bt-form", () => {
       fields: [
         {
           id: "foo",
-          label: "Foo",
+          name: "Foo",
           type: "short_text",
           required: false,
         },
@@ -259,12 +259,12 @@ describe("bt-form", () => {
       fields: [
         {
           id: "step",
-          label: "Step One",
+          name: "Step One",
           type: "step",
         },
         {
           id: "foo",
-          label: "Foo",
+          name: "Foo",
           type: "short_text",
           required: false,
         },
@@ -286,7 +286,7 @@ describe("bt-form", () => {
         fields: [
           {
             id: "abcd",
-            label: "ABCD",
+            name: "ABCD",
             type: "dropdown",
             options: [
               { id: "foo", name: "Foo" },
@@ -296,7 +296,7 @@ describe("bt-form", () => {
           },
           {
             id: "bcde",
-            label: "BCDE",
+            name: "BCDE",
             type: "dropdown",
             options: [{ id: "123", name: "One two three" }],
             showRules: [
@@ -334,7 +334,7 @@ describe("bt-form", () => {
         fields: [
           {
             id: "abcd",
-            label: "ABCD",
+            name: "ABCD",
             type: "dropdown",
             options: [
               { id: "foo", name: "Foo" },
@@ -344,7 +344,7 @@ describe("bt-form", () => {
           },
           {
             id: "bcde",
-            label: "BCDE",
+            name: "BCDE",
             type: "dropdown",
             options: [{ id: "123", name: "One two three" }],
             showRules: [
@@ -383,7 +383,7 @@ describe("bt-form", () => {
         fields: [
           {
             id: "abcd",
-            label: "ABCD",
+            name: "ABCD",
             type: "dropdown",
             options: [
               { id: "foo", name: "Foo" },
@@ -393,7 +393,7 @@ describe("bt-form", () => {
           },
           {
             id: "bcde",
-            label: "BCDE",
+            name: "BCDE",
             type: "dropdown",
             dynamicOptions: (formModel) => {
               if (formModel.abcd === "foo")

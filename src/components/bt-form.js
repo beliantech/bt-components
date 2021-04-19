@@ -323,7 +323,7 @@ class BTForm extends BTBase {
             .minlength=${field.minlength}
             .maxlength=${field.maxlength}
             .placeholder=${field.placeholder}
-            .label=${field.label}
+            .label=${field.name}
             .corrector=${field.corrector}
             .transformer=${field.transformer}
             .allowedCharacters=${field.allowedCharacters}
@@ -350,7 +350,7 @@ class BTForm extends BTBase {
             ?required=${field.required}
             .displaymode=${this.displaymode}
             .clickToEdit=${this.clickToEdit}
-            .label=${field.label}
+            .label=${field.name}
             .description=${field.description}
             .options=${field.options}
             .disableValidation=${!this.validate}
@@ -373,7 +373,7 @@ class BTForm extends BTBase {
             .displaymode=${this.displaymode}
             .clickToEdit=${this.clickToEdit}
             .placeholder=${ifDefined(field.placeholder)}
-            .label=${field.label}
+            .label=${field.name}
             .description=${field.description}
             .filterable=${field.filterable}
             .multiselect=${field.multiselect}
