@@ -276,6 +276,21 @@ describe("bt-select", () => {
       assert.deepEqual(el.model, []);
     });
 
+    it("setting model to empty returns empty array", async () => {
+      el.options = [
+        { id: "123", name: "Option 1" },
+        { id: "234", name: "Option 2" },
+      ];
+      el.filterable = false;
+      el.multiselect = true;
+
+      await el.updateComplete;
+
+      el.model = null;
+      await el.updateComplete;
+      assert.deepEqual(el.model, []);
+    });
+
     it("returns the model it was given", async () => {
       el.options = [
         { id: "123", name: "Option 1" },

@@ -66,7 +66,11 @@ class BTSelect extends BTBase {
         }
       }
     } else {
-      this._model = model == null ? "" : `${model}`; // convert to string...
+      if (this.multiselect) {
+        this._model = [];
+      } else {
+        this._model = model == null ? "" : `${model}`; // convert to string...
+      }
     }
     this.requestUpdate("model", oldModel);
   }
