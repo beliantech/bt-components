@@ -175,6 +175,7 @@ class BTField extends BTBase {
     e.preventDefault();
 
     if (!this.field) return;
+    if (!this.field.disabled) return;
 
     if (this.field.clickToEdit && this.field.displaymode) {
       this._enterEditMode();
