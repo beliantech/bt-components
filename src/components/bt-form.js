@@ -318,7 +318,6 @@ class BTForm extends BTBase {
             .inputType=${field.type === "number"
               ? "number"
               : field.inputType || "text"}
-            .disabled=${field.disabled || field.computed || false}
             .min=${field.min}
             .max=${field.max}
             .minlength=${field.minlength}
@@ -336,6 +335,7 @@ class BTForm extends BTBase {
             .disableValidation=${!this.validate}
             .annotation=${field.computed ? "computed" : ""}
             .model=${model}
+            .disabled=${field.disabled || field.computed || false}
             @model-change=${this.onModelChange}
             @input-submit=${this.onSubmit}
             @input-cancel=${this.onInputCancel}
@@ -355,6 +355,7 @@ class BTForm extends BTBase {
             .options=${field.options}
             .disableValidation=${!this.validate}
             .model=${model || ""}
+            .disabled=${field.disabled || false}
             @model-change=${this.onModelChange}
             @input-submit=${this.onSubmit}
             @input-cancel=${this.onInputCancel}
@@ -382,6 +383,7 @@ class BTForm extends BTBase {
             .errorMessage=${this.errorMap[field.id]}
             .disableValidation=${!this.validate}
             .model=${model || ""}
+            .disabled=${field.disabled || false}
             @model-change=${this.onModelChange}
             @input-submit=${this.onSubmit}
             @input-cancel=${this.onInputCancel}
