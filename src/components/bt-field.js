@@ -51,9 +51,10 @@ class BTField extends BTBase {
             class="edit-overlay flex items-center justify-end"
             @click=${this._onOverlayClick}
           >
+            <bt-icon button>edit</bt-icon>
             ${NodeNamesAllowCopyPaste[this.field.nodeName]
               ? html`
-                  <bt-icon button small @click=${this._onCopyClick}
+                  <bt-icon class="ml-1" button small @click=${this._onCopyClick}
                     >filter_none</bt-icon
                   >
                 `
@@ -227,12 +228,6 @@ const style = html`
     .overlay .edit-overlay:hover {
       border: 1px solid lightgray;
       background-color: rgba(0, 0, 0, 0.05);
-    }
-    .overlay .edit-overlay:hover kr-icon {
-      display: block;
-    }
-    .overlay .edit-overlay kr-icon {
-      display: none;
     }
     .overlay .edit-overlay {
       cursor: pointer;
