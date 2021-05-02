@@ -40,7 +40,7 @@ class BTField extends BTBase {
     const shouldOverlay = this.field.clickToEdit && this.field.displaymode;
 
     const containerClasses = {
-      overlay: shouldOverlay,
+      overlay: shouldOverlay && !this.field.disabled,
     };
 
     let overlayTemplate = html``;
@@ -234,7 +234,7 @@ const style = html`
     .overlay .edit-overlay kr-icon {
       display: none;
     }
-    .overlay .edit-overlay {
+    .edit-overlay {
       border: 1px solid transparent;
       cursor: pointer;
       position: absolute;
