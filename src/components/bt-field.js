@@ -234,9 +234,11 @@ const style = html`
     .overlay .edit-overlay kr-icon {
       display: none;
     }
+    .overlay .edit-overlay {
+      cursor: pointer;
+    }
     .edit-overlay {
       border: 1px solid transparent;
-      cursor: pointer;
       position: absolute;
       top: 0;
       right: 0;
