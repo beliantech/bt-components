@@ -195,6 +195,7 @@ export const BTForm = () => {
           { id: "foo", name: "Foo" },
           { id: "bar", name: "Bar" },
         ],
+        // disabled: true,
       },
       {
         id: "my_radio",
@@ -204,9 +205,13 @@ export const BTForm = () => {
           { id: "foo", name: "Foo" },
           { id: "bar", name: "Bar" },
         ],
+        // disabled: true,
       },
     ],
   };
+  // form.clickToEdit = true;
+  // form.fieldsonly = true;
+  // form.displaymode = true;
 
   return form;
 };

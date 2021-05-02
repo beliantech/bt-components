@@ -37,10 +37,11 @@ class BTField extends BTBase {
   render() {
     if (!this.field) return html``;
 
-    const shouldOverlay = this.field.clickToEdit && this.field.displaymode;
+    const shouldOverlay =
+      this.field.clickToEdit && this.field.displaymode && !this.field.disabled;
 
     const containerClasses = {
-      overlay: shouldOverlay && !this.field.disabled,
+      overlay: shouldOverlay,
     };
 
     let overlayTemplate = html``;
