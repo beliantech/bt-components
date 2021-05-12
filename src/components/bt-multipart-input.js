@@ -90,7 +90,7 @@ class BTMultipartInput extends BTBase {
                   .placeholder=${ifDefined(s.placeholder)}
                   .validateAs=${s.validateAs}
                   .hideIndicator=${s.hideIndicator}
-                  .label=${s.label}
+                  .label=${s.name}
                   .description=${s.description}
                   .model=${this._modelMap[s.id]}
                   @model-change=${(e) => {
@@ -111,7 +111,7 @@ class BTMultipartInput extends BTBase {
                   .displaymode=${this.displaymode}
                   .placeholder=${ifDefined(s.placeholder)}
                   .options=${s.options}
-                  .label=${!this.hidelabel && s.label}
+                  .label=${!this.hidelabel && s.name}
                   .description=${!this.hidelabel && s.description}
                   .model=${this._modelMap[s.id]}
                   @model-change=${(e) => {
@@ -130,7 +130,7 @@ class BTMultipartInput extends BTBase {
                   .required=${s.required}
                   .displaymode=${this.displaymode}
                   .options=${s.options}
-                  .label=${!this.hidelabel && s.label}
+                  .label=${!this.hidelabel && s.name}
                   .description=${!this.hidelabel && s.description}
                   ?horizontal=${s.horizontal}
                   .model=${this._modelMap[s.id]}
@@ -148,7 +148,7 @@ class BTMultipartInput extends BTBase {
                   id=${s.id}
                   class=${classMap(fieldClasses)}
                   .field=${s.field}
-                  .label=${this.hidelabel && s.label}
+                  .label=${this.hidelabel && s.name}
                   .description=${this.hidelabel && s.description}
                   .buttonText=${s.buttonText}
                   .model=${this._modelMap[s.id]}
@@ -175,7 +175,7 @@ class BTMultipartInput extends BTBase {
                 <bt-checkbox
                   id=${s.id}
                   class=${classMap(fieldClasses)}
-                  .label=${!this.hidelabel && s.label}
+                  .label=${!this.hidelabel && s.name}
                   .inline=${s.inline != null ? s.inline : true}
                   .model=${this._modelMap[s.id]}
                   @model-change=${(e) => {
