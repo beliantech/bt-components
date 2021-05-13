@@ -250,6 +250,7 @@ export default class BTButton extends BTBase {
           line-height: 1.2;
           margin: 0;
           min-height: 34px;
+          max-height: 38px;
         }
         button.muted {
           opacity: 0.5;
@@ -265,7 +266,8 @@ export default class BTButton extends BTBase {
           font-weight: 600;
         }
         button.small {
-          min-height: 28px;
+          height: 28px;
+          max-height: 28px;
         }
         button.active {
           border: 1px solid
@@ -337,6 +339,7 @@ export default class BTButton extends BTBase {
           background-color: lightgray !important;
           border: 0 !important;
           cursor: not-allowed !important;
+          color: inherit !important;
         }
 
         button.danger {
