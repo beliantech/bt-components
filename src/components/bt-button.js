@@ -49,6 +49,8 @@ export default class BTButton extends BTBase {
 
       height: { type: Number },
 
+      spin: { type: Boolean },
+
       _showPopup: { type: Boolean },
     };
   }
@@ -60,6 +62,7 @@ export default class BTButton extends BTBase {
     this.primary = false;
     this.square = false;
     this.popup = false;
+    this.spin = false;
 
     this._showPopup = false;
   }
@@ -68,6 +71,7 @@ export default class BTButton extends BTBase {
     let otherClasses = [];
 
     if (this.primary) otherClasses.push("primary");
+    if (this.spin) otherClasses.push("spin");
     if (this.secondary) otherClasses.push("secondary");
     if (this.transparent) otherClasses.push("transparent");
     if (this.rounded) otherClasses.push("rounded");
@@ -133,7 +137,15 @@ export default class BTButton extends BTBase {
         style="${styleMap(buttonStyles)}"
         ?disabled=${this.disabled}
       >
-        ${this.icon
+        ${this.spin
+          ? html`<div class="lds-ring ${this.primary && "primary"}">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>`
+          : html``}
+        ${this.icon && !this.spin
           ? html`
               <bt-icon small class=${this.icononly ? "m-0" : "ml-0 mr-1 my-0"}
                 >${this.icon}</bt-icon
@@ -181,7 +193,7 @@ export default class BTButton extends BTBase {
   }
 
   _onClick(e) {
-    if (this.disabled) {
+    if (this.disabled || this.spin) {
       e.stopImmediatePropagation();
       e.stopPropagation();
       e.preventDefault();
@@ -233,6 +245,7 @@ export default class BTButton extends BTBase {
           border: 1px solid transparent;
           cursor: pointer;
           display: flex;
+          align-items: center;
           /* Minimal line height to keep line centered without cutting text. */
           line-height: 1.2;
           margin: 0;
@@ -294,6 +307,10 @@ export default class BTButton extends BTBase {
             --bt-button-secondary-color,
             ${unsafeCSS(colors.lightblue)}
           );
+          border-color: var(
+            --bt-button-secondary-color,
+            ${unsafeCSS(colors.lightblue)}
+          );
         }
         button.secondary:hover {
           border: 1px solid
@@ -315,10 +332,10 @@ export default class BTButton extends BTBase {
         button.transparent.primary:active {
           background-color: rgba(255, 255, 255, 0.5);
         }
-        button[disabled] {
+        button[disabled],
+        button.spin {
           background-color: lightgray !important;
           border: 0 !important;
-          color: white !important;
           cursor: not-allowed !important;
         }
 
@@ -349,6 +366,49 @@ export default class BTButton extends BTBase {
         .popup {
           /* necessary to lift it up */
           z-index: 1;
+        }
+
+        .lds-ring {
+          display: flex;
+          position: relative;
+          width: 28px;
+          height: 28px;
+          margin-right: 1rem;
+          align-items: center;
+          justify-items: center;
+        }
+        .lds-ring div {
+          box-sizing: border-box;
+          display: block;
+          position: absolute;
+          width: 24px;
+          height: 24px;
+          margin: 3px;
+          border: 3px solid black;
+          border-radius: 50%;
+          animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+          border-color: black transparent transparent transparent;
+        }
+        .lds-ring.primary div {
+          border: 4px solid white;
+          border-color: white transparent transparent transparent;
+        }
+        .lds-ring div:nth-child(1) {
+          animation-delay: -0.45s;
+        }
+        .lds-ring div:nth-child(2) {
+          animation-delay: -0.3s;
+        }
+        .lds-ring div:nth-child(3) {
+          animation-delay: -0.15s;
+        }
+        @keyframes lds-ring {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
         }
       `,
     ];
