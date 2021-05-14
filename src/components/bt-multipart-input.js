@@ -148,8 +148,8 @@ class BTMultipartInput extends BTBase {
                   id=${s.id}
                   class=${classMap(fieldClasses)}
                   .field=${s.field}
-                  .label=${this.hidelabel && s.name}
-                  .description=${this.hidelabel && s.description}
+                  .label=${!this.hidelabel && s.name}
+                  .description=${!this.hidelabel && s.description}
                   .buttonText=${s.buttonText}
                   .model=${this._modelMap[s.id]}
                   @model-change=${(e) => {
