@@ -372,9 +372,9 @@ export default class BTButton extends BTBase {
         .lds-ring {
           display: flex;
           position: relative;
-          width: 28px;
-          height: 28px;
-          margin-right: 1rem;
+          width: 24px;
+          height: 24px;
+          margin-right: 0.5rem;
           align-items: center;
           justify-items: center;
         }
@@ -382,10 +382,10 @@ export default class BTButton extends BTBase {
           box-sizing: border-box;
           display: block;
           position: absolute;
-          width: 24px;
-          height: 24px;
-          margin: 3px;
-          border: 3px solid black;
+          width: 20px;
+          height: 20px;
+          margin: 2px;
+          border: 2px solid black;
           border-radius: 50%;
           animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
           border-color: black transparent transparent transparent;
