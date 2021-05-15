@@ -37,10 +37,6 @@ class BTModal extends BTBase {
     `;
   }
 
-  get slider() {
-    return this._id("slider");
-  }
-
   clear() {
     Array.from(this._id("container").children).forEach((view) => {
       this._id("container").removeChild(view);
@@ -50,11 +46,6 @@ class BTModal extends BTBase {
   }
 
   _removeTopModal() {
-    if (this._id("slider").hasView) {
-      this._id("slider").close();
-      return;
-    }
-
     if (this._views.length) {
       const view = this._views[this._views.length - 1];
 
