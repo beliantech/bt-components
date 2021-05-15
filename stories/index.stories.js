@@ -122,10 +122,9 @@ export const BTButton = () => `
     icon="add"
   >Add Label</bt-button>
   <bt-button
-    icononly
     small
-    icon="add"
-  ></bt-button>
+    icon="content_copy"
+  >Copy</bt-button>
   <bt-button
     border
     center
