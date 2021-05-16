@@ -132,9 +132,7 @@ class BTInput extends BTBase {
   }
   get model() {
     if (this.inputType === InputTypeNumber) {
-      if (this._model) {
-        return +this._model;
-      }
+      return +this._model;
     }
 
     return this._model || "";
