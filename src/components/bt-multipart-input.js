@@ -80,7 +80,9 @@ class BTMultipartInput extends BTBase {
           }
 
           switch (s.type) {
-            case "short_text": {
+            case "short_text":
+            case "long_text":
+            case "number": {
               return html`
                 <bt-input
                   class="block field ${classMap(fieldClasses)}"
