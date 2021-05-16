@@ -95,6 +95,10 @@ class BTMultipartInput extends BTBase {
                   .label=${s.name}
                   .description=${s.description}
                   .model=${this._modelMap[s.id]}
+                  .type=${s.type === "long_text" ? "textarea" : null}
+                  .inputType=${s.type === "number"
+                    ? "number"
+                    : s.inputType || "text"}
                   @model-change=${(e) => {
                     this._emit("model-change", {
                       value: this.model,
