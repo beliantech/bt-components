@@ -99,6 +99,25 @@ describe("bt-radio", () => {
     });
   });
 
+  describe("boolean mode", async () => {
+    it("accepts true/false boolean as model", async () => {
+      el.boolean = true;
+      el.model = false;
+      el.options = [
+        { id: "true", name: "Yes" },
+        { id: "false", name: "No" },
+      ];
+
+      await el.updateComplete;
+      assert.equal(el.model, false);
+
+      MockInteractions.click(el._select("input"));
+
+      await el.updateComplete;
+      assert.equal(el.model, true);
+    });
+  });
+
   it("updates the model on input change", async () => {
     el.options = [
       { id: "123", name: "Option 1" },

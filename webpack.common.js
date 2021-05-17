@@ -1,9 +1,6 @@
 const path = require("path");
 const fs = require("fs");
 
-// const webpack = require("webpack");
-// const HtmlWebpackPlugin = require("html-webpack-plugin");
-
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
@@ -33,7 +30,7 @@ module.exports = {
     // libraryTarget: "umd",
     // library: "bt-components",
   },
-  mode: "production",
+  mode: process.env.NODE_ENV === "development" ? "development" : "production",
   // devServer: {
   //   contentBase: "./dist",
   //   allowedHosts: ["local.beliantech.com"]
@@ -43,7 +40,7 @@ module.exports = {
     modules: [path.resolve(__dirname, "src"), "node_modules"],
   },
   optimization: {
-    minimize: true,
+    minimize: process.env.NODE_ENV === "development" ? false : true,
     minimizer: [new TerserPlugin()],
   },
   // externals: [/^lodash\/.+$/],
@@ -96,4 +93,7 @@ module.exports = {
       },
     ]),
   ],
+  devServer: {
+    contentBase: "./dist",
+  },
 };

@@ -23,6 +23,8 @@ class BTRadio extends BTBase {
       clickToEdit: { type: Boolean },
       horizontal: { type: Boolean },
 
+      boolean: { type: Boolean }, // In boolean mode, true/false boolean model is supported
+
       description: { type: String },
       options: { type: Array },
       model: { type: String }, // the UUID
@@ -37,6 +39,21 @@ class BTRadio extends BTBase {
     this._errors = [];
     this.options = [];
     this.horizontal = false;
+    this.boolean = false;
+  }
+
+  set model(model) {
+    const oldModel = this._model;
+
+    this._model = `${model}`; // convert to string
+    this.requestUpdate("model", oldModel);
+  }
+
+  get model() {
+    if (this.boolean) {
+      return this._model === "true" ? true : false;
+    }
+    return this._model;
   }
 
   render() {

@@ -348,6 +348,7 @@ class BTForm extends BTBase {
             class=${classMap(fieldClasses)}
             id=${field.id}
             ?required=${field.required}
+            ?boolean=${ifDefined(field.boolean)}
             .displaymode=${this.displaymode}
             .clickToEdit=${this.clickToEdit}
             .label=${field.name}
