@@ -4,7 +4,7 @@
   "description": "UI components for Belian Tech products",
   "main": "index.js",
   "scripts": {
-    "build": "NODE_ENV=production webpack --config webpack.prod.js && npm run build-css",
+    "build": "NODE_ENV=production webpack --config webpack.common.js && npm run build-css",
     "build-storybook": "build-storybook -c .storybook -o .out",
     "deploy-storybook": "npm run build-storybook && npx firebase deploy",
     "publish-npm": "npm run build && wct --npm && npm publish dist --access public",
