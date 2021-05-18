@@ -110,11 +110,13 @@ describe("bt-radio", () => {
 
       await el.updateComplete;
       assert.equal(el.model, false);
+      assert.strictEqual(getCheckedRadioId(el._selectAll("input")), "false");
 
       MockInteractions.click(el._select("input"));
 
       await el.updateComplete;
       assert.equal(el.model, true);
+      assert.strictEqual(getCheckedRadioId(el._selectAll("input")), "true");
     });
   });
 

@@ -112,9 +112,9 @@ class BTRadio extends BTBase {
   }
 
   updated(changed) {
-    if (changed.has("model") && this.model) {
+    if (changed.has("model") && this._model) {
       // Need to write the value of input explicitly because value attribute only sets the default value.
-      const input = this._id(this.model);
+      const input = this._id(this._model);
       if (input) input.checked = true;
     }
   }
