@@ -56,7 +56,7 @@ class BTModal extends BTBase {
     this._views = [];
   }
 
-  sidebar() {
+  get sidebar() {
     return this._id("sidebar");
   }
 
