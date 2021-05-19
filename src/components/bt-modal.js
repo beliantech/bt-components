@@ -1,6 +1,7 @@
 import { html } from "lit-element";
 import BTBase from "../bt-base";
 import { escapeToDismiss } from "../util/mouse";
+import "./bt-sidebar";
 
 class BTModal extends BTBase {
   static get properties() {
