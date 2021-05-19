@@ -34,6 +34,17 @@ class BTModal extends BTBase {
         @mousedown="${this._onMousedown}"
         @click="${this._onContainerClick}"
       ></div>
+      <bt-sidebar
+        id="sidebar"
+        class="absolute inset-y-0 inset-x-0"
+        style="display: none; z-index: 1000;"
+        @sidebar-show=${() => (this.style.display = "")}
+        @sidebar-hide=${() => {
+          if (this._views.length === 0) {
+            this.style.display = "none";
+          }
+        }}
+      ></bt-sidebar>
     `;
   }
 
@@ -46,6 +57,11 @@ class BTModal extends BTBase {
   }
 
   _removeTopModal() {
+    if (this._id("sidebar").hasView) {
+      this._id("sidebar").close();
+      return;
+    }
+
     if (this._views.length) {
       const view = this._views[this._views.length - 1];
 
