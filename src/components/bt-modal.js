@@ -56,6 +56,10 @@ class BTModal extends BTBase {
     this._views = [];
   }
 
+  sidebar() {
+    return this._id("sidebar");
+  }
+
   _removeTopModal() {
     if (this._id("sidebar").hasView) {
       this._id("sidebar").close();
