@@ -163,6 +163,11 @@ export const BTJsonEditor = () => `
   <bt-json-editor model="const foo = 'Hello World!;'"></bt-json-editor>
 `;
 
+export const BTProgress = () => `
+  <bt-progress circle></bt-progress>
+  <bt-progress linear></bt-progress>
+`;
+
 export const BTForm = () => {
   const form = document.createElement("bt-form");
 
