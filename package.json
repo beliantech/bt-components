@@ -1,6 +1,6 @@
 {
   "name": "@beliantech/bt-components",
-  "version": "0.28.2",
+  "version": "0.28.3",
   "description": "UI components for Belian Tech products",
   "main": "index.js",
   "scripts": {
