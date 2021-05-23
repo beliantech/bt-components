@@ -17,6 +17,11 @@ class BTMenu extends BTBase {
   }
 
   set menuItems(items) {
+    // Inject a reference to menu for each menu item
+    items.forEach((item) => {
+      item.menu = this;
+    });
+
     this.__menuItems = items; // top level items
     this._activeMenuItems = items;
   }
