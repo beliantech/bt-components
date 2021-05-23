@@ -244,7 +244,8 @@ export const BTTabs = () => {
 
 export const BTCheckbox = () => {
   return `
-  <bt-checkbox label="Enable"></bt-checkbox>`;
+  <bt-checkbox label="Enable"></bt-checkbox>
+  <bt-checkbox></bt-checkbox>`;
 };
 
 const multipartSchema = [

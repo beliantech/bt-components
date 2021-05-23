@@ -96,7 +96,7 @@ export default class BTCheckbox extends BTBase {
               >
               </bt-inline-input>
             `
-          : this.inline
+          : this.inline && this.label
           ? html`
               <label
                 class="block text-sm w-full pl-1"
@@ -111,9 +111,7 @@ export default class BTCheckbox extends BTBase {
           : html``}
       </div>
       ${this.description
-        ? html`<div class="text-xs mt-1">
-            ${this.description}
-          </div>`
+        ? html`<div class="text-xs mt-1">${this.description}</div>`
         : html``}
     `;
   }
