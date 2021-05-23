@@ -15,6 +15,7 @@ export default class BTIcon extends BTBase {
       circle: { type: Boolean, reflect: true },
       muted: { type: Boolean, reflect: true },
       popup: { type: Boolean, reflect: true },
+      stopPropagation: { type: Boolean, reflect: true },
 
       linkTo: { type: String, reflect: true },
       linkTarget: { type: String },
@@ -61,6 +62,8 @@ export default class BTIcon extends BTBase {
           // Prevent click from going to parent element.
           if (this.button && !this.linkTo) {
             e.preventDefault();
+          }
+          if (this.stopPropagation) {
             e.stopPropagation();
           }
 
@@ -130,7 +133,7 @@ const style = (linkTo = false, muted = false) => {
       }
 
       :host .popup,
-      :host[popup-right] .popup {
+      :host([popup-right]) .popup {
         top: 100%;
         right: 0;
       }

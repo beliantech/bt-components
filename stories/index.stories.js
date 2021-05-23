@@ -248,6 +248,23 @@ export const BTCheckbox = () => {
   <bt-checkbox></bt-checkbox>`;
 };
 
+export const BTMenu = () => {
+  setTimeout(() => {
+    document.getElementById("menu").menuItems = [{ text: "Edit Account" }];
+    document.getElementById("menu-2").menuItems = [{ text: "Edit Account" }];
+  }, 1000);
+  return `
+    <bt-menu id="menu" menu-left>
+      <bt-icon button>more_vert</bt-icon>
+    </bt-menu>
+    <div style="display:flex;justify-content:flex-end;">
+      <bt-menu id="menu-2" menu-right>
+        <bt-icon button>more_vert</bt-icon>
+      </bt-menu>
+    </div>
+  `;
+};
+
 const multipartSchema = [
   {
     id: "myid",

@@ -8,3 +8,4 @@ import "./components/bt-multirow-group";
 import "./components/bt-radio";
 import "./components/bt-select";
 import "./components/bt-form";
+import "./components/bt-menu";
