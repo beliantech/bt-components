@@ -61,6 +61,7 @@ export default class BTIcon extends BTBase {
           // Prevent click from going to parent element.
           if (this.button && !this.linkTo) {
             e.preventDefault();
+            e.stopPropagation();
           }
 
           if (this.popup) {

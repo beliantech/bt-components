@@ -142,6 +142,7 @@ export default class BTCheckbox extends BTBase {
     });
     // prevent click checkbox within <a></a> triggering navigation
     e.preventDefault();
+    e.stopPropagation();
   }
 
   updated(changedProps) {
