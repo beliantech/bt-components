@@ -11,6 +11,8 @@ class BTMenu extends BTBase {
       _showMenu: { type: Boolean },
 
       _submenuTemplate: { type: Object },
+
+      stopPropagation: { type: Boolean, attribute: "stop-propagation" },
     };
   }
 
@@ -45,6 +47,10 @@ class BTMenu extends BTBase {
               this._emit("menu-open");
             } else {
               this.dismiss();
+            }
+
+            if (this.stopPropagation) {
+              e.stopPropagation();
             }
           }}
         >
