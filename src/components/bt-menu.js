@@ -41,7 +41,7 @@ class BTMenu extends BTBase {
       <div class="relative" @menu-dismiss=${this._onMenuDismiss}>
         <div
           class="flex items-center"
-          @click=${(_e) => {
+          @click=${(e) => {
             this._showMenu = !this._showMenu;
 
             if (this._showMenu) {
