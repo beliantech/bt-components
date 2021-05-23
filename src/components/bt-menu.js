@@ -40,6 +40,7 @@ class BTMenu extends BTBase {
     return html`
       <div class="relative" @menu-dismiss=${this._onMenuDismiss}>
         <div
+          class="flex items-center"
           @click=${(_e) => {
             this._showMenu = !this._showMenu;
 
@@ -107,6 +108,8 @@ class BTMenu extends BTBase {
                                   }
 
                                   this._submenuTemplate = mi.template;
+                                } else {
+                                  this._showMenu = false;
                                 }
                               }}
                               >${mi.text}</a
