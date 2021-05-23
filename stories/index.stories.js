@@ -112,6 +112,7 @@ export const BTIcon = () => `
     open_in_new
   </bt-icon>
   <bt-icon>visibility_on</bt-icon>
+  <bt-icon stop-propagation>visibility_on</bt-icon>
 `;
 
 export const BTButton = () => `

@@ -15,7 +15,7 @@ export default class BTIcon extends BTBase {
       circle: { type: Boolean, reflect: true },
       muted: { type: Boolean, reflect: true },
       popup: { type: Boolean, reflect: true },
-      stopPropagation: { type: Boolean, reflect: true },
+      stopPropagation: { type: Boolean, attribute: "stop-propagation" },
 
       linkTo: { type: String, reflect: true },
       linkTarget: { type: String },
