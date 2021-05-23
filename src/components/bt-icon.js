@@ -209,7 +209,7 @@ const style = (linkTo = false, muted = false) => {
       }
       .tooltip {
         top: 100%;
-        background-color: ${colors.gray}
+        background-color: ${colors.darkgray}
       }
 
       :host([tooltip]) .tooltip {
