@@ -114,6 +114,8 @@ const style = (linkTo = false, muted = false) => {
         user-select: none;
         position: relative;
         display: inline-flex;
+        align-items: center;
+        justify-content: center;
         ${muted ? "opacity: 0.5" : ""};
 
         color: var(--bt-icon-color);
