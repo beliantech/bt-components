@@ -174,18 +174,17 @@ const style = (linkTo = false, muted = false) => {
         height: 36px;
         width: 36px;
       }
-      :host([circle]) a {
-        display: flex;
+      :host([circle]) {
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         border-radius: 50%;
-        padding: 0.5rem;
       }
-      :host([circle]:hover) a {
+      :host([circle]:hover) {
         background-color: var(--bt-icon-circle-hover-color, #eeeeee);
       }
-      :host([circle]:active) a {
+      :host([circle]:active) {
         background-color: var(--bt-icon-circle-hover-color, lightgray);
       }
 
