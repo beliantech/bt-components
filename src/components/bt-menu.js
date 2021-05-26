@@ -1,4 +1,5 @@
 import { html, css, unsafeCSS } from "lit-element";
+import { ifDefined } from "lit-html/directives/if-defined";
 import BTBase from "../bt-base";
 
 import { clickOutsideToDismiss } from "../util/mouse";
@@ -85,7 +86,8 @@ class BTMenu extends BTBase {
                         ? html`
                             <a
                               class="py-2 px-3"
-                              href="${mi.linkTo}"
+                              href=${mi.linkTo}
+                              target=${ifDefined(mi.linkTarget)}
                               @click=${(e) => {
                                 this._showMenu = false;
                                 this._emit("item-select");
