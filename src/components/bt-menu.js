@@ -18,11 +18,6 @@ class BTMenu extends BTBase {
   }
 
   set menuItems(items) {
-    // Inject a reference to menu for each menu item
-    items.forEach((item) => {
-      item.menu = this;
-    });
-
     this.__menuItems = items; // top level items
     this._activeMenuItems = items;
   }
@@ -106,7 +101,7 @@ class BTMenu extends BTBase {
                                 if (mi.items) {
                                   this._activeMenuItems = mi.items;
                                 } else if (mi.action) {
-                                  mi.action(mi); // pass in info
+                                  mi.action(this); // pass in menu element
                                   this._showMenu = false;
                                   this._emit("item-select");
                                 } else if (mi.template) {
