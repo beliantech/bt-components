@@ -255,10 +255,10 @@ class BTForm extends BTBase {
           >
             <bt-button
               block
-              .primary=${this.buttonPrimary}
-              .secondary=${!this.buttonPrimary}
-              .small=${this.buttonsSmall}
-              .disabled="${errorCount > 0 || this._disableSubmit}"
+              ?primary=${this.buttonPrimary}
+              ?secondary=${!this.buttonPrimary}
+              ?small=${this.buttonsSmall}
+              ?disabled="${errorCount > 0 || this._disableSubmit}"
               id="submit"
               button
               @click=${this.onSubmit}
@@ -271,7 +271,7 @@ class BTForm extends BTBase {
                   <bt-button
                     transparent
                     block
-                    .small=${this.buttonsSmall}
+                    ?small=${this.buttonsSmall}
                     class="${this.buttonsHorizontal ? "ml-2" : "mt-1"}"
                     @click="${this._onCancel}"
                     >${this.cancelButtonText}</bt-button

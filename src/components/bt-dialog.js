@@ -117,7 +117,7 @@ class BTDialog extends BTBase {
                 <bt-button
                   small
                   @click=${this._onOk}
-                  .disabled=${this.disableOk}
+                  ?disabled=${this.disableOk}
                   >${this.ok}</bt-button
                 >
               </div>

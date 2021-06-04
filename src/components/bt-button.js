@@ -22,10 +22,8 @@ export default class BTButton extends BTBase {
       icononly: { type: Boolean, reflect: true },
 
       small: { type: Boolean, reflect: true },
-      square: { type: Boolean, reflect: true },
       center: { type: Boolean, reflect: true },
       left: { type: Boolean, reflect: true },
-      muted: { type: Boolean, reflect: true },
       bold: { type: Boolean, reflect: true },
 
       popup: { type: Boolean, reflect: true }, // Whether or not button has a popup
@@ -93,9 +91,7 @@ export default class BTButton extends BTBase {
       [pl]: pl,
       [pr]: pr,
       active: this.active || this._showPopup,
-      muted: this.muted,
       small: this.small,
-      square: this.square,
       "font-bold": this.bold,
       "text-lg": this.large,
       "text-sm": !this.large,
