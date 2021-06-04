@@ -1,4 +1,4 @@
-import { html } from "lit-element";
+import { html, css, unsafeCSS } from "lit-element";
 import BTBase from "../bt-base";
 import colors from "../colors";
 
@@ -44,14 +44,14 @@ class BTDialog extends BTBase {
           min-width: 350px;
         }
         .notice {
-          background-color: ${colors.yellow};
+          background-color: ${unsafeCSS(colors.yellow)};
         }
         .title-bar {
-          background-color: ${colors.theme};
+          background-color: ${unsafeCSS(colors.theme)};
           color: white;
         }
         .title-bar.danger {
-          background-color: ${colors.red}cc;
+          background-color: ${unsafeCSS(colors.red)}cc;
         }
         .content {
           height: 100%;
