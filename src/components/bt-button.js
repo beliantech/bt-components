@@ -11,32 +11,22 @@ import { clickOutsideToDismiss } from "../util/mouse";
 export default class BTButton extends BTBase {
   static get properties() {
     return {
+      // CSS attributes: primary, secondary, square, large,
+      // transparent, danger, muted, border, rounded
+
       disabled: { type: Boolean, reflect: true },
-
-      primary: { type: Boolean, reflect: true },
-      secondary: { type: Boolean, reflect: true },
-
-      // button has no color, hover adds some white
-      transparent: { type: Boolean, reflect: true },
 
       linkTo: { type: String },
 
-      active: { type: Boolean, reflect: true },
-
       unpadded: { type: Boolean, reflect: true },
-      square: { type: Boolean, reflect: true },
       icononly: { type: Boolean, reflect: true },
 
       small: { type: Boolean, reflect: true },
-
-      rounded: { type: Boolean, reflect: true },
+      square: { type: Boolean, reflect: true },
       center: { type: Boolean, reflect: true },
-      border: { type: Boolean, reflect: true },
-      danger: { type: Boolean, reflect: true },
       left: { type: Boolean, reflect: true },
       muted: { type: Boolean, reflect: true },
       bold: { type: Boolean, reflect: true },
-      uppercase: { type: Boolean },
 
       popup: { type: Boolean, reflect: true }, // Whether or not button has a popup
       popupright: { type: Boolean },
@@ -59,8 +49,6 @@ export default class BTButton extends BTBase {
     super();
 
     this.disabled = false;
-    this.primary = false;
-    this.square = false;
     this.popup = false;
     this.spin = false;
 
@@ -70,20 +58,13 @@ export default class BTButton extends BTBase {
   render() {
     let otherClasses = [];
 
-    if (this.primary) otherClasses.push("primary");
     if (this.spin) otherClasses.push("spin");
-    if (this.secondary) otherClasses.push("secondary");
-    if (this.transparent) otherClasses.push("transparent");
-    if (this.rounded) otherClasses.push("rounded");
     otherClasses.push("items-center");
     if (this.left) {
       otherClasses.push("justify-start");
     } else {
       otherClasses.push("justify-center");
     }
-    if (this.uppercase) otherClasses.push("uppercase");
-    if (this.border) otherClasses.push("border");
-    if (this.danger) otherClasses.push("danger");
 
     let py = "py-2";
     let px = "px-4";
@@ -114,6 +95,7 @@ export default class BTButton extends BTBase {
       active: this.active || this._showPopup,
       muted: this.muted,
       small: this.small,
+      square: this.square,
       "font-bold": this.bold,
       "text-lg": this.large,
       "text-sm": !this.large,
@@ -172,7 +154,7 @@ export default class BTButton extends BTBase {
 
     return html`
       <div
-        class="relative block"
+        class="relative"
         @dismiss=${() => (this._showPopup = false)}
         @click=${this._onClick}
       >
@@ -247,29 +229,31 @@ export default class BTButton extends BTBase {
           /* Minimal line height to keep line centered without cutting text. */
           line-height: 1.2;
           margin: 0;
-          min-height: 34px;
-          max-height: 38px;
+          height: 36px;
         }
-        button.muted {
+        :host([muted]) button {
           opacity: 0.5;
         }
-        button.border {
+        :host([border]) button {
           border: 1px solid lightgray;
         }
-        button.rounded {
+        :host([rounded]) button {
           border-radius: 0.75rem;
         }
-        button.uppercase {
+        :host([uppercase]) button {
           text-transform: uppercase;
           font-weight: 600;
         }
-        button.small {
+        :host([small]) button {
           height: 28px;
-          max-height: 28px;
         }
-        button.active {
-          border: 1px solid
-            var(--bt-button-active-color, ${unsafeCSS(colors.blue)});
+        :host([square]) button {
+          height: 48px;
+          width: 48px;
+        }
+        :host([large][square]) button {
+          height: 64px;
+          width: 64px;
         }
         button:hover {
           background-color: var(
@@ -277,30 +261,34 @@ export default class BTButton extends BTBase {
             ${unsafeCSS(colors.hover)}
           );
         }
+        :host([active]) button {
+          border: 1px solid
+            var(--bt-button-active-color, ${unsafeCSS(colors.blue)});
+        }
         button:active,
-        button.active {
+        :host([active]) button {
           background-color: #dddddd;
         }
-        button.primary {
+        :host([primary]) button {
           background-color: var(
             --bt-button-primary-color,
             ${unsafeCSS(colors.lightblue)}
           );
           color: white;
         }
-        button.primary:hover {
+        :host([primary]) button:hover {
           background-color: var(
             --bt-button-primary-hover-color,
             ${unsafeCSS(colors.blue)}
           );
         }
-        button.primary:active {
+        :host([primary]) button:active {
           background-color: var(
             --bt-button-primary-active-color,
             ${unsafeCSS(colors.darkblue)}
           );
         }
-        button.secondary {
+        :host([secondary]) button {
           border: 1px solid
             var(--bt-button-secondary-color, ${unsafeCSS(colors.lightblue)});
           color: var(
@@ -312,7 +300,7 @@ export default class BTButton extends BTBase {
             ${unsafeCSS(colors.lightblue)}
           );
         }
-        button.secondary:hover {
+        :host([secondary]) button:hover {
           border: 1px solid
             var(--bt-button-secondary-hover-color, ${unsafeCSS(colors.blue)});
           color: var(
@@ -320,16 +308,16 @@ export default class BTButton extends BTBase {
             ${unsafeCSS(colors.blue)}
           );
         }
-        button.transparent {
+        :host([transparent]) button {
           background-color: transparent;
         }
-        button.transparent:hover {
+        :host([transparent]) button:hover {
           background-color: rgba(0, 0, 0, 0.1);
         }
-        button.transparent.primary:hover {
+        :host([transparent]) button.primary:hover {
           background-color: rgba(255, 255, 255, 0.25);
         }
-        button.transparent.primary:active {
+        :host([transparent]) button.primary:active {
           background-color: rgba(255, 255, 255, 0.5);
         }
         button[disabled],
@@ -339,28 +327,27 @@ export default class BTButton extends BTBase {
           cursor: not-allowed !important;
           color: inherit !important;
         }
-
-        button.danger {
+        :host([danger]) button {
           background-color: ${unsafeCSS(colors.red)}cc;
           color: white;
           font-weight: 500;
         }
-        button.danger.secondary {
+        :host([danger][secondary]) button {
           color: ${unsafeCSS(colors.red)};
           background-color: white;
           font-weight: normal;
           border-color: ${unsafeCSS(colors.red)};
         }
-        button.danger.secondary:hover {
+        :host([danger][secondary]) button:hover {
           color: white;
         }
-        button.danger:hover {
+        :host([danger]) button:hover {
           background-color: ${unsafeCSS(colors.red)};
         }
-        button.danger:active {
+        :host([danger]) button:active {
           background-color: ${unsafeCSS(colors.darkred)};
         }
-        button.danger.border {
+        :host([danger][border]) {
           border-color: ${unsafeCSS(colors.red)}cc;
         }
 
@@ -390,7 +377,7 @@ export default class BTButton extends BTBase {
           animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
           border-color: black transparent transparent transparent;
         }
-        .lds-ring.primary div {
+        :host([primary]) .lds-ring div {
           border: 4px solid white;
           border-color: white transparent transparent transparent;
         }

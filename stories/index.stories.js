@@ -119,7 +119,14 @@ export const BTIcon = () => `
 `;
 
 export const BTButton = () => `
+  <style>
+    bt-button {
+      display: inline-block;
+    }
+  </style>
   <bt-button>Button</bt-button>
+  <bt-button primary small>Small Button</bt-button>
+  <bt-button primary danger small>Small Button</bt-button>
   <bt-button icon="add">Button</bt-button>
   <bt-button
     small
@@ -160,6 +167,12 @@ export const BTButton = () => `
     aftericon="arrow_forward"
     >
     <span class="truncate">Move to right</span>
+  </bt-button>
+  <bt-button primary square rounded>
+    <bt-icon medium>add</bt-icon>
+  </bt-button>
+  <bt-button primary square large rounded>
+    <bt-icon medium>add</bt-icon>
   </bt-button>
 `;
 
