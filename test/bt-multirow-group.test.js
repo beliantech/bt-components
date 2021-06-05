@@ -38,4 +38,22 @@ describe(ElementTag, () => {
 
     assert.deepEqual(el.model, [{ name: "Jonathan" }, { name: "James" }]);
   });
+
+  describe("transformer", () => {
+    it("returns transformed model", async () => {
+      setupTestData();
+      el.transformer = (model) => {
+        return model.map((item) => {
+          item.foo = true;
+          return item;
+        });
+      };
+      await el.updateComplete;
+
+      assert.deepEqual(el.model, [
+        { name: "Jonathan", foo: true },
+        { name: "James", foo: true },
+      ]);
+    });
+  });
 });

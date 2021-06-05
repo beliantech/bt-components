@@ -22,6 +22,8 @@ class BTMultirowGroup extends BTBase {
       label: { type: String },
       description: { type: String },
 
+      transformer: { type: Object },
+
       required: { type: Boolean },
       displaymode: { type: Boolean, reflect: true },
 
@@ -43,6 +45,10 @@ class BTMultirowGroup extends BTBase {
   }
 
   get model() {
+    if (this.transformer) {
+      return this.transformer(this._model);
+    }
+
     return this._model || [];
   }
 
@@ -140,7 +146,7 @@ class BTMultirowGroup extends BTBase {
                 this._model[idx] = e.detail.value;
 
                 this._emit("model-change", {
-                  value: this._model,
+                  value: this.model,
                 });
               }}
             ></bt-multipart-input>
@@ -165,7 +171,7 @@ class BTMultirowGroup extends BTBase {
                 this._model[idx] = e.detail.value;
 
                 this._emit("model-change", {
-                  value: this._model,
+                  value: this.model,
                 });
               }}
               .min=${ifDefined(this.field.min)}
