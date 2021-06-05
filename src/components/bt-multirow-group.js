@@ -157,6 +157,7 @@ class BTMultirowGroup extends BTBase {
             <bt-input
               class="field"
               .model=${this._model[idx]}
+              .label=${this.field.name}
               ?displaymode=${this.displaymode}
               ?required=${this.field.required}
               .inputType=${this.field.type === "number" ? "number" : "text"}
