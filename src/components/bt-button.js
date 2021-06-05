@@ -248,8 +248,8 @@ export default class BTButton extends BTBase {
           width: 48px;
         }
         :host([large][square]) button {
-          height: 64px;
-          width: 64px;
+          height: 60px;
+          width: 60px;
         }
         button:hover {
           background-color: var(
