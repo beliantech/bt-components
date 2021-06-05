@@ -134,8 +134,8 @@ class BTDialog extends BTBase {
     // Keep reference to original dialog
     this._el = el || this;
 
-    // Append for caller convenience (caller no need to do this)
-    document.body.appendChild(this._el);
+    // Allow generic use of bt-dialog
+    if (!el) document.body.appendChild(this);
 
     return this.updateComplete.then(() => {
       this._emit("bt-modal-show", { el: this._el }, true);
@@ -153,7 +153,6 @@ class BTDialog extends BTBase {
 
     this._emit("bt-modal-hide", { el: this._el }, true);
     this._emit("close", {});
-    this._el = null;
   }
 
   _onCancel() {
