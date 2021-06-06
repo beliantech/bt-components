@@ -11,6 +11,7 @@ import errorTemplate from "./templates/error";
 import colors from "../colors";
 
 const ErrorRequired = "required";
+const ErrorInvalidOption = "invalid_option";
 
 class BTSelect extends BTBase {
   static get properties() {
@@ -133,17 +134,17 @@ class BTSelect extends BTBase {
               const optionId = `${option.id}`;
               if (this.model === optionId) optionPresent = true;
 
+              /* prettier-ignore */
               return html`
-                <option value=${option.id} ?selected=${this.model === optionId}
-                  >${option.name}</option
-                >
+                <option value=${option.id} ?selected=${this.model === optionId}>${option.name}</option>
               `;
             })}
-            ${!optionPresent && this.model
-              ? html`<option value=${this.model} selected
-                  >(invalid option)</option
-                >`
-              : html``}
+            ${
+              /* prettier-ignore */
+              !optionPresent && this.model
+              ? html`<option value=${this.model} selected>(invalid option)</option>`
+              : html``
+            }
           </select>
           <bt-icon
             class="absolute right-0 ${this.small ? "" : "my-2"}"
@@ -155,6 +156,7 @@ class BTSelect extends BTBase {
     }
 
     const errorRequired = this._errors.includes(ErrorRequired);
+    const errorInvalidOption = this._errors.includes(ErrorInvalidOption);
 
     return html`
       <bt-field .field=${this}>
@@ -172,6 +174,7 @@ class BTSelect extends BTBase {
               `
             : html``}
           ${errorTemplate(errorRequired, "Please select an option")}
+          ${errorTemplate(errorInvalidOption, "Please select a valid option")}
           ${errorTemplate(this.errorMessage != null, this.errorMessage)}
         </div>
       </bt-field>
@@ -192,10 +195,21 @@ class BTSelect extends BTBase {
 
   validate() {
     if (this.disableValidation) return true;
+
     const errors = [];
+
+    // Validate required
     if (this.required) {
       if (!this.model) {
         errors.push(ErrorRequired);
+      }
+    }
+
+    // Validate invalid option
+    if (this.options) {
+      const isModelInOption = this.options.find((opt) => opt.id === this.model);
+      if (!isModelInOption) {
+        errors.push(ErrorInvalidOption);
       }
     }
 
