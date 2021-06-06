@@ -110,6 +110,11 @@ describe("bt-select", () => {
 
       selectedOption = el._select(`option[selected=""]`);
       assert.strictEqual(selectedOption.value, "123");
+
+      // Check empty is OK
+      el.model = "";
+      await el.updateComplete;
+      assert.ok(el.validate());
     });
   });
 
@@ -154,7 +159,7 @@ describe("bt-select", () => {
         assert.strictEqual(errorsChangeSpy.callCount, 1);
         assert.deepEqual(errorsChangeSpy.getCall(0).args[0].detail, {
           id: "some-id",
-          errors: ["required", "invalid_option"],
+          errors: ["required"],
         });
       });
     });

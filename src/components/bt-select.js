@@ -155,9 +155,6 @@ class BTSelect extends BTBase {
       `;
     }
 
-    const errorRequired = this._errors.includes(ErrorRequired);
-    const errorInvalidOption = this._errors.includes(ErrorInvalidOption);
-
     return html`
       <bt-field .field=${this}>
         <div class="${this.horizontal ? "flex" : ""}">
@@ -215,7 +212,7 @@ class BTSelect extends BTBase {
     }
 
     // Validate invalid option
-    if (this.options) {
+    if (this.options && this.model) {
       const isModelInOption = this.options.find(
         (opt) => `${opt.id}` === this.model
       );
