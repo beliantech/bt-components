@@ -189,7 +189,6 @@ class BTForm extends BTBase {
                         dependentFields.push(
                           this._fieldsById[showRule.fieldId]
                         );
-                        break;
                       }
                     }
                   }
