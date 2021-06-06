@@ -173,12 +173,21 @@ class BTSelect extends BTBase {
                 </bt-editable-options>
               `
             : html``}
-          ${errorTemplate(errorRequired, "Please select an option")}
-          ${errorTemplate(errorInvalidOption, "Please select a valid option")}
-          ${errorTemplate(this.errorMessage != null, this.errorMessage)}
+          ${this._errorTemplate}
         </div>
       </bt-field>
     `;
+  }
+
+  get _errorTemplate() {
+    if (this._errors.includes(ErrorRequired)) {
+      return html` ${errorTemplate(true, "Please select an option")} `;
+    } else if (this._errors.includes(ErrorInvalidOption)) {
+      return html` ${errorTemplate(true, "Please select a valid option")} `;
+    } else if (this.errorMessage) {
+      return html` ${errorTemplate(true, this.errorMessage)} `;
+    }
+    return html``;
   }
 
   updated(changed) {

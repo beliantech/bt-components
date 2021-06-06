@@ -276,9 +276,7 @@ class BTInput extends BTBase {
             ? `width: ${this.width};`
             : ""} position: relative;"
         >
-          <div>
-            ${contentTemplate} ${inputTemplate} ${errorTemplate}
-          </div>
+          <div>${contentTemplate} ${inputTemplate} ${errorTemplate}</div>
         </div>
       </bt-field>
     `;
