@@ -132,7 +132,7 @@ class BTSelect extends BTBase {
             this.options.map((option) => {
               // Interpolate option.id to string
               const optionId = `${option.id}`;
-              if (this.model === optionId) optionPresent = true;
+              if (this.model && this.model === optionId) optionPresent = true;
 
               /* prettier-ignore */
               return html`
@@ -212,13 +212,15 @@ class BTSelect extends BTBase {
     }
 
     // Validate invalid option
-    if (this.options && this.model) {
-      const isModelInOption = this.options.find(
-        (opt) => `${opt.id}` === this.model
-      );
+    if (!this.filterable && !this.multiselect) {
+      if (this.options && this.model) {
+        const isModelInOption = this.options.find(
+          (opt) => `${opt.id}` === this.model
+        );
 
-      if (!isModelInOption) {
-        errors.push(ErrorInvalidOption);
+        if (!isModelInOption) {
+          errors.push(ErrorInvalidOption);
+        }
       }
     }
 
