@@ -192,8 +192,6 @@ class BTForm extends BTBase {
                       }
                     }
                   }
-
-                  if (showField) break;
                 }
               }
             }
