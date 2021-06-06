@@ -207,7 +207,10 @@ class BTSelect extends BTBase {
 
     // Validate invalid option
     if (this.options) {
-      const isModelInOption = this.options.find((opt) => opt.id === this.model);
+      const isModelInOption = this.options.find(
+        (opt) => `${opt.id}` === this.model
+      );
+
       if (!isModelInOption) {
         errors.push(ErrorInvalidOption);
       }

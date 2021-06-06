@@ -96,6 +96,7 @@ describe("bt-select", () => {
       assert.strictEqual(selectedOption.value, "abcd");
       assert.equal(selectedOption.innerText, "(invalid option)");
       assert.equal(el.model, "abcd");
+      assert.isNotOk(el.validate());
 
       el.model = "123";
       await el.updateComplete;
@@ -105,6 +106,7 @@ describe("bt-select", () => {
       assert.strictEqual(selectedOption.value, "456");
       assert.equal(selectedOption.innerText, "Option 4");
       assert.equal(el.model, "123");
+      assert.ok(el.validate());
 
       selectedOption = el._select(`option[selected=""]`);
       assert.strictEqual(selectedOption.value, "123");
