@@ -249,6 +249,23 @@ describe("bt-select", () => {
       await el.updateComplete;
       assert.equal(el.model, "123");
     });
+
+    it("clears the model on close icon click", async () => {
+      el.options = [
+        { id: "123", name: "Option 1" },
+        { id: "234", name: "Option 2" },
+      ];
+      el.filterable = true;
+      el.model = "123";
+
+      await delay();
+      assert.equal(el.model, "123");
+
+      MockInteractions.click(el._id("filterable")._select("bt-icon"));
+
+      await el.updateComplete;
+      assert.equal(el.model, "");
+    });
   });
 
   describe("filterable=true,multiselect=true", () => {

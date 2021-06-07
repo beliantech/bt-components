@@ -9,7 +9,7 @@ import "../bt-input";
 const ITEM_ROW_HEIGHT = 34;
 const MAX_VISIBLE_TAG_ROWS = 5;
 
-// PORTED FROM PD-TAG-EDITOR
+// PORTED FROM PD-TAG-EDITOR. Some code is unused.
 class BTFilterableItems extends BTBase {
   static get properties() {
     return {
@@ -87,18 +87,30 @@ class BTFilterableItems extends BTBase {
 
     return html`
       <div @keydown=${this.onKeydown} @click=${this._blockClick}>
-        <bt-input
-          class="block"
-          id="input"
-          .placeholder=${this.placeholder}
-          .chips=${displayChips ? this._selectedItems.map((i) => i.name) : []}
-          .inline=${displayChips}
-          .noline=${displayChips}
-          .noindent=${displayChips}
-          .model=${this._input}
-          @model-change=${this._onModelChange}
-          @focus=${() => (this._displayItems = true)}
-        ></bt-input>
+        <div class="w-full relative">
+          <bt-input
+            class="block"
+            id="input"
+            .placeholder=${this.placeholder}
+            .chips=${displayChips ? this._selectedItems.map((i) => i.name) : []}
+            .inline=${displayChips}
+            .noline=${displayChips}
+            .noindent=${displayChips}
+            .model=${this._input}
+            @model-change=${this._onModelChange}
+            @focus=${() => (this._displayItems = true)}
+          ></bt-input>
+          ${this.model.length && !this.allowMultiselect
+            ? html`<bt-icon
+                button
+                class="absolute right-1"
+                style="top: 6px;"
+                @click=${this._clearModel}
+              >
+                close
+              </bt-icon>`
+            : html``}
+        </div>
         <div class="relative">
           ${(!this.dropdownMode || this._displayItems) && this._rows.length
             ? html`
@@ -285,6 +297,16 @@ class BTFilterableItems extends BTBase {
         value: this.model,
       });
     }
+  }
+
+  _clearModel(e) {
+    this._displayItems = false;
+
+    this.model = [];
+    this._input = "";
+    this._emit("model-change", {
+      value: this.model,
+    });
   }
 
   // _addNewItem(tagInput) {

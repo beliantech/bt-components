@@ -64,6 +64,8 @@ class BTSelect extends BTBase {
       } else {
         if (model.length > 0) {
           this._model = model[0];
+        } else {
+          this._model = "";
         }
       }
     } else {
