@@ -266,6 +266,19 @@ describe("bt-select", () => {
       await el.updateComplete;
       assert.equal(el.model, "");
     });
+
+    it("displays the current model option when model is set", async () => {
+      el.options = [
+        { id: "123", name: "Option 1" },
+        { id: "234", name: "Option 2" },
+      ];
+      el.filterable = true;
+      el.model = "123";
+
+      await el.updateComplete;
+      assert.equal(el.model, "123");
+      assert.equal(el._id("filterable")._id("input").model, "Option 1");
+    });
   });
 
   describe("filterable=true,multiselect=true", () => {
