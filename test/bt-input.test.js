@@ -90,8 +90,11 @@ describe("bt-input", () => {
 
     it("empty model should return 0", async () => {
       el.inputType = "number";
-      el.model = "";
 
+      await el.updateComplete;
+      assert.strictEqual(el.model, 0);
+
+      el.model = "";
       await el.updateComplete;
       assert.strictEqual(el.model, 0);
     });
@@ -103,6 +106,12 @@ describe("bt-input", () => {
       await el.updateComplete;
       assert.strictEqual(el.model, 0);
       assert.equal(el._select('input[type="number"]').value, "0");
+    });
+
+    it("default model value is valid", async () => {
+      el.required = true;
+      el.inputType = "number";
+      assert.ok(el.validate());
     });
   });
 
@@ -351,7 +360,9 @@ describe("bt-input", () => {
         it("validates required", () => {
           el.inputType = "number";
           el.required = true;
-          assert.notOk(el.validate());
+
+          // For number, defaults to 0, which is valid value
+          assert.ok(el.validate());
         });
       });
 

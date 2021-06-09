@@ -130,6 +130,20 @@ class BTInput extends BTBase {
   set name(name) {
     this._name = name;
   }
+  get inputType() {
+    return this._inputType;
+  }
+  set inputType(inputType) {
+    const oldInputType = this._inputType;
+
+    this._inputType = inputType;
+
+    if (inputType === InputTypeNumber) {
+      this._model = "0";
+    }
+
+    this.requestUpdate("inputType", oldInputType);
+  }
   get model() {
     if (this.inputType === InputTypeNumber) {
       return +this._model;
