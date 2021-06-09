@@ -98,9 +98,9 @@ class BTSelect extends BTBase {
       contentTemplate = html`
         <bt-filterable-items
           id="filterable"
+          .allowMultiselect=${this.multiselect}
           .items=${this.options}
           .model=${this.filterableItemsModel}
-          .allowMultiselect=${this.multiselect}
           .displayCheckboxes=${this.multiselect}
           .placeholder=${this.placeholder}
           @model-change=${(e) => {

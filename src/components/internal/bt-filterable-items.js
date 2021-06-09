@@ -38,10 +38,14 @@ class BTFilterableItems extends BTBase {
   set model(model = []) {
     const oldModel = this._model;
     this._model = model;
-    if (this.items && this._model.length) {
-      const item = this.items.find((opt) => `${opt.id}` === this._model[0]);
-      if (item) {
-        this._input = item.name;
+
+    // In filterable mode, set the input to model if model present
+    if (!this.allowMultiselect) {
+      if (this.items && this._model.length) {
+        const item = this.items.find((opt) => `${opt.id}` === this._model[0]);
+        if (item) {
+          this._input = item.name;
+        }
       }
     }
 
