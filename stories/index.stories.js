@@ -125,6 +125,7 @@ export const BTButton = () => `
     }
   </style>
   <bt-button>Button</bt-button>
+  <bt-button link-to="https://google.com" link-target="_blank">Link</bt-button>
   <bt-button primary small>Small Button</bt-button>
   <bt-button primary danger small>Small Button</bt-button>
   <bt-button icon="add">Button</bt-button>

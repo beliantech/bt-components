@@ -7,6 +7,7 @@ import "./bt-icon";
 import colors from "../colors";
 
 import { clickOutsideToDismiss } from "../util/mouse";
+import { ifDefined } from "lit-html/directives/if-defined";
 
 export default class BTButton extends BTBase {
   static get properties() {
@@ -16,7 +17,8 @@ export default class BTButton extends BTBase {
 
       disabled: { type: Boolean, reflect: true },
 
-      linkTo: { type: String },
+      linkTo: { type: String, attribute: "link-to" },
+      linkTarget: { type: String, attribute: "link-target" },
 
       unpadded: { type: Boolean, reflect: true },
       icononly: { type: Boolean, reflect: true },
@@ -155,7 +157,11 @@ export default class BTButton extends BTBase {
         @click=${this._onClick}
       >
         ${this.linkTo
-          ? html` <a href=${this.linkTo}>${buttonTemplate}</a> `
+          ? html`
+              <a href=${this.linkTo} target=${ifDefined(this.linkTarget)}
+                >${buttonTemplate}</a
+              >
+            `
           : buttonTemplate}
         ${(this.popup || this.popupright || this.popuptop) && this._showPopup
           ? html`
