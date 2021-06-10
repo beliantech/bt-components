@@ -212,6 +212,9 @@ export default class BTButton extends BTBase {
     return [
       super.styles,
       css`
+        :host {
+          display: inline-block;
+        }
         a {
           text-decoration: none !important;
         }
