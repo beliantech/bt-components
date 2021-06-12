@@ -251,7 +251,7 @@ class BTForm extends BTBase {
               ${this.buttonsClass || "py-4"}"
           >
             <bt-button
-              block
+              class="block"
               ?primary=${this.buttonPrimary}
               ?secondary=${!this.buttonPrimary}
               ?small=${this.buttonsSmall}
@@ -266,8 +266,8 @@ class BTForm extends BTBase {
             ${this.cancelButtonText
               ? html`
                   <bt-button
+                    class="block"
                     transparent
-                    block
                     ?small=${this.buttonsSmall}
                     class="${this.buttonsHorizontal ? "ml-2" : "mt-1"}"
                     @click="${this._onCancel}"

@@ -69,7 +69,6 @@ class BTMultirowGroup extends BTBase {
             ? html``
             : html`
                 <bt-button
-                  block
                   secondary
                   center
                   small
