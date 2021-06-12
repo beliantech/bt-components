@@ -53,6 +53,7 @@ class BTSelect extends BTBase {
     this.model = "";
 
     this._errors = [];
+    this.__optionsIdById = {};
   }
 
   set model(model) {
@@ -78,14 +79,33 @@ class BTSelect extends BTBase {
     this.requestUpdate("model", oldModel);
   }
   get model() {
+    // If option id is integer, return the integer id as model
+    if (
+      this._model &&
+      typeof this._model === "string" &&
+      this.__optionsIdById[this._model]
+    ) {
+      return this.__optionsIdById[this._model];
+    }
+    if (this._model && Array.isArray(this._model)) {
+      return this._model.map((m) => this.__optionsIdById[m] || m);
+    }
+
     return this._model;
   }
   set options(options = []) {
     const oldOptions = this._options;
 
-    // Transform all ID to string
+    // Map of string ID to original ID (e.g. integer)
+    this.__optionsIdById = {};
+
     this._options = options.map((o) => {
-      o.id = `${o.id}`;
+      this.__optionsIdById[`${o.id}`] = o.id;
+
+      // Transform all ID to string
+      if (typeof o.id !== "string") {
+        o.id = `${o.id}`;
+      }
       return o;
     });
 
@@ -146,17 +166,18 @@ class BTSelect extends BTBase {
               : html``}
             ${this.options &&
             this.options.map((option) => {
-              if (this.model && this.model === option.id) optionPresent = true;
+              if (this._model && this._model === option.id)
+                optionPresent = true;
 
               /* prettier-ignore */
               return html`
-                <option value=${option.id} ?selected=${this.model === option.id}>${option.name}</option>
+                <option value=${option.id} ?selected=${this._model === option.id}>${option.name}</option>
               `;
             })}
             ${
               /* prettier-ignore */
-              !optionPresent && this.model
-              ? html`<option value=${this.model} selected>(invalid option)</option>`
+              !optionPresent && this._model
+              ? html`<option value=${this._model} selected>(invalid option)</option>`
               : html``
             }
           </select>
@@ -204,7 +225,7 @@ class BTSelect extends BTBase {
   updated(changed) {
     // Need to write the value of input explicitly because value attribute only sets the default value.
     if (this._id("select")) {
-      this._id("select").value = this.model;
+      this._id("select").value = this._model;
     }
 
     if (changed.has("multiselect") && this.multiselect) {
@@ -220,16 +241,16 @@ class BTSelect extends BTBase {
 
     // Validate required
     if (this.required) {
-      if (!this.model) {
+      if (!this._model) {
         errors.push(ErrorRequired);
       }
     }
 
     // Validate invalid option
     if (!this.filterable && !this.multiselect) {
-      if (this.options && this.model) {
+      if (this.options && this._model) {
         const isModelInOption = this.options.find(
-          (opt) => opt.id === this.model
+          (opt) => opt.id === this._model
         );
 
         if (!isModelInOption) {
@@ -245,11 +266,11 @@ class BTSelect extends BTBase {
   }
 
   get filterableItemsModel() {
-    if (Array.isArray(this.model)) {
-      return this.model;
+    if (Array.isArray(this._model)) {
+      return this._model;
     }
-    if (this.model) {
-      return [this.model];
+    if (this._model) {
+      return [this._model];
     }
     return [];
   }

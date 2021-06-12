@@ -80,6 +80,19 @@ describe("bt-select", () => {
       assert.equal(selectedOption.innerText, "Select an option");
     });
 
+    it("returns integer model if option id was integer", async () => {
+      el.options = [
+        { id: 123, name: "Option 1" },
+        { id: 234, name: "Option 2" },
+        { id: 345, name: "Option 3" },
+        { id: 456, name: "Option 4" },
+      ];
+      el.model = "123";
+
+      await el.updateComplete;
+      assert.strictEqual(el.model, 123);
+    });
+
     it("renders non-existent option if no model match, retaining model", async () => {
       el.placeholder = "Select an option";
       el.options = [
@@ -105,7 +118,7 @@ describe("bt-select", () => {
       selectedOption = el._select(`option:last-child`);
       assert.strictEqual(selectedOption.value, "456");
       assert.equal(selectedOption.innerText, "Option 4");
-      assert.equal(el.model, "123");
+      assert.equal(el.model, 123); // returned model reflects options given
       assert.ok(el.validate());
 
       selectedOption = el._select(`option[selected=""]`);
@@ -299,6 +312,22 @@ describe("bt-select", () => {
       assert.deepEqual(el.model, ["123"]);
     });
 
+    it("model is an array of integers if id is integer", async () => {
+      el.options = [
+        { id: 123, name: "Option 1" },
+        { id: 234, name: "Option 2" },
+      ];
+      el.filterable = true;
+      el.multiselect = true;
+
+      await delay();
+      MockInteractions.focus(el._id("filterable")._id("input"));
+      await delay();
+      MockInteractions.click(el._id("filterable")._id("scroller").children[0]);
+
+      await el.updateComplete;
+      assert.deepEqual(el.model, [123]);
+    });
     it("does not display the current model option when model is set", async () => {
       el.options = [
         { id: "123", name: "Option 1" },
