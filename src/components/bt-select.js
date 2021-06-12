@@ -80,6 +80,20 @@ class BTSelect extends BTBase {
   get model() {
     return this._model;
   }
+  set options(options = []) {
+    const oldOptions = this._options;
+
+    // Transform all ID to string
+    this._options = options.map((o) => {
+      o.id = `${o.id}`;
+      return o;
+    });
+
+    this.requestUpdate("options", oldOptions);
+  }
+  get options() {
+    return this._options;
+  }
 
   render() {
     let contentTemplate = html``;
@@ -132,13 +146,11 @@ class BTSelect extends BTBase {
               : html``}
             ${this.options &&
             this.options.map((option) => {
-              // Interpolate option.id to string
-              const optionId = `${option.id}`;
-              if (this.model && this.model === optionId) optionPresent = true;
+              if (this.model && this.model === option.id) optionPresent = true;
 
               /* prettier-ignore */
               return html`
-                <option value=${option.id} ?selected=${this.model === optionId}>${option.name}</option>
+                <option value=${option.id} ?selected=${this.model === option.id}>${option.name}</option>
               `;
             })}
             ${
@@ -217,7 +229,7 @@ class BTSelect extends BTBase {
     if (!this.filterable && !this.multiselect) {
       if (this.options && this.model) {
         const isModelInOption = this.options.find(
-          (opt) => `${opt.id}` === this.model
+          (opt) => opt.id === this.model
         );
 
         if (!isModelInOption) {
