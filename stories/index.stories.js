@@ -140,7 +140,6 @@ export const BTButton = () => `
   <bt-button
     border
     center
-    block
     icon="arrow_back"
     style="width:300px;"
     >
@@ -148,7 +147,6 @@ export const BTButton = () => `
   </bt-button>
   <bt-button
     border
-    block
     icon="arrow_back"
     style="width:300px;"
     >
@@ -156,7 +154,6 @@ export const BTButton = () => `
   </bt-button>
   <bt-button
     border
-    block
     left
     style="width:300px;"
     >
