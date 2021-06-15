@@ -154,6 +154,9 @@ class BTInput extends BTBase {
   set model(model) {
     if (model == null) {
       model = "";
+      if (this.inputType === InputTypeNumber) {
+        model = "0";
+      }
     }
 
     const oldModel = this.model;

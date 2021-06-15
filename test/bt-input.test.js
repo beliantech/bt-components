@@ -358,8 +358,17 @@ describe("bt-input", () => {
 
       context("props.inputType = 'number'", () => {
         it("validates required", () => {
-          el.inputType = "number";
           el.required = true;
+          el.inputType = "number";
+
+          // For number, defaults to 0, which is valid value
+          assert.ok(el.validate());
+        });
+
+        it("setting empty model should not cause validator error", () => {
+          el.required = true;
+          el.inputType = "number";
+          el.model = undefined;
 
           // For number, defaults to 0, which is valid value
           assert.ok(el.validate());
