@@ -266,10 +266,9 @@ class BTForm extends BTBase {
             ${this.cancelButtonText
               ? html`
                   <bt-button
-                    class="block"
                     transparent
                     ?small=${this.buttonsSmall}
-                    class="${this.buttonsHorizontal ? "ml-2" : "mt-1"}"
+                    class="block ${this.buttonsHorizontal ? "ml-2" : "mt-1"}"
                     @click="${this._onCancel}"
                     >${this.cancelButtonText}</bt-button
                   >
