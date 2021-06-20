@@ -203,7 +203,7 @@ export default class BTCheckbox extends BTBase {
         }
         .o,
         .x {
-          color: #666;
+          color: inherit;
         }
         label {
           user-select: none;
