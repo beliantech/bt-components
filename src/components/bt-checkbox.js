@@ -17,6 +17,11 @@ export default class BTCheckbox extends BTBase {
       model: { type: Boolean },
       disabled: { type: Boolean, reflect: true },
       editable: { type: Boolean, reflect: true },
+      _indeterminate: {
+        type: Boolean,
+        reflect: true,
+        attribute: "indeterminate",
+      },
 
       inline: { type: Boolean }, // whether or not label is inline
     };
@@ -33,9 +38,14 @@ export default class BTCheckbox extends BTBase {
     return this._model;
   }
 
-  set model(model) {
+  set model(model = null) {
     const oldModel = this._model;
-    this._model = Boolean(model);
+
+    if (model === null) {
+      this._indeterminate = true;
+    }
+
+    this._model = model;
     this.requestUpdate("model", oldModel);
   }
 
@@ -77,6 +87,16 @@ export default class BTCheckbox extends BTBase {
         <bt-icon class="o m-0" small @click=${(e) => this._onIconClick(e, true)}
           >check_box_outline_blank</bt-icon
         >
+        ${this._indeterminate
+          ? html`
+              <bt-icon
+                class="i m-0"
+                small
+                @click=${(e) => this._onIconClick(e, false)}
+                >indeterminate_check_box</bt-icon
+              >
+            `
+          : html``}
         <bt-icon
           class="x m-0"
           small
@@ -132,11 +152,13 @@ export default class BTCheckbox extends BTBase {
     e.preventDefault();
   }
 
-  _onIconClick(e, model) {
+  _onIconClick(e, nextmodel) {
     if (this.disabled) return;
-    if (model == null) return;
 
-    this.model = model;
+    if (!nextmodel) {
+      this._indeterminate = false;
+    }
+    this.model = nextmodel;
     this._emit("model-change", {
       value: this.model,
     });
@@ -145,14 +167,7 @@ export default class BTCheckbox extends BTBase {
     e.stopPropagation();
   }
 
-  updated(changedProps) {
-    if (changedProps.has("model")) {
-      if (this.model != null) {
-        // Need to write the value of input explicitly because value attribute only sets the default value.
-        this._id("input").checked = this.model;
-      }
-    }
-  }
+  updated(changedProps) {}
 
   _onChange(e) {
     this.model = e.currentTarget.checked;
@@ -177,6 +192,10 @@ export default class BTCheckbox extends BTBase {
     return [
       super.styles,
       css`
+        :host([indeterminate]) .x,
+        :host([indeterminate]) .o {
+          display: none;
+        }
         input[type="checkbox"] {
           display: none;
         }

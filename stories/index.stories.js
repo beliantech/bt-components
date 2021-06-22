@@ -260,7 +260,8 @@ export const BTTabs = () => {
 export const BTCheckbox = () => {
   return `
   <bt-checkbox label="Enable"></bt-checkbox>
-  <bt-checkbox></bt-checkbox>`;
+  <bt-checkbox></bt-checkbox>
+  <bt-checkbox indeterminate></bt-checkbox>`;
 };
 
 export const BTMenu = () => {
