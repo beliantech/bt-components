@@ -43,6 +43,8 @@ export default class BTCheckbox extends BTBase {
 
     if (model === null) {
       this._indeterminate = true;
+    } else {
+      this._indeterminate = false;
     }
 
     this._model = model;
@@ -166,8 +168,6 @@ export default class BTCheckbox extends BTBase {
     e.preventDefault();
     e.stopPropagation();
   }
-
-  updated(changedProps) {}
 
   _onChange(e) {
     this.model = e.currentTarget.checked;
